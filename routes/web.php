@@ -4,16 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserAppController;
 
-Route::get('userapps', [UserAppController::class, 'index']);
-Route::get('userapps/{id}', [UserAppController::class, 'show']);
+Route::get('user_apps', [UserAppController::class, 'index'])->name('user_apps.index');
+Route::get('user_apps/{user_app}', [UserAppController::class, 'show'])->name('user_app.show');
 
-use App\Http\Controllers\LoginController;
-
-use App\Http\Controllers\AuthClienteController;
-use Illuminate\Auth\Events\Login;
-
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('cliente.login.form');
-Route::post('login', [LoginController::class, 'login'])->name('cliente.login');
 
 
 

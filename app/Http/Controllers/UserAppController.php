@@ -17,18 +17,19 @@ public function index()   // http://api.codersfree.test/v1/user_apps?included=po
 {
     $url = env('URL_SERVER_API');
 
-    $userApps = $this->fetchDataFromApi($url . '/user_apps');
+    $user_apps = $this->fetchDataFromApi($url . '/user_apps');
+    
 
-    return view('userApp.index', compact('userApps'));
+    return view('userapps.index', compact('user_apps'));
 }
 
 public function show($id)
 {
     $url = env('URL_SERVER_API');
 
-    $userApp = $this->fetchDataFromApi($url . '/user_apps/' . $id);
+    $user_app = $this->fetchDataFromApi($url . '/user_apps/' . $id);
 
-    return view('userApp.show', compact('userApp'));
+    return view('userapps.show', compact('user_app'));
 }
 
 }
