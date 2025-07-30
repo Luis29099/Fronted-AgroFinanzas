@@ -28,7 +28,7 @@ public function show($id)
     $url = env('URL_SERVER_API');
 
     $user_app = $this->fetchDataFromApi($url . '/user_apps/' . $id);
-
+    
     return view('userapps.show', compact('user_app'));
 }
 
