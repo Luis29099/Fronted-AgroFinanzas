@@ -17,18 +17,18 @@ public function index()   // http://api.codersfree.test/v1/coffe_crops?included=
 {
     $url = env('URL_SERVER_API');
 
-    $coffeCrops = $this->fetchDataFromApi($url . '/coffe_crops');
+    $coffecrops = $this->fetchDataFromApi($url . '/coffe_crops');
 
-    return view('coffe_crops.index', compact('coffeCrops'));
+    return view('coffecrops.index', compact('coffecrops'));
 }
 
 public function show($id)
 {
     $url = env('URL_SERVER_API');
 
-    $coffeCrop = $this->fetchDataFromApi($url . '/coffe_crops/' . $id);
+    $coffecrop = $this->fetchDataFromApi($url . '/coffe_crops/' . $id);
 
-    return view('coffe_crops.show', compact('coffeCrop'));
+    return view('coffecrops.show', compact('coffecrop'));
 }
 
 }

@@ -10,8 +10,8 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th>Contraseña</th>
                     <th>Fecha de Nacimiento</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,10 +20,9 @@
                         <td>{{ $user_app['id'] }}</td>
                         <td>{{ $user_app['name'] }}</td>
                         <td>{{ $user_app['email'] }}</td>
-                        <td>{{ $user_app['password'] }}</td>
-                        <td>{{ $user_app['birth_date'] }}</td>
+                        <td>{{ $user_app['birth_date'] ?? 'N/A' }}</td>
                         <td>
-                            <a href="{{ route('user_app.show', $user_app['id']) }}" class="btn btn-info btn-sm">Ver más</a>
+                            <a href="{{ route('user_app.show', $user_app['id']) }}" class="btn btn-primary btn-sm">Ver Detalle</a>
                         </td>
                     </tr>
                 @endforeach

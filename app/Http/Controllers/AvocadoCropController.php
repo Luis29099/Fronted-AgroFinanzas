@@ -16,17 +16,17 @@ class AvocadoCropController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        $avocadoCrops = $this->fetchDataFromApi($url . '/avocado_crops');
+        $avocadocrops = $this->fetchDataFromApi($url . '/avocado_crops');
 
-        return view('avocado_crops.index', compact('avocadoCrops'));
+        return view('avocadocrops.index', compact('avocadocrops'));
     }
 
     public function show($id)
     {
         $url = env('URL_SERVER_API');
 
-        $avocadoCrop = $this->fetchDataFromApi($url . '/avocado_crops/' . $id);
+        $avocadocrop = $this->fetchDataFromApi($url . '/avocado_crops/' . $id);
 
-        return view('avocado_crops.show', compact('avocadoCrop'));
+        return view('avocadocrops.show', compact('avocadocrop'));
     }       
 }

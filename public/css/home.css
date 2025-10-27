@@ -1,0 +1,26 @@
+/* ===== Sección de Presentación (fondo negro sólido) ===== */
+.presentacion {
+  background: #000; /* Fondo negro puro */
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  transition: transform 0.3s ease, background 0.3s ease;
+  backdrop-filter: none; /* quitamos el desenfoque */
+}
+
+.presentacion:hover {
+  transform: translateY(-5px);
+  background: #0d0d0d; /* Un negro ligeramente más claro al pasar el mouse */
+}
+
+.presentacion h2 {
+  color: #18d92e; /* Verde característico del tema */
+  font-weight: 700;
+}
+
+.presentacion p {
+  color: #e6e6e6;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-align: justify;
+}

@@ -9,19 +9,18 @@
             <thead class="table-success">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Email</th>
-                    
-                    <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">Raza</th>
+                    <th scope="col">Producción diaria de huevos</th>
+                    <th scope="col">Total mensual de huevos</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $user_app['id'] }}</td>
-                    <td>{{ $user_app['name'] }}</td>
-                    <td>{{ $user_app['email'] }}</td>
-                    
-                    <td>{{ $user_app['birth_date'] }}</td>
+                    <td>{{ $hen['id'] }}</td>
+                    <td>{{ $hen['breed'] }}</td>
+                    <td>{{ $hen['daily_egg_production'] }}</td>
+                    <td>{{ $hen['monthly_egg_total'] }}</td>
 
                 </tr>
             </tbody>

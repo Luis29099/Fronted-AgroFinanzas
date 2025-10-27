@@ -19,7 +19,7 @@ public function index()   // http://api.codersfree.test/v1/hens?included=posts
 
     $hens = $this->fetchDataFromApi($url . '/hens');
 
-    return view('hens.index', compact('hens'));
+    return view('hen.index', compact('hens'));
 }
 
 public function show($id)
@@ -28,7 +28,7 @@ public function show($id)
 
     $hen = $this->fetchDataFromApi($url . '/hens/' . $id);
 
-    return view('hens.show', compact('hen'));
+    return view('hen.show', compact('hen'));
 }
 
 }

@@ -13,22 +13,24 @@ class RecommendationController extends Controller
     return $response->json();
 }
 
-public function index()   // http://api.codersfree.test/v1/recommendations?included=posts
-{
-    $url = env('URL_SERVER_API');
+public function index()
+    {
+        $response = Http::get('http://api.AgroFinanzas.test/api/recommendations');
+        $recommendations = $response->json();
 
-    $recommendations = $this->fetchDataFromApi($url . '/recommendations');
+        return view('recommendations.index', compact('recommendations'));
+    }
 
-    return view('recommendation.index', compact('recommendations'));
-}
+    public function store(Request $request)
+    {
+        $user = session('user');
 
-public function show($id)
-{
-    $url = env('URL_SERVER_API');
+        Http::post('http://api.AgroFinanzas.test/api/recommendations', [
+            'text' => $request->text,
+            'id_user_app' => $user['id'] ?? null,
+        ]);
 
-    $recommendation = $this->fetchDataFromApi($url . '/recommendations/' . $id);
-
-    return view('recommendation.show', compact('recommendation'));
-}
+        return redirect()->route('recommendations.index');
+    }
 
 }

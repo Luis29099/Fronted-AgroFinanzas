@@ -9,19 +9,16 @@
             <thead class="table-success">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Email</th>
-                    
-                    <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">Texto</th>
+                    <th scope="col">Fecha</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $user_app['id'] }}</td>
-                    <td>{{ $user_app['name'] }}</td>
-                    <td>{{ $user_app['email'] }}</td>
-                    
-                    <td>{{ $user_app['birth_date'] }}</td>
+                    <td>{{ $recommendation['id'] }}</td>
+                    <td>{{ $recommendation['text'] }}</td>
+                    <td>{{ $recommendation['date'] }}</td>
 
                 </tr>
             </tbody>

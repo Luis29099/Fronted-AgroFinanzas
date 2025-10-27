@@ -18,11 +18,11 @@ class AnimalProductionController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $animalProductions = $this->fetchDataFromApi($url . '/animal_productions');
+        $animalproductions = $this->fetchDataFromApi($url . '/animal_productions');
 
 
 
-        return view('animal_productions.index', compact('animalProductions'));
+        return view('animalproductions.index', compact('animalproductions'));
     }
 
     public function show($id)
@@ -30,8 +30,8 @@ class AnimalProductionController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $animalProduction = $this->fetchDataFromApi($url . '/animal_productions/' . $id);
+        $animalproduction = $this->fetchDataFromApi($url . '/animal_productions/' . $id);
 
-        return view('animal_productions.show', compact('animalProduction'));
+        return view('animalproductions.show', compact('animalproduction'));
     }
 }

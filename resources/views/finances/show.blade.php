@@ -9,19 +9,20 @@
             <thead class="table-success">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Email</th>
-                    
-                    <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">Ingreso</th>
+                    <th scope="col">Gasto</th>
+                    <th scope="col">Beneficio</th>
+                    <th scope="col">Fecha</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $user_app['id'] }}</td>
-                    <td>{{ $user_app['name'] }}</td>
-                    <td>{{ $user_app['email'] }}</td>
-                    
-                    <td>{{ $user_app['birth_date'] }}</td>
+                    <td>{{ $finance['id'] }}</td>
+                    <td>{{ $finance['income'] }}</td>
+                    <td>{{ $finance['expense'] }}</td>
+                    <td>{{ $finance['profit'] }}</td>
+                    <td>{{ $finance['date'] }}</td>
 
                 </tr>
             </tbody>
