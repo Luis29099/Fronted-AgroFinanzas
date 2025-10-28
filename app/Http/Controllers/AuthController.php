@@ -32,7 +32,10 @@ class AuthController extends Controller
 
         if ($response->successful()) {
             $data = $response->json();
-            session(['user' => $data['user']]); // Guardar usuario en sesión
+            // Guardar usuario en sesión
+            session(['user' => $data['user']]); 
+            // Regenera el ID de sesión tras el login para prevenir Session Fixation
+            $request->session()->regenerate(); 
             return redirect()->route('home');
         }
 
@@ -42,9 +45,9 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $response = Http::post('http://api.AgroFinanzas.test/api/register', [
-            'name'       => $request->name,
-            'email'      => $request->email,
-            'password'   => $request->password,
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => $request->password,
             'birth_date' => $request->birth_date,
         ]);
 
@@ -55,9 +58,18 @@ class AuthController extends Controller
         return back()->withErrors(['register_error' => 'No se pudo registrar']);
     }
 
-    public function logout()
+    // MÉTODO LOGOUT CORREGIDO
+    public function logout(Request $request)
     {
-        session()->forget('user');
+        // 1. Olvida la variable de sesión 'user' que usas para el control.
+        $request->session()->forget('user');
+        
+        // 2. Invalida la sesión (destruye todos los datos de sesión)
+        $request->session()->invalidate();
+        
+        // 3. Regenera el token CSRF por seguridad
+        $request->session()->regenerateToken(); 
+        
         return redirect()->route('login');
     }
 }
