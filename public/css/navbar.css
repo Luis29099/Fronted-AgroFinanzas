@@ -92,3 +92,72 @@
     text-align: center;
   }
 }
+
+/* ================= ESTILOS DEL DROPDOWN PERSONALIZADO ================= */
+
+/* 1. Estilo del Contenedor Principal del Dropdown 
+  (La caja que aparece al hacer clic en 'Menú')
+*/
+.custom-dropdown {
+    /* Usamos fondo oscuro y blur para que coincida con .navbar-custom */
+    background-color: rgba(33, 37, 41, 0.95) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    backdrop-filter: blur(5px);
+    padding: 5px 0;
+}
+
+/* 2. Estilo por defecto de los Items (Enlaces) del Dropdown
+  Estilo de tu botón: fondo degradado verde, texto blanco.
+  Estilo del menú: fondo oscuro, texto blanco, pero transparente en estado normal.
+*/
+.custom-dropdown .dropdown-item {
+    color: #ffffff !important; 
+    padding: 8px 16px;
+    font-size: 14px;
+    /* QUITAMOS cualquier fondo para que se vea sobre el fondo oscuro del menú */
+    background-color: transparent !important; 
+    transition: all 0.2s ease-in-out;
+}
+
+/* 3. Estilo Hover: Aplicamos el color de tu botón .btn-navegacion al hacer hover
+*/
+.custom-dropdown .dropdown-item:hover,
+.custom-dropdown .dropdown-item:focus {
+    /* Usamos tu degradado de .btn-navegacion en el fondo */
+    background: linear-gradient(135deg, #38ef7d, #11998e) !important;
+    /* El texto debe ser oscuro para contrastar con el degradado */
+    color: #000000 !important; 
+    border-radius: 6px; 
+}
+
+/* 4. Estilo de Cerrar Sesión (Logout)
+*/
+.logout-link {
+    /* Color rojo por defecto */
+    color: #ff4d4d !important; 
+    background-color: transparent !important; 
+}
+
+.logout-link:hover {
+    /* Usamos el color de tu clase .logout:hover */
+    background: linear-gradient(135deg, #ff6b6b, #ff9999) !important;
+    /* Texto blanco sobre el fondo rojo/rosado de hover */
+    color: #ffffff !important; 
+}
+
+/* 5. Estilo para el Separador 
+*/
+.custom-dropdown .dropdown-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+}
+
+/* 6. Asegurar que el botón principal del Menú sea tu .btn-navegacion 
+*/
+.dropdown .btn-navegacion.dropdown-toggle {
+    /* Usamos !important por si Bootstrap intenta sobrescribir */
+    background: linear-gradient(135deg, #38ef7d, #11998e) !important;
+    color: #ffffff !important;
+}
+

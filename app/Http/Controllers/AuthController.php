@@ -33,7 +33,7 @@ class AuthController extends Controller
         if ($response->successful()) {
             $data = $response->json();
             session(['user' => $data['user']]); // Guardar usuario en sesión
-            return redirect()->route('user_apps');
+            return redirect()->route('home');
         }
 
         return back()->withErrors(['login_error' => 'Credenciales inválidas']);

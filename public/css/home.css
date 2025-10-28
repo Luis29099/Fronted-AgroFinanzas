@@ -1,4 +1,9 @@
 /* ===== Sección de Presentación (fondo negro sólido) ===== */
+/* Añade esto a tu CSS para compensar la altura de la navbar fija */
+body {
+    /* Usamos 80px para compensar la altura (12px padding top + contenido + 12px padding bottom + 1px border) */
+    padding-top: 80px; 
+}
 .presentacion {
   background: #000; /* Fondo negro puro */
   border-radius: 20px;

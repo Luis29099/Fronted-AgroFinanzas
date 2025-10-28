@@ -13,7 +13,9 @@ use App\Http\Controllers\UserAppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FinanceClienteController;
 
-Route::get('user_apps', [UserAppController::class, 'index'])->name('user_apps');
+// En routes/web.php
+Route::get('user_apps', [UserAppController::class, 'index'])
+    ->name('user_apps');
 Route::get('user_apps/{user_app}', [UserAppController::class, 'show'])->name('user_app.show');
 
 Route::get('recommendations', [RecommendationController::class, 'index'])->name('recommendations');

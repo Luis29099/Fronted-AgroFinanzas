@@ -22,7 +22,7 @@
                         <td>{{ $user_app['email'] }}</td>
                         <td>{{ $user_app['birth_date'] ?? 'N/A' }}</td>
                         <td>
-                            <a href="{{ route('user_app.show', $user_app['id']) }}" class="btn btn-primary btn-sm">Ver Detalle</a>
+                            <a href="{{ route('user_app.show', $user_app['id']) }}" class="btn btn-primary btn-sm">Ver Detalles</a>
                         </td>
                     </tr>
                 @endforeach
