@@ -7,28 +7,51 @@ use Illuminate\Support\Facades\Http;
 
 class FinanceController extends Controller
 {
-    private function fetchDataFromApi($url)
-{
-    $response = Http::get($url);
-    return $response->json();
-}
+    // URL de la API externa (MockAPI)
+    private $mockApiUrl = 'https://68fa9ecfef8b2e621e807d6d.mockapi.io/api/v1/finances';
 
-public function index()   // http://api.codersfree.test/v1/finances?included=posts
-{
-    $url = env('URL_SERVER_API');
+    // URL del backend real (Laravel API)
+    private $backendApiUrl = 'http://api.AgroFinanzas.test/api/finances';
 
-    $finances = $this->fetchDataFromApi($url . '/finances');
+    /**
+     * Muestra los datos obtenidos desde la MockAPI
+     */
+    public function index()
+    {
+        // Consumir los datos desde MockAPI
+        $response = Http::get($this->mockApiUrl);
 
-    return view('finances.index', compact('finances'));
-}
+        if ($response->failed()) {
+            return response()->json(['error' => 'No se pudo conectar con la API externa'], 500);
+        }
 
-public function show($id)
-{
-    $url = env('URL_SERVER_API');
+        $finances = $response->json();
 
-    $finance = $this->fetchDataFromApi($url . '/finances/' . $id);
+        return view('finances.index', compact('finances'));
+    }
 
-    return view('finances.show', compact('finance'));
-}
+    /**
+     * Envía datos tanto a la MockAPI como al backend Laravel
+     */
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'type' => 'required|in:income,expense',
+            'amount' => 'required|numeric|min:0',
+            'date' => 'required|date',
+            'description' => 'nullable|string',
+        ]);
 
+        // 1️⃣ Enviamos a la MockAPI
+        $mockResponse = Http::post($this->mockApiUrl, $data);
+
+        // 2️⃣ Enviamos también al backend Laravel
+        $backendResponse = Http::post($this->backendApiUrl, $data);
+
+        return response()->json([
+            'success' => true,
+            'mockapi_response' => $mockResponse->json(),
+            'backend_response' => $backendResponse->json(),
+        ]);
+    }
 }

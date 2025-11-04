@@ -1,44 +1,144 @@
-/* ================= NAVBAR PERSONALIZADO ================= */
-.navbar-custom {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  padding: 12px 40px !important;
-  background: rgba(0, 0, 0, 0.6) !important;
-  backdrop-filter: blur(10px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  position: fixed !important;
-  top: 0;
-  width: 100%;
+
+/* 🌿 Fondo oscuro elegante */
+.navbar-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000;
+  padding: 15px 50px;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  position: relative;
   z-index: 1000;
 }
 
+/* 🔸 Logo */
 .logo-nombre {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none !important;
-}
-
-.Logo {
+.logo {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  object-fit: contain;
 }
 
-.NombreP {
-  font-size: 24px;
-  font-weight: 700;
-  color: #18d92e !important;
+.nombre {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #00ff9d;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px #00ff9d50;
+}
+.logo-nombre a {
+  text-decoration: none;
+  color: inherit;
 }
 
+.logo-nombre a:hover {
+  text-decoration: none;
+}
+/* 🔹 Navegación */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* 🔹 Enlaces */
+.nav-item {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-item::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  background: #00ff9d;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 100%;
+}
+
+.nav-item:hover {
+  color: #00ff9d;
+}
+
+/* 👤 Perfil */
+.profile {
+  position: relative;
+}
+
+.profile-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #00ff9d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #00ff9d;
+}
+
+/* 🔽 Menú desplegable del perfil */
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background: #111;
+  border: 1px solid #00ff9d50;
+  border-radius: 10px;
+  padding: 15px;
+  display: none;
+  flex-direction: column;
+  min-width: 180px;
+  box-shadow: 0 0 15px #00ff9d40;
+}
+
+.profile-dropdown.show {
+  display: flex;
+}
+
+.profile-dropdown .username {
+  color: #00ff9d;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #ff7070;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: left;
+  padding: 5px 0;
+  width: 100%;
+  transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: #ff2f2f;
+}
 /* ---------- BOTONES DE NAVEGACIÓN ---------- */
 .nav-buttons {
   display: flex;
@@ -50,114 +150,26 @@
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 500;
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #38ef7d, #11998e) !important;
-  border: none !important;
-  border-radius: 8px !important;
+  color: #ffffff;
+  background: linear-gradient(135deg, #38ef7d, #11998e);
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
 .btn-navegacion:hover {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #42f5b6, #1dd1a1) !important;
+  background: linear-gradient(135deg, #42f5b6, #1dd1a1);
   box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
-}
-
-.logout {
-  background: linear-gradient(135deg, #ff4d4d, #ff7676) !important;
-}
-
-.logout:hover {
-  background: linear-gradient(135deg, #ff6b6b, #ff9999) !important;
 }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 480px) {
-  .navbar-custom {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 20px;
-  }
-
   .nav-buttons {
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .btn-navegacion {
     width: 100%;
-    text-align: center;
+    align-items: center;
   }
 }
-
-/* ================= ESTILOS DEL DROPDOWN PERSONALIZADO ================= */
-
-/* 1. Estilo del Contenedor Principal del Dropdown 
-  (La caja que aparece al hacer clic en 'Menú')
-*/
-.custom-dropdown {
-    /* Usamos fondo oscuro y blur para que coincida con .navbar-custom */
-    background-color: rgba(33, 37, 41, 0.95) !important; 
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
-    backdrop-filter: blur(5px);
-    padding: 5px 0;
-}
-
-/* 2. Estilo por defecto de los Items (Enlaces) del Dropdown
-  Estilo de tu botón: fondo degradado verde, texto blanco.
-  Estilo del menú: fondo oscuro, texto blanco, pero transparente en estado normal.
-*/
-.custom-dropdown .dropdown-item {
-    color: #ffffff !important; 
-    padding: 8px 16px;
-    font-size: 14px;
-    /* QUITAMOS cualquier fondo para que se vea sobre el fondo oscuro del menú */
-    background-color: transparent !important; 
-    transition: all 0.2s ease-in-out;
-}
-
-/* 3. Estilo Hover: Aplicamos el color de tu botón .btn-navegacion al hacer hover
-*/
-.custom-dropdown .dropdown-item:hover,
-.custom-dropdown .dropdown-item:focus {
-    /* Usamos tu degradado de .btn-navegacion en el fondo */
-    background: linear-gradient(135deg, #38ef7d, #11998e) !important;
-    /* El texto debe ser oscuro para contrastar con el degradado */
-    color: #000000 !important; 
-    border-radius: 6px; 
-}
-
-/* 4. Estilo de Cerrar Sesión (Logout)
-*/
-.logout-link {
-    /* Color rojo por defecto */
-    color: #ff4d4d !important; 
-    background-color: transparent !important; 
-}
-
-.logout-link:hover {
-    /* Usamos el color de tu clase .logout:hover */
-    background: linear-gradient(135deg, #ff6b6b, #ff9999) !important;
-    /* Texto blanco sobre el fondo rojo/rosado de hover */
-    color: #ffffff !important; 
-}
-
-/* 5. Estilo para el Separador 
-*/
-.custom-dropdown .dropdown-divider {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 5px 0;
-}
-
-/* 6. Asegurar que el botón principal del Menú sea tu .btn-navegacion 
-*/
-.dropdown .btn-navegacion.dropdown-toggle {
-    /* Usamos !important por si Bootstrap intenta sobrescribir */
-    background: linear-gradient(135deg, #38ef7d, #11998e) !important;
-    color: #ffffff !important;
-}
-

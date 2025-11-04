@@ -15,7 +15,12 @@
   {{-- Tus estilos (asegúrate que existan en public/css) --}}
   <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-
+  <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/inicio.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/finances.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Agronomy.css') }}">
   {{-- Permite que vistas empujen estilos extra --}}
   @stack('styles')
 </head>

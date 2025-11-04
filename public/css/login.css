@@ -1,0 +1,184 @@
+.contenido_login{
+      /* Sobrescribe el estilo de 'main' para centrar todo SOLO en esta página */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    
+    padding: 20px 0; /* Agregamos padding para que la tarjeta no se pegue en el borde */
+}
+body {
+    /* Fondo que queremos en todas las vistas, si es que layouts.app no lo pone */
+    background-color: #0b0f0c; 
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.apartado {
+    position: relative;
+    width: 420px;
+    /* La altura se ajusta para el contenido más largo */
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    z-index: 1;
+    transition: transform 0.3s ease;
+
+    /* SOLUCIÓN AL SCROLL: Limitar la altura de la tarjeta */
+    max-height: 120vh; /* La tarjeta no será más alta que el 90% de la ventana */
+    overflow-y: auto; /* Permite scroll SÓLO dentro de la tarjeta si es muy larga */
+}
+
+/* Nuevo selector en public/css/login.css */
+.login-wrapper {
+    /* Toma la altura restante del main (gracias a body.min-vh-100 y main.flex-grow-1 de Bootstrap) */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    width: 100%;
+    /* Aseguramos que la altura mínima sea lo que queda después de navbar/footer */
+    min-height: 100%; 
+    
+    /* Aplicamos el fondo degradado solo a esta vista */
+    background: radial-gradient(circle at top left, #0a0a0a 0%, #1b1b1b 100%); 
+    position: relative; /* Para que el fondo img.fondo sea relativo a este wrapper */
+}
+
+/* Ajuste importante: Si el fondo está dentro del wrapper, debe ser absoluto dentro de él */
+img.fondo {
+position: fixed; /* 👈 Cambiar de 'absolute' a 'fixed' */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Ahora 100% de la ventana, no del contenedor */
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.25;
+    filter: blur(3px);
+}
+
+/* Aseguramos que la tarjeta esté encima del fondo */
+.apartado {
+    /* ... (mantener estilos originales) ... */
+    z-index: 1; /* Esto es crucial */
+}
+.Logo-l {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  object-fit: contain;
+
+}
+/* ---------- CAMPOS DE ENTRADA ---------- */
+input {
+  width: 95%;
+  padding: 10px 70px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border: 1px solid #18d92e;
+  outline: none;
+}
+
+/* ---------- CONTENEDOR CONTRASEÑA ---------- */
+.password-container {
+  position: relative;
+  width: 95%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 35px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  cursor: pointer;
+  color: #18d92e;
+  font-size: 18px;
+  user-select: none;
+}
+
+/* ---------- RECORDAR CONTRASEÑA (CORREGIDO) ---------- */
+.recordar {
+  display: flex;
+  
+  justify-content: flex-start;
+  gap: 8px;
+  width: 85%;
+  margin-top: 10px;
+  color: #ccc;
+  font-size: 13px;
+}
+
+/* Ajuste del checkbox */
+.recordar input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #18d92e; /* Cambia el color del check */
+  cursor: pointer;
+  transform: translateY(1px);
+}
+
+
+/* ---------- BOTÓN PRINCIPAL (Iniciar sesión) ---------- */
+.contenedor-boton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.boton {
+  width: 70%;
+  padding: 12px 0;
+  background: linear-gradient(135deg, #38ef7d, #11998e);
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(24, 217, 46, 0.3);
+  margin-top: 15px;
+}
+
+.boton:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 25px rgba(24, 217, 46, 0.6);
+}
+
+/* ---------- LINK DE REGISTRO ---------- */
+.registro-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.registro-link a {
+  color: #18d92e;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.registro-link a:hover {
+  text-decoration: underline;
+}

@@ -36,7 +36,8 @@ class AuthController extends Controller
             session(['user' => $data['user']]); 
             // Regenera el ID de sesión tras el login para prevenir Session Fixation
             $request->session()->regenerate(); 
-            return redirect()->route('home');
+            return redirect()->route('inicio.index');
+
         }
 
         return back()->withErrors(['login_error' => 'Credenciales inválidas']);

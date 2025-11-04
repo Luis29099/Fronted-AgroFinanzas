@@ -1,0 +1,107 @@
+
+/* Solución de scroll y centrado para la vista de registro */
+.contedido-register {
+    /* Sobrescribe el estilo de 'main' para centrar todo SOLO en esta página */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    
+    padding: 20px 0; /* Agregamos padding para que la tarjeta no se pegue en el borde */
+}
+
+img.fondo {
+    position: fixed; /* 👈 Cambiar de 'absolute' a 'fixed' */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Ahora 100% de la ventana, no del contenedor */
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.25;
+    filter: blur(3px);
+}
+
+/* ---------------- TARJETA (register-card) ---------------- */
+.register-card {
+    position: relative;
+    width: 420px;
+    /* La altura se ajusta para el contenido más largo */
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    z-index: 1;
+    transition: transform 0.3s ease;
+
+    /* SOLUCIÓN AL SCROLL: Limitar la altura de la tarjeta */
+    max-height: 120vh; /* La tarjeta no será más alta que el 90% de la ventana */
+    overflow-y: auto; /* Permite scroll SÓLO dentro de la tarjeta si es muy larga */
+}
+
+/* ---------------- ELEMENTOS ÚNICOS ---------------- */
+
+.register-card:hover {
+    transform: translateY(-5px);
+}
+
+.register-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.register-title {
+    color: #18d92e;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* ---------------- BOTÓN ---------------- */
+
+.register-button-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.register-button {
+    width: 70%;
+    padding: 12px 0;
+    background: linear-gradient(135deg, #38ef7d, #11998e);
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(24, 217, 46, 0.3);
+    margin-top: 20px;
+}
+
+/* ---------------- LINK ---------------- */
+
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.login-link a {
+    color: #18d92e;
+    font-weight: 600;
+    text-decoration: none;
+}

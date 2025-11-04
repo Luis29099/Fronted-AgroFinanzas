@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgronomyController;
 use App\Http\Controllers\AnimalProductionController;
 use App\Http\Controllers\AvocadoCropController;
 use App\Http\Controllers\CattleController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\RecommendationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAppController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClimaController;
 use App\Http\Controllers\FinanceClienteController;
 
 // En routes/web.php
@@ -82,6 +84,12 @@ Route::get('/recommendations', [RecommendationController::class, 'index'])->name
 Route::post('/recommendations', [RecommendationController::class, 'store'])->name('recommendations.store');
 
 
+Route::get('/inicio', [ClimaController::class, 'index'])->name('inicio.index');
 
 
+use App\Http\Controllers\FinanceApiController;
 
+Route::get('/finances/api', [FinanceController::class, 'index'])->name('finances.index');
+Route::post('/finances/api/store', [FinanceController::class, 'store'])->name('finances.store');
+
+Route::get('/Agronomia', [AgronomyController::class, 'index'])->name('Agronomy.index');

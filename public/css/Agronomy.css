@@ -1,0 +1,87 @@
+/* 🌿 ---------- MAIN AGRONOMÍA ---------- */
+main.Agronomia {
+    flex: 1;
+    padding-top: 30px;
+    padding-bottom: 60px; /* Espacio antes del footer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+}
+
+/* 🚀 MEJORA 1: Contenedor y estilo para el título y subtítulo */
+.header-produccion {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+}
+
+.titulo-principal {
+    font-size: 3.2rem; /* Aumentado para mayor impacto */
+    color: #18d92e;
+    letter-spacing: 2px;
+    font-weight: 800;
+    text-shadow: 0 0 20px rgba(24, 217, 46, 0.7); /* Sombra más fuerte */
+    margin-bottom: 10px;
+}
+
+.subtitulo-principal {
+    font-size: 1.2rem;
+    color: #a0a0a0; /* Color gris suave para contraste */
+    font-style: italic;
+}
+
+
+/* Contenedor de tarjetas */
+.Agronomia-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    width: 90%;
+    max-width: 1200px; /* Limitar el ancho máximo */
+}
+
+/* 🚀 MEJORA 2: Tarjeta individual (Efecto y Sombra) */
+.Agronomia-card {
+    width: 300px;
+    background: rgba(17, 17, 17, 0.8); /* Fondo más oscuro y sólido */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde más sutil */
+    border-radius: 16px; /* Bordes ligeramente más suaves */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Sombra más profunda y profesional */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+/* 🚀 MEJORA 3: Efecto Hover (Borde Luminoso) */
+.Agronomia-card:hover {
+    transform: translateY(-8px); /* Elevación más notable */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), /* Sombra de elevación */
+                0 0 25px rgba(24, 217, 46, 0.6); /* Resplandor verde */
+    border: 1px solid #18d92e; /* Borde sólido verde */
+}
+
+.img-card {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    /* Elimina el border-bottom para una apariencia más limpia */
+}
+
+/* 🚀 MEJORA 4: Texto de tarjeta (Degradado mejorado) */
+.textog {
+    /* Degradado ligeramente ajustado para mayor profundidad */
+    background: linear-gradient(135deg, #11998e, #38ef7d); 
+    text-align: center;
+    padding: 16px 0; /* Un poco más de padding */
+    font-weight: 700; /* Mayor negrita */
+    color: #0b0f0c; /* Texto oscuro para fuerte contraste */
+    font-size: 1.1rem; /* Tamaño de fuente ligeramente mayor */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+a{
+    text-decoration: none;
+}

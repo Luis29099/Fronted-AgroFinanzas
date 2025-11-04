@@ -1,0 +1,195 @@
+
+/* --------------------------------- HERO PRINCIPAL --------------------------------- */
+.hero-principal {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Altura más definida para el "Hero" */
+    margin-bottom: 50px; /* Separación de la siguiente sección */
+    overflow: hidden;
+    /* Usamos un grid o flex para centrar el contenido, pero usaremos el estilo de fondo para la imagen */
+}
+
+.imagen-principal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Fondo con imagen y degradado */
+    background: linear-gradient(rgba(11, 15, 12, 0.6), rgba(11, 15, 12, 0.7)), /* Degradado oscuro para contraste */
+                url('https://images.unsplash.com/photo-1580570598977-4b2412d01bbc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1167') no-repeat center center;
+    background-size: cover;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); /* Efecto de corte sutil en la parte inferior */
+}
+
+.hero-contenido {
+    position: relative; /* Para estar encima de la imagen */
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-contenido h1 {
+    /* Estilos mejorados para el H1 en el Hero */
+    color: #ffffff; /* Color blanco para contraste con el fondo */
+    font-size: 3.8rem; /* Tamaño más grande para impacto */
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: 800; /* Más audaz */
+    text-shadow: 0 4px 15px rgba(24, 217, 46, 0.9); /* Sombra más fuerte y con color primario */
+}
+
+.hero-contenido p {
+    color: #18d92e;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    text-shadow: 0 0 10px rgba(24, 217, 46, 0.5);
+    font-weight: 500;
+}
+
+/* --------------------------------- ESTILOS EXISTENTES (AJUSTES) --------------------------------- */
+body {
+    margin: 0;
+    background-color: #0b0f0c;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Eliminamos los estilos antiguos de h1 y .imagen-principal img */
+/*
+h1 {
+    color: #18d92e;
+    font-size: 2.2rem;
+    text-shadow: 0 0 10px rgba(24, 217, 46, 0.5);
+}
+
+.imagen-principal img {
+    width: 80%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 20px;
+    margin-top: 30px;
+    box-shadow: 0 0 20px rgba(24, 217, 46, 0.3);
+}
+*/
+
+
+
+/* ... Mantener el resto de tu CSS para .clima-section y .noticias ... */
+
+/* ---------- RESPONSIVO (AJUSTE AL HERO) ---------- */
+@media (max-width: 768px) {
+    .hero-contenido h1 {
+        font-size: 2.5rem;
+    }
+    .hero-contenido p {
+        font-size: 1.2rem;
+    }
+    .hero-principal {
+        height: 300px;
+    }
+
+}
+
+/* ---------- SECCIÓN DEL CLIMA ---------- */
+.clima-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 5px solid #18d92e;
+  border-radius: 15px;
+  padding: 30px 40px;
+  margin: 40px auto;
+  width: 85%;
+  max-width: 700px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  text-align: center;
+  color: #fff;
+}
+
+.clima-section h2 {
+  color: #18d92e;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-shadow: 0 0 10px rgba(24, 217, 46, 0.4);
+}
+
+.clima-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 20px;
+  line-height: 1.8;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(24, 217, 46, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clima-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(24, 217, 46, 0.3);
+}
+
+.clima-card strong {
+  color: #18d92e;
+}
+
+/* ---------- NOTICIAS ---------- */
+.noticias {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 50px 0;
+  padding: 0 20px;
+}
+
+.noticia {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: 0 0 15px rgba(24, 217, 46, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.noticia:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(24, 217, 46, 0.4);
+}
+
+.noticia img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.noticia-content {
+  padding: 15px;
+  text-align: left;
+}
+
+.noticia-content h3 {
+  color: #18d92e;
+  margin-bottom: 10px;
+}
+
+.noticia-content p {
+  font-size: 14px;
+  color: #d4d4d4;
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 768px) {
+  .noticias {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .imagen-principal img {
+    width: 95%;
+  }
+}
