@@ -13,8 +13,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   {{-- Tus estilos (asegúrate que existan en public/css) --}}
-  <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+ <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/agronomy.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/cattles.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/coffecrops.css') }}">
 
   {{-- Permite que vistas empujen estilos extra --}}
   @stack('styles')

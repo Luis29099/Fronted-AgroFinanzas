@@ -1,0 +1,86 @@
+/* 🌿 ---------- ESTILOS AGRONOMÍA ---------- */
+.agronomy-section .card-text.text-muted,
+.agronomy-section p.text-muted {
+  color: #ffffff81 !important;
+}
+
+.agronomy-section {
+  background: radial-gradient(circle at top left, #0a0a0a 0%, #1b1b1b 100%);
+  color: #fff;
+  min-height: 100vh;
+  padding-top: 120px !important;
+}
+
+
+
+.agronomy-title {
+  color: #18d92e !important;
+  text-shadow: 0 0 15px rgba(24, 217, 46, 0.4);
+  letter-spacing: 1px;
+}
+
+/* ---------- Tarjetas ---------- */
+.agronomy-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.agronomy-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(24, 217, 46, 0.4);
+}
+
+/* Imagen */
+.agronomy-card img {
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Texto */
+.agronomy-card .card-title {
+  color: #18d92e;
+  margin-bottom: 10px;
+}
+
+.agronomy-card .card-text {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Botón */
+.agronomy-btn {
+  background: linear-gradient(135deg, #38ef7d, #11998e);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.agronomy-btn:hover {
+  background: linear-gradient(135deg, #42f5b6, #1dd1a1);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+  .agronomy-card img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .agronomy-section {
+    padding-top: 80px !important;
+  }
+  .agronomy-title {
+    font-size: 26px;
+  }
+}

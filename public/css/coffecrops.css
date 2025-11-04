@@ -1,0 +1,56 @@
+/* === Estilos generales === */
+    .section-box { padding: 1.5rem 0; }
+    .section-title { font-weight: 600; }
+    .info ul { padding-left: 1.25rem; }
+
+    /* === Imágenes generales === */
+    .img-grid {
+      width: 100%;
+      object-fit: cover;
+      border-radius: .5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    }
+
+    /* Alturas específicas por tipo */
+    .img-grid.small { height: 200px; }
+    .img-grid.medium { height: 280px; }
+    .img-grid.large { height: 350px; }
+
+    /* === Cards de variedades === */
+    .card {
+      position: relative;
+      overflow: hidden;
+      border: none;
+      border-radius: .75rem;
+      transition: transform .3s ease, box-shadow .3s ease;
+      background-color: #1b1b1b;
+      color: #fff;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.2);
+    }
+    .card img {
+      object-fit: cover;
+      height: 220px;
+      filter: brightness(0.8);
+      transition: transform .3s ease, filter .3s ease;
+    }
+    .card:hover img {
+      transform: scale(1.05);
+      filter: brightness(1);
+    }
+    .card-body {
+      padding: 1rem 1.2rem;
+    }
+    .card h1.fs-6 {
+      line-height: 1.5;
+      font-weight: 400;
+      color: #f1f1f1;
+    }
+
+    @media (min-width:768px){
+      .img-grid.small { height: 240px; }
+      .img-grid.medium { height: 320px; }
+      .img-grid.large { height: 420px; }
+    }
