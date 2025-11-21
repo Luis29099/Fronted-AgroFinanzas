@@ -1,87 +1,121 @@
-/* 🌿 ---------- MAIN AGRONOMÍA ---------- */
+/* ---------------------------------------------------- */
+/* 🌿 ESTILOS PRINCIPALES DE AGRONOMÍA (COLORES ORIGINALES) 🌿 */
+/* ---------------------------------------------------- */
+
 main.Agronomia {
     flex: 1;
-    padding-top: 30px;
-    padding-bottom: 60px; /* Espacio antes del footer */
+    padding: 60px 20px; /* Padding uniforme */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 60px; /* Espacio entre el encabezado y las tarjetas */
     width: 100%;
+    /* Asumiendo fondo principal oscuro */
 }
 
-/* 🚀 MEJORA 1: Contenedor y estilo para el título y subtítulo */
+/* -------------------- ENCABEZADO -------------------- */
+
 .header-produccion {
     text-align: center;
-    margin-bottom: 20px;
+    max-width: 900px;
     padding: 0 20px;
-    max-width: 800px;
 }
 
 .titulo-principal {
-    font-size: 3.2rem; /* Aumentado para mayor impacto */
-    color: #18d92e;
-    letter-spacing: 2px;
-    font-weight: 800;
-    text-shadow: 0 0 20px rgba(24, 217, 46, 0.7); /* Sombra más fuerte */
-    margin-bottom: 10px;
+    /* Color principal de tu paleta */
+    font-size: 3.8rem; 
+    color: #18d92e; 
+    letter-spacing: 3px;
+    font-weight: 500;
+    /* Sombra con el color original */
+    text-shadow: 0 4px 15px rgba(24, 217, 46, 0.4); 
+    margin-bottom: 8px;
+    line-height: 1.1;
 }
 
 .subtitulo-principal {
-    font-size: 1.2rem;
-    color: #a0a0a0; /* Color gris suave para contraste */
-    font-style: italic;
+    font-size: 1.4rem;
+    color: #a0a0a0; /* Gris claro/suave, tomado de tu CSS anterior */
+    font-style: normal;
+    font-weight: 300;
 }
 
+/* -------------------- CONTENEDOR DE TARJETAS (USANDO GRID) -------------------- */
 
-/* Contenedor de tarjetas */
 .Agronomia-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-    width: 90%;
-    max-width: 1200px; /* Limitar el ancho máximo */
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; 
+    width: 95%;
+    max-width: 1300px;
 }
 
-/* 🚀 MEJORA 2: Tarjeta individual (Efecto y Sombra) */
+/* Enlace/Contenedor de tarjeta */
+a.card-link {
+    text-decoration: none; 
+}
+
+/* -------------------- TARJETA INDIVIDUAL -------------------- */
+
 .Agronomia-card {
-    width: 300px;
-    background: rgba(17, 17, 17, 0.8); /* Fondo más oscuro y sólido */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde más sutil */
-    border-radius: 16px; /* Bordes ligeramente más suaves */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Sombra más profunda y profesional */
+    background: rgba(17, 17, 17, 0.8); /* Fondo oscuro original */
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    border-radius: 12px; 
     overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); 
     transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    cursor: pointer;
 }
 
-/* 🚀 MEJORA 3: Efecto Hover (Borde Luminoso) */
+/* EFECTO HOVER: Elevación y Borde Luminoso con color original */
 .Agronomia-card:hover {
-    transform: translateY(-8px); /* Elevación más notable */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), /* Sombra de elevación */
-                0 0 25px rgba(24, 217, 46, 0.6); /* Resplandor verde */
-    border: 1px solid #18d92e; /* Borde sólido verde */
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 
+                /* Resplandor usando tu color #18d92e */
+                0 0 25px rgba(24, 217, 46, 0.7); 
+    border: 1px solid #18d92e; /* Borde sólido de color temático */
 }
 
 .img-card {
     width: 100%;
-    height: 220px;
+    height: 240px; 
     object-fit: cover;
-    /* Elimina el border-bottom para una apariencia más limpia */
+    display: block;
 }
 
-/* 🚀 MEJORA 4: Texto de tarjeta (Degradado mejorado) */
-.textog {
-    /* Degradado ligeramente ajustado para mayor profundidad */
-    background: linear-gradient(135deg, #11998e, #38ef7d); 
+/* -------------------- TEXTO DE TARJETA -------------------- */
+
+.card-text {
+    /* Degradado original de tus estilos anteriores */
+    background: linear-gradient(135deg, #38ef7d, #11998e); 
     text-align: center;
-    padding: 16px 0; /* Un poco más de padding */
-    font-weight: 700; /* Mayor negrita */
-    color: #0b0f0c; /* Texto oscuro para fuerte contraste */
-    font-size: 1.1rem; /* Tamaño de fuente ligeramente mayor */
+    padding: 18px 0; 
+    font-weight: 700; /* Negrita fuerte */
+    color: #0b0f0c; /* Texto oscuro para contraste sobre el degradado */
+    font-size: 1.15rem; 
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
-a{
-    text-decoration: none;
+
+/* -------------------- RESPONSIVIDAD MÓVIL -------------------- */
+
+@media (max-width: 768px) {
+    .titulo-principal {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+
+    .subtitulo-principal {
+        font-size: 1.1rem;
+    }
+
+    .Agronomia-container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .img-card {
+        height: 200px;
+    }
 }

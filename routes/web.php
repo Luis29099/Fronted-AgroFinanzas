@@ -89,7 +89,8 @@ Route::get('/inicio', [ClimaController::class, 'index'])->name('inicio.index');
 
 use App\Http\Controllers\FinanceApiController;
 
-Route::get('/finances/api', [FinanceController::class, 'index'])->name('finances.index');
-Route::post('/finances/api/store', [FinanceController::class, 'store'])->name('finances.store');
+Route::get('/finanzas', [FinanceClienteController::class, 'index'])->name('client.finances.index');
+Route::post('/finanzas/income', [FinanceClienteController::class, 'storeIncome'])->name('client.income.store');
+Route::post('/finanzas/expense', [FinanceClienteController::class, 'storeExpense'])->name('client.expense.store');
 
 Route::get('/Agronomia', [AgronomyController::class, 'index'])->name('Agronomy.index');

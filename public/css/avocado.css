@@ -1,0 +1,205 @@
+/*
+ * Estilos CSS para el Contenido Principal (MAIN) de la vista de Aguacates.
+ * Se asume que el estilo base (fondo, tipografía) está en style.css.
+ * Se incluyen estilos nuevos para Datos Rápidos y Recomendaciones.
+ */
+
+/* ===== FUENTES Y COLOR BASE (Asumiendo que están definidos en style.css) ===== */
+/* :root {
+    --color-neon: #18d92e;
+    --color-text-light: #ccc;
+    --color-surface: rgba(255, 255, 255, 0.06);
+} */
+
+.avocado-main{
+    flex: 1;
+    padding: 50px 20px 20px;
+}
+
+/* ------------------- Sección Principal/Hero ------------------- */
+.info-hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.main-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #18d92e; /* Color Neón */
+    letter-spacing: 1px;
+    font-size: 2.5rem;
+}
+
+.intro-text {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* ------------------- Sección de Datos Rápidos ------------------- */
+.quick-data-section {
+    padding: 40px 0;
+}
+
+.quick-data-section h2, .varieties-section h2, .care-recommendations h2 {
+    text-align: center;
+    color: #42f5b6;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.data-card {
+    background: rgba(24, 217, 46, 0.1); /* Fondo semitransparente neón */
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(24, 217, 46, 0.3);
+    box-shadow: 0 0 10px rgba(24, 217, 46, 0.2);
+    transition: background 0.3s ease;
+}
+
+.data-card:hover {
+    background: rgba(24, 217, 46, 0.2);
+}
+
+.data-card i {
+    font-size: 2.5rem;
+    color: #18d92e; /* Icono neón */
+    margin-bottom: 10px;
+}
+
+.data-card h3 {
+    font-size: 1.2rem;
+    color: #18d92e;
+    margin: 5px 0;
+}
+
+.data-card p {
+    color: #fff;
+    font-weight: 300;
+}
+
+/* ------------------- Sección de Recomendaciones ------------------- */
+.care-recommendations {
+    padding: 40px 0;
+    margin-top: 40px;
+}
+
+.recommendation-list {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.recommendation-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #42f5b6; /* Borde de color secundario */
+}
+
+.icon-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #42f5b6;
+    background: #0a0a0a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px #42f5b6;
+}
+
+.recommendation-item h3 {
+    color: #18d92e;
+    margin-top: 0;
+    font-size: 1.3rem;
+}
+
+.recommendation-item p {
+    color: #ccc;
+}
+
+
+/* ------------------- Galería de Variedades (Contenido Original) ------------------- */
+.varieties-section {
+    padding: 40px 0;
+}
+
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.tarjeta {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 15px;
+    overflow: hidden;
+    border-left: 4px solid #18d92e;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(24, 217, 46, 0.3);
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.tarjeta h2 {
+    font-size: 20px;
+    margin: 10px;
+    color: #18d92e;
+    text-transform: capitalize;
+}
+
+.tarjeta p {
+    font-size: 14px;
+    color: #ccc;
+    padding: 0 10px 15px;
+}
+
+/* ===== RESPONSIVE PARA EL NUEVO CONTENIDO ===== */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2rem;
+    }
+    .intro-text {
+        font-size: 1rem;
+    }
+    .data-grid {
+        grid-template-columns: 1fr;
+    }
+    .recommendation-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    .icon-number {
+        margin: 0 auto 10px;
+    }
+}

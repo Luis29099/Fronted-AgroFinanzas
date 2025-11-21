@@ -5,128 +5,140 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-
 class FinanceClienteController extends Controller
 {
-    // 🔸 Formulario de Ingreso
-    public function createIncome()
+    // ----------------------------------------------------------------------
+    // 1. VISTA UNIFICADA (INDEX)
+    // ----------------------------------------------------------------------
+
+    /**
+     * Muestra la vista principal de finanzas con el historial y formularios.
+     * La vista se llama 'client/client_finances'.
+     */
+    public function index(Request $request)
     {
-        return view('client.income.create');
+        // 1. Obtener filtro desde la URL (query)
+        $filter = $request->query('filter', 'all'); // por defecto 'all'
+
+        // 2. Llamada a la API para obtener todos los registros
+        $response = Http::get('http://api.AgroFinanzas.test/api/finances');
+
+        if ($response->successful()) {
+            $finances = $response->json();
+
+            // 3. Filtrar los datos en el cliente (si el filtro no es 'all')
+            if ($filter !== 'all') {
+                $finances = array_filter($finances, function($item) use ($filter) {
+                    // Usar 'type' como fallback si el campo falta
+                    return ($item['type'] ?? 'N/A') === $filter;
+                });
+            }
+            
+            // Revertir el orden para mostrar el más reciente primero
+            $finances = array_reverse($finances); 
+
+            // 4. Retornar la vista unificada
+            return view('client.client_finances', [
+                'finances' => $finances,
+                'filter' => $filter // Se pasa el filtro para resaltar el botón correcto en la vista
+            ]);
+        }
+        
+        // Manejo de error de API
+        return view('client.client_finances', [
+            'finances' => [],
+            'filter' => $filter
+        ])->with('error', 'No se pudo cargar el historial de finanzas. Revisar API.');
     }
 
+    // ----------------------------------------------------------------------
+    // 2. ACCIONES DE GUARDADO (STORE)
+    // ----------------------------------------------------------------------
+
+    // 🔸 Guardar Ingreso
     public function storeIncome(Request $request)
     {
+        // Validación del frontend (para UX inmediata)
         $data = $request->validate([
-            'amount' => 'required|numeric',
-            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0.01',
+            'description' => 'nullable|string|max:255',
             'date' => 'required|date',
         ]);
 
         $data['type'] = 'income';
 
-        Http::post('http://api.AgroFinanzas.test/api/finances', $data);
+        // Llama a la API (Backend)
+        $response = Http::post('http://api.AgroFinanzas.test/api/finances', $data);
 
-        return redirect()->route('client.index')->with('success', 'Ingreso registrado correctamente.');
+        if ($response->successful()) {
+            return redirect()->route('client.finances.index', ['filter' => 'income'])->with('success', 'Ingreso registrado correctamente.');
+        }
+        
+        // --- DEPURACIÓN: Muestra el error exacto del backend ---
+        $errorMessage = $response->json('message') ?? 'Error desconocido al guardar el ingreso en el API.';
+        if ($response->failed() && $response->json('errors')) {
+            $errorMessage = "Error de validación del API. Detalles: " . json_encode($response->json('errors'));
+        }
+        // --- FIN DEPURACIÓN ---
+
+        return redirect()->back()->with('error', $errorMessage)->withInput();
     }
 
-    // 🔸 Formulario de Gasto
-    public function createExpense()
-    {
-        return view('client.expense.create');
-    }
-
+    // 🔸 Guardar Gasto
     public function storeExpense(Request $request)
     {
+        // Validación del frontend (para UX inmediata)
         $data = $request->validate([
-            'amount' => 'required|numeric',
-            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0.01',
+            'description' => 'nullable|string|max:255',
             'date' => 'required|date',
         ]);
 
         $data['type'] = 'expense';
 
-        Http::post('http://api.AgroFinanzas.test/api/finances', $data);
+        // Llama a la API (Backend)
+        $response = Http::post('http://api.AgroFinanzas.test/api/finances', $data);
 
-        return redirect()->route('client.index')->with('success', 'Gasto registrado correctamente.');
-    }
-    public function index(Request $request)
-{
-    // Recibir filtro desde la URL (?filter=income o expense)
-    $filter = $request->query('filter', 'all'); // por defecto 'all'
-
-    $response = Http::get('http://api.AgroFinanzas.test/api/finances');
-
-    if ($response->successful()) {
-        $finances = $response->json();
-
-        // Filtrar en el cliente
-        if ($filter !== 'all') {
-            $finances = array_filter($finances, function($item) use ($filter) {
-                return $item['type'] === $filter;
-            });
+        if ($response->successful()) {
+            return redirect()->route('client.finances.index', ['filter' => 'expense'])->with('success', 'Gasto registrado correctamente.');
         }
 
-        return view('client.index', [
-            'finances' => $finances,
-            'filter' => $filter
-        ]);
+        // --- DEPURACIÓN: Muestra el error exacto del backend ---
+        $errorMessage = $response->json('message') ?? 'Error desconocido al guardar el gasto en el API.';
+        if ($response->failed() && $response->json('errors')) {
+            $errorMessage = "Error de validación del API. Detalles: " . json_encode($response->json('errors'));
+        }
+        // --- FIN DEPURACIÓN ---
+
+        return redirect()->back()->with('error', $errorMessage)->withInput();
     }
 
-    return view('client.index', [
-        'finances' => [],
-        'filter' => $filter
-    ])->with('error', 'No se pudo cargar el historial.');
-}
-
-
-//original----------------------------------------
-
-    // public function index()
-    // {
-    //     $finances = Http::get('http://api.AgroFinanzas.test/api/finances')->json();
-    //     return view('client.index', compact('finances'));
-    // }
-
-    // public function store(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'income'  => 'required|numeric',
-    //         'expense' => 'required|numeric',
-    //         'date'    => 'required|date',
-    //     ]);
-
-    //     $response = Http::post('http://api.AgroFinanzas.test/api/finances', $data);
-
-    //     if ($response->successful()) {
-    //         return redirect()->route('client.index')->with('success', 'Registro agregado correctamente.');
-    //     }
-
-    //     return redirect()->back()->with('error', $response->json('message') ?? 'Error al agregar el registro.');
-    // }
-    //----------------------------------------------------------------------------
+    // El método 'store' original
     public function store(Request $request)
-{
-    $data = $request->validate([
-        'type'        => 'required|in:income,expense',
-        'amount'      => 'required|numeric',
-        'date'        => 'required|date',
-        'description' => 'nullable|string',
-    ]);
+    {
+        $data = $request->validate([
+            'type'      => 'required|in:income,expense',
+            'amount'      => 'required|numeric|min:0.01',
+            'date'        => 'required|date',
+            'description' => 'nullable|string|max:255',
+        ]);
 
-    $response = Http::post('http://api.AgroFinanzas.test/api/finances', $data);
+        $response = Http::post('http://api.AgroFinanzas.test/api/finances', $data);
 
-    if ($response->successful()) {
-        return redirect()->route('client.index')->with('success', 'Registro agregado correctamente.');
+        if ($response->successful()) {
+            return redirect()->route('client.finances.index')->with('success', 'Registro agregado correctamente.');
+        }
+
+        // --- DEPURACIÓN: Muestra el error exacto del backend ---
+        $errorMessage = $response->json('message') ?? 'Error desconocido al agregar el registro.';
+        if ($response->failed() && $response->json('errors')) {
+            $errorMessage = "Error de validación del API. Detalles: " . json_encode($response->json('errors'));
+        }
+        // --- FIN DEPURACIÓN ---
+
+        return redirect()->back()->with('error', $errorMessage)->withInput();
     }
 
-    return redirect()->back()->with('error', $response->json('message') ?? 'Error al agregar el registro.');
+    // Los métodos createIncome() y createExpense() ya no son necesarios
+    // ya que la vista index() los incluye todos.
 }
-
-}
-
-
-

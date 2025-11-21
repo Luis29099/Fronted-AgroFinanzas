@@ -5,7 +5,6 @@
     <div class="footer-section">
       <h3><i class="fas fa-phone-alt"></i> Números de Contacto</h3>
       <ul>
-        <li>+57 311 7091198</li>
         <li>+57 312 7759123</li>
         <li>+57 314 2716135</li>
         <li>+57 316 0993123</li>
@@ -29,7 +28,6 @@
     <div class="footer-section">
       <h3><i class="fas fa-envelope"></i> Correos Electrónicos</h3>
       <ul>
-        <li>jeanc1778@gmail.com</li>
         <li>forcemenrtartu@gmail.com</li>
         <li>luisestebannarvaez82@gmail.com</li>
         <li>chicanganad9@gmail.com</li>

@@ -1,0 +1,333 @@
+/* --------------------------------- BASE Y UTILIDADES --------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+
+/* Base del Body para el contenido (asumiendo que el navbar/footer ya lo cubren) */
+/* Aplicamos estilos de fuente y fondo de forma segura */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top left, #0a0a0a 0%, #1b1b1b 100%);
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* Color de acento neón verde */
+:root {
+    --color-neon-green: #18d92e;
+    --color-dark-bg: #0b0f0c;
+    --color-text-light: #d4d4d4;
+    --shadow-neon: rgba(24, 217, 46, 0.7);
+}
+
+/* Enlaces dentro del contenido */
+a {
+    text-decoration: none;
+    color: var(--color-neon-green);
+    transition: color 0.3s ease;
+}
+p{
+    color: #d4d4d4;
+}
+
+a:hover {
+    color: #42f5b6; /* Verde más claro al pasar el ratón */
+}
+
+/* Utilidad para el color de acento */
+.text-neon-green {
+    color: var(--color-neon-green) !important;
+}
+.small-text {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
+
+/* =========================================================
+   ===== CONTENIDO PRINCIPAL (AGRONOMÍA) ===================
+   ========================================================= */
+
+/* ---------- ANIMACIÓN ---------- */
+.fade-in {
+    opacity: 0;
+    /* La animación se maneja con JS para el escalonamiento */
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- CONTENEDOR DE COLUMNAS (MAIN WRAPPER) ---------- */
+.main-content-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    /* Padding superior debe compensar la altura del navbar fijo */
+    padding: 120px 5% 60px;
+}
+
+/* ---------- COLUMNA PRINCIPAL Y LATERAL ---------- */
+.main-column {
+    flex: 3;
+    min-width: 60%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.aside-column {
+    flex: 1;
+    min-width: 300px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ---------- SECCIÓN TÍTULO ---------- */
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: rgba(255,255,255,0.08); 
+    border-left: 6px solid var(--color-neon-green);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 0 25px rgba(24,217,46,0.2);
+}
+
+.title-section img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px var(--shadow-neon);
+}
+
+.title-section h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    text-shadow: 0 0 10px var(--shadow-neon);
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: var(--color-neon-green);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* ---------- CARD GENERAL ---------- */
+.card {
+    background: rgba(255,255,255,0.05); 
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(24, 217, 46, 0.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    transition: all 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 30px rgba(24,217,46,0.3); 
+    background: rgba(255,255,255,0.07);
+}
+
+.card h3 {
+    color: var(--color-neon-green);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    border-bottom: 2px dashed rgba(24, 217, 46, 0.3);
+    padding-bottom: 5px;
+}
+
+.card h4.aside-subtitle {
+    color: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+/* Estilo de lista mejorado */
+.styled-list {
+    list-style: none;
+    padding: 0;
+}
+.styled-list li {
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+    color: var(--color-text-light);
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.5;
+}
+.styled-list li:last-child {
+    border-bottom: none;
+}
+.styled-list li i {
+    margin-right: 10px;
+    margin-top: 3px;
+    font-size: 1.1rem;
+}
+
+/* ---------- IMÁGENES Y GALERÍA ---------- */
+.card-img {
+    width: 100%;
+    max-height: 350px;
+    border-radius: 10px;
+    margin: 15px 0;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.aside-img {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    margin: 0;
+    object-fit: cover;
+    border: 1px solid rgba(24, 217, 46, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.gallery-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--shadow-neon);
+    z-index: 5;
+}
+
+/* ---------- VIDEOS ---------- */
+.video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.video-grid iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9; 
+    max-width: 100%;
+    border-radius: 10px;
+    border: 3px solid rgba(24,217,46,0.6);
+    box-shadow: 0 0 20px rgba(24,217,46,0.4);
+}
+.video-title {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* ---------- MODAL IMAGEN ---------- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    backdrop-filter: blur(5px);
+    overflow: auto;
+    padding-top: 60px;
+}
+
+.modal-content {
+    margin: 5% auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 10px;
+    box-shadow: 0 0 30px var(--shadow-neon);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: var(--color-neon-green);
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    text-shadow: 0 0 10px var(--shadow-neon);
+}
+
+.close-modal-btn:hover,
+.close-modal-btn:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ---------- BOTÓN SCROLL TOP ---------- */
+.scroll-top-btn {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 50px;
+    height: 50px;
+    background: var(--color-neon-green);
+    color: var(--color-dark-bg);
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 0 15px var(--shadow-neon);
+    transition: all 0.3s ease;
+    display: none; /* Se muestra con JS */
+}
+
+.scroll-top-btn:hover {
+    background-color: #42f5b6;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--shadow-neon);
+}
+
+
+/* 📱 RESPONSIVE */
+@media (max-width: 992px) {
+    .main-column {
+        min-width: 90%;
+        max-width: 90%;
+    }
+    .aside-column {
+        min-width: 90%;
+        max-width: 90%;
+    }
+    .main-content-container {
+        padding: 100px 5% 40px;
+        gap: 20px;
+    }
+    .title-section h2 {
+        font-size: 1.5rem;
+    }
+    .title-section img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    .title-section img {
+        margin-bottom: 10px;
+    }
+}

@@ -1,0 +1,176 @@
+/*
+ * Estilos CSS para el Contenido Principal (MAIN) de la vista de Café.
+ * Se reutiliza la estética oscura/neón y se crean las secciones informativas.
+ */
+
+/* ===== COLORES BASE (Del estilo original) ===== */
+/* --color-neon: #18d92e;
+   --color-secundario: #42f5b6; 
+   --color-fondo: #0a0a0a; */
+
+.coffe-main {
+    flex: 1;
+    padding: 5px 20px 10px; /* Ajuste para el navbar fijo */
+    display: block;
+}
+
+/* ------------------- Sección Principal/Hero ------------------- */
+.info-hero {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+.main-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #18d92e; /* Color Neón */
+    letter-spacing: 1px;
+    font-size: 2.8rem;
+    text-shadow: 0 0 10px rgba(24, 217, 46, 0.4);
+}
+
+.intro-text {
+    max-width: 850px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #cfeeda;
+    line-height: 1.6;
+}
+
+/* ------------------- Títulos de Sección ------------------- */
+.quick-data-section h2, .process-section h2, .care-recommendations h2 {
+    text-align: center;
+    color: #42f5b6; /* Neón secundario */
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ------------------- Sección de Datos Rápidos ------------------- */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.data-card {
+    background: rgba(24, 217, 46, 0.08); 
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(24, 217, 46, 0.3);
+    box-shadow: 0 0 15px rgba(24, 217, 46, 0.15);
+    transition: background 0.3s ease;
+}
+
+.data-card:hover {
+    background: rgba(24, 217, 46, 0.15);
+}
+
+.data-card i {
+    font-size: 3rem;
+    color: #18d92e; /* Icono neón */
+    margin-bottom: 15px;
+}
+
+.data-card h3 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 5px 0;
+}
+
+.data-card p {
+    color: #cfeeda;
+    font-weight: 300;
+}
+
+/* ------------------- Sección de Recomendaciones ------------------- */
+.care-recommendations {
+    padding: 40px 0;
+    margin-top: 20px;
+}
+
+.recommendation-list {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.recommendation-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 5px solid #18d92e; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.icon-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #18d92e;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #18d92e;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px #18d92e;
+}
+
+.recommendation-item h3 {
+    color: #42f5b6;
+    margin-top: 0;
+    font-size: 1.3rem;
+}
+
+.recommendation-item p {
+    color: #ccc;
+}
+
+/* ------------------- Contenedor de Tarjetas (Original) ------------------- */
+.process-section {
+    padding: 40px 0;
+}
+
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 26px;
+    align-items: stretch; /* Asegura que todas las tarjetas tengan la misma altura */
+}
+
+/* Las tarjetas en sí ya están estilizadas en el CSS base que enviaste */
+
+/* ===== RESPONSIVE PARA EL NUEVO CONTENIDO ===== */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.2rem;
+    }
+    .intro-text {
+        font-size: 1rem;
+    }
+    .data-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .recommendation-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .icon-number {
+        margin: 0 auto 10px;
+    }
+}

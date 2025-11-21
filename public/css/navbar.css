@@ -1,175 +1,178 @@
-
 /* 🌿 Fondo oscuro elegante */
-.navbar-modern {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #000;
-  padding: 15px 50px;
-  font-family: "Poppins", sans-serif;
-  color: #fff;
-  position: relative;
-  z-index: 1000;
+.af-navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000;
+    padding: 15px 50px;
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    position: relative;
+    z-index: 1000;
 }
 
-/* 🔸 Logo */
-.logo-nombre {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* 🔸 Logo y Marca */
+.af-logo-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.logo {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+.af-logo-link {
+    display: flex; /* Asegura que el logo y el nombre estén alineados */
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
 }
 
-.nombre {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #00ff9d;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px #00ff9d50;
-}
-.logo-nombre a {
-  text-decoration: none;
-  color: inherit;
+.af-brand-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
 }
 
-.logo-nombre a:hover {
-  text-decoration: none;
-}
-/* 🔹 Navegación */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.af-brand-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #00ff9d;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #00ff9d50;
+    margin-left: 10px; /* Separación entre el logo y el nombre */
 }
 
-/* 🔹 Enlaces */
-.nav-item {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-  transition: color 0.3s ease;
+/* 🔹 Navegación Principal */
+.af-main-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-item::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 50%;
-  background: #00ff9d;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
+/* 🔹 Enlaces de Navegación */
+.af-nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
-.nav-item:hover::after,
-.nav-item.active::after {
-  width: 100%;
+.af-nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background: #00ff9d;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
 }
 
-.nav-item:hover {
-  color: #00ff9d;
+.af-nav-link:hover::after,
+.af-nav-link.active::after {
+    width: 100%;
 }
 
-/* 👤 Perfil */
-.profile {
-  position: relative;
+.af-nav-link:hover {
+    color: #00ff9d;
 }
 
-.profile-img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid #00ff9d;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* 👤 Perfil y Menú */
+.af-profile-menu {
+    position: relative;
 }
 
-.profile-img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px #00ff9d;
+.af-profile-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #00ff9d;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.af-profile-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #00ff9d;
 }
 
 /* 🔽 Menú desplegable del perfil */
-.profile-dropdown {
-  position: absolute;
-  right: 0;
-  top: 60px;
-  background: #111;
-  border: 1px solid #00ff9d50;
-  border-radius: 10px;
-  padding: 15px;
-  display: none;
-  flex-direction: column;
-  min-width: 180px;
-  box-shadow: 0 0 15px #00ff9d40;
+.af-dropdown-content {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background: #111;
+    border: 1px solid #00ff9d50;
+    border-radius: 10px;
+    padding: 15px;
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    box-shadow: 0 0 15px #00ff9d40;
 }
 
-.profile-dropdown.show {
-  display: flex;
+.af-dropdown-content.show {
+    display: flex;
 }
 
-.profile-dropdown .username {
-  color: #00ff9d;
-  font-weight: 500;
-  margin-bottom: 10px;
+.af-dropdown-username {
+    color: #00ff9d;
+    font-weight: 500;
+    margin-bottom: 10px;
 }
 
-.logout-btn {
-  background: none;
-  border: none;
-  color: #ff7070;
-  cursor: pointer;
-  font-weight: 500;
-  text-align: left;
-  padding: 5px 0;
-  width: 100%;
-  transition: color 0.3s ease;
+.af-logout-btn {
+    background: none;
+    border: none;
+    color: #ff7070;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: left;
+    padding: 5px 0;
+    width: 100%;
+    transition: color 0.3s ease;
 }
 
-.logout-btn:hover {
-  color: #ff2f2f;
-}
-/* ---------- BOTONES DE NAVEGACIÓN ---------- */
-.nav-buttons {
-  display: flex;
-  gap: 10px;
+.af-logout-btn:hover {
+    color: #ff2f2f;
 }
 
-.btn-navegacion {
-  font-family: 'Poppins', sans-serif;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #ffffff;
-  background: linear-gradient(135deg, #38ef7d, #11998e);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
+/* ---------- BOTONES DE AUTENTICACIÓN (Pre-login) ---------- */
+.af-auth-buttons {
+    display: flex;
+    gap: 10px;
 }
 
-.btn-navegacion:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, #42f5b6, #1dd1a1);
-  box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
+.af-nav-btn {
+    font-family: 'Poppins', sans-serif;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    background: linear-gradient(135deg, #38ef7d, #11998e);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    /* Asegura que el color se aplique correctamente a la etiqueta <a> */
+    display: inline-block; 
+}
+
+.af-nav-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #42f5b6, #1dd1a1);
+    box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
 }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 480px) {
-  .nav-buttons {
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-  }
+    .af-auth-buttons {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
 }

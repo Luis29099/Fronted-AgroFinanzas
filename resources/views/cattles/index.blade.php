@@ -1,123 +1,233 @@
 @extends('layouts.app')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgroFinanzas – Vacas</title>
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Enlace al CSS externo (asumiendo que se carga correctamente en el entorno de Blade) -->
+<link rel="stylesheet" href="bovine_style.css"> 
+<!-- Fuente Poppins y Font Awesome para íconos profesionales -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <style>
-    body {
-      background: linear-gradient(to bottom, #e9f7ef, #ffffff);
-      font-family: Arial, sans-serif;
-    }
-    h1, h2 {
-      font-weight: bold;
-      color: #1b5e20; /* Verde más fuerte */
-    }
-    h1 {
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    }
-    .lead {
-      color: #2e473b;
-    }
-    /* Para que todas las imágenes tengan mismo tamaño */
-    .img-grid {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .img-grid:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    }
-    .section-box {
-      background: #ffffff;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      margin-bottom: 40px;
-      border-left: 8px solid #2e7d32; /* borde verde */
-    }
-    .section-title {
-      background: #a5d6a7;
-      padding: 10px;
-      border-radius: 8px;
-      display: inline-block;
-      color: #1b5e20;
-    }
-  </style>
-</head>
-<body>
+<!-- Contenedor principal para encapsular estilos y tema -->
+<div id="bovine-page" class="bovine-page">
 
-  <!-- Contenido principal -->
-  <main class="container my-5">
+    <!-- Botón Flotante de Modo Oscuro - ID Único -->
+    <button id="theme-toggle-btn" onclick="toggleTheme()" class="floating-btn dark-mode">
+        <i class="fas fa-moon"></i> Cambiar tema
+    </button>
 
-    <section class="section-box text-center">
-      <h1 class="mb-3">🐄 Vacas: Manejo y Producción</h1>
-      <p class="lead">
-        Las vacas son animales domesticados esenciales para la producción de carne y leche, 
-        además de ser fundamentales en muchas economías rurales.
-      </p>
-    </section>
 
-    <!-- Sección de Razas -->
-    <section class="section-box">
-      <h2 class="mb-4 text-center section-title">Razas más comunes</h2>
-      <p>
-        Entre las más conocidas están: <strong>Holstein</strong> (alta producción de leche), 
-        <strong>Jersey</strong> (leche rica en grasa), <strong>Angus</strong> (carne de calidad) y 
-        <strong>Brahman</strong> (resistencia a climas cálidos).
-      </p>
+    <!-- ===== CONTENIDO PRINCIPAL - Clase Única ===== -->
+    <main class="bovine-container">
+        <h1>🐄 Ganado Bovino: Manejo y Producción</h1>
 
-      <div class="row g-3 mt-3">
-        <div class="col-6 col-md-4 col-lg-2">
-          <img src="https://licnz.com/wp-content/uploads/2020/10/Holstein-Friesian-bull-Mint-Edition-Front-on.jpg" class="img-grid" alt="Vaca 1">
+        <!-- Razas - Clase Única -->
+        <section class="bovine-card" id="razas">
+            <h2>Razas más comunes 
+                <button onclick="toggleSection('razas-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
+            </h2>
+            <div id="razas-content" class="bovine-content">
+                <p>
+                    Entre las más conocidas están: <strong>Holstein</strong> (alta producción de leche), 
+                    <strong>Jersey</strong> (leche rica en grasa), <strong>Angus</strong> (carne de calidad) y 
+                    <strong>Brahman</strong> (resistencia a climas cálidos).
+                </p>
+                <div class="bovine-collage">
+                    <img src="https://licnz.com/wp-content/uploads/2020/10/Holstein-Friesian-bull-Mint-Edition-Front-on.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=HOLSTEIN';" alt="Vaca Holstein" onclick="enlargeImage(this)">
+                    <img src="https://i.pinimg.com/originals/e5/79/01/e57901f813294688ca0bf4f313e5c840.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=JERSEY';" alt="Vaca Jersey" onclick="enlargeImage(this)">
+                    <img src="https://www.lechedeflorida.com/core/fileparse.php/278/urlt/Holstein-Cow-Headshot.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=LECHE';" alt="Vaca de leche" onclick="enlargeImage(this)">
+                    <img src="https://www.miguelvergara.com/actualidad/wp-content/uploads/2023/10/vaca-frisona-listado.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=FRISONA';" alt="Vaca frisona" onclick="enlargeImage(this)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Suelo y pasturas -->
+        <section class="bovine-card" id="suelo">
+            <h2>Suelo y pasturas 
+                <button onclick="toggleSection('suelo-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
+            </h2>
+            <div id="suelo-content" class="bovine-content">
+                <p>
+                    Prefieren suelos bien drenados, con pastos nutritivos como <em>kikuyo</em>, 
+                    <em>ryegrass</em> y <em>trébol</em>. El pH ideal está entre 6 y 7, con alto contenido
+                    de materia orgánica.
+                </p>
+                <div class="bovine-collage two-cols">
+                    <img src="https://images.unsplash.com/photo-1714983894044-44ca0451216b?q=80&w=1170&auto=format&fit=crop" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=PASTURAS';" alt="Pasturas nutritivas" onclick="enlargeImage(this)">
+                    <img src="https://www.gob.mx/cms/uploads/article/main_image/72605/vacas.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=FORRAJE';" alt="Forrajes para ganado" onclick="enlargeImage(this)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Alimentación -->
+        <section class="bovine-card" id="alimentacion">
+            <h2>Alimentación 
+                <button onclick="toggleSection('alimentacion-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
+            </h2>
+            <div id="alimentacion-content" class="bovine-content">
+                <p>
+                    La dieta del ganado vacuno se basa principalmente en pasto, silo y heno. 
+                    También se puede complementar con granos (maíz, sorgo) y suplementos proteicos.
+                </p>
+                <ul>
+                    <li><i class="fas fa-seedling"></i> <strong>Pasto fresco:</strong> principal fuente de nutrientes.</li>
+                    <li><i class="fas fa-tractor"></i> <strong>Heno y ensilaje:</strong> reservas para épocas secas.</li>
+                    <li><i class="fas fa-pills"></i> <strong>Suplementos:</strong> sales minerales y vitaminas.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Producción de leche -->
+        <section class="bovine-card" id="leche">
+            <h2>Producción de leche 
+                <button onclick="toggleSection('leche-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
+            </h2>
+            <div id="leche-content" class="bovine-content">
+                <p>
+                    Una vaca lechera puede producir entre <strong>20 y 40 litros diarios</strong> de leche,
+                    dependiendo de la raza, la genética, la alimentación y el manejo.
+                </p>
+                <p>
+                    La <strong>Holstein</strong> es la más productiva, mientras que la <strong>Jersey</strong> 
+                    destaca por la calidad y el contenido graso de su leche.
+                </p>
+            </div>
+        </section>
+
+        <!-- Producción de carne -->
+        <section class="bovine-card" id="carne">
+            <h2>Producción de carne 
+                <button onclick="toggleSection('carne-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
+            </h2>
+            <div id="carne-content" class="bovine-content">
+                <p>
+                    Las razas de carne como <strong>Angus</strong> y <strong>Hereford</strong> 
+                    son criadas por su carne de alta calidad y rápido crecimiento.
+                </p>
+                <p>
+                    El manejo adecuado de la alimentación y el pastoreo influye directamente 
+                    en la calidad del producto final.
+                </p>
+            </div>
+        </section>
+
+        <!-- Salud y manejo -->
+        <section class="bovine-card" id="salud">
+            <h2>Salud y manejo 
+                <button onclick="toggleSection('salud-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
+            </h2>
+            <div id="salud-content" class="bovine-content">
+                <p>
+                    El ganado requiere cuidados veterinarios periódicos: vacunación, desparasitación 
+                    y control de parásitos externos. 
+                </p>
+                <ul>
+                    <li><i class="fas fa-syringe"></i> Vacunas contra fiebre aftosa y brucelosis.</li>
+                    <li><i class="fas fa-bug"></i> Desparasitación interna y externa.</li>
+                    <li><i class="fas fa-house-chimney"></i> Corrales limpios y ventilados.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Noticias -->
+        <section class="bovine-card">
+            <h2>📰 Noticias sobre ganado</h2>
+            <input type="text" id="bovine-news-search" placeholder="Buscar noticias..." onkeyup="filterNews()" class="buscador">
+            <div id="news-container">
+                <!-- Contenido de noticias simulado para el filtro -->
+                <div class="news-item">
+                    <h3 class="text-neon">Inversión en Genética Bovina</h3>
+                    <p>El gobierno anuncia nuevos programas de apoyo para la mejora genética de las razas lecheras y cárnicas.</p>
+                </div>
+                <div class="news-item">
+                    <h3 class="text-neon">Estrategias de Pastoreo Rotacional</h3>
+                    <p>Expertos discuten las mejores prácticas para maximizar la eficiencia del pastoreo en climas variables.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de imágenes -->
+        <div id="image-modal" class="modal" onclick="closeModal()">
+            <img id="modal-img" src="" alt="imagen ampliada">
+            <span class="close" onclick="closeModal(event)">✖</span>
         </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <img src="https://i.pinimg.com/originals/e5/79/01/e57901f813294688ca0bf4f313e5c840.jpg" class="img-grid" alt="Vaca 2">
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <img src="https://www.lechedeflorida.com/core/fileparse.php/278/urlt/Holstein-Cow-Headshot.jpg" class="img-grid" alt="Vaca 3">
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <img src="https://www.miguelvergara.com/actualidad/wp-content/uploads/2023/10/vaca-frisona-listado.jpg" class="img-grid" alt="Vaca 4">
-        </div>
-        <div class="col-6 col-md-4 col-lg-2">
-          <img src="https://www.compassionfoodbusiness.es/media/7437422/bulls-in-shed-3.jpg" class="img-grid" alt="Vaca 5">
-        </div>
-      </div>
-    </section>
+    </main>
 
-    <!-- Sección de Suelo -->
-    <section class="section-box">
-      <h2 class="mb-4 text-center section-title">Suelo y pasturas</h2>
-      <p>
-        Prefieren suelos bien drenados, con pastos nutritivos como kikuyo, ryegrass y trébol.
-        El pH ideal está entre 6 y 7, con alto contenido de materia orgánica.
-      </p>
 
-      <div class="row g-3 mt-3">
-        <div class="col-12 col-md-6">
-          <img src="https://a.storyblok.com/f/160385/890x605/4e2cafbd21/pastos-forrajes.jpg/m/filters:quality(70)/" class="img-grid" alt="Pastos">
-        </div>
-        <div class="col-12 col-md-6">
-          <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc" class="img-grid" alt="Pradera">
-        </div>
-      </div>
-    </section>
-  </main>
+    <!-- ===== JAVASCRIPT DE INTERACTIVIDAD (Nombres de ID/Clase actualizados) ===== -->
+    <script>
+        // Cierra el modal de imagen, evitando que el clic en el botón cierre el modal
+        function closeModal(event) {
+            if (event && event.target.classList.contains('close')) {
+                event.stopPropagation();
+            }
+            document.getElementById('image-modal').style.display = 'none';
+        }
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        // Abre y muestra la imagen en el modal
+        function enlargeImage(imgElement) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-img');
+            modal.style.display = 'flex';
+            modalImg.src = imgElement.src;
+        }
 
+        // Muestra/Oculta secciones con transición
+        function toggleSection(id) {
+            const content = document.getElementById(id);
+            const button = content.previousElementSibling.querySelector('.mostrar i');
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                // Usamos la misma lógica de padding que en el CSS para una transición suave
+                content.style.padding = '0 15px'; 
+                button.style.transform = 'rotate(0deg)';
+            } else {
+                // Usamos scrollHeight + un margen para asegurar que se muestre todo el contenido
+                content.style.maxHeight = content.scrollHeight + 30 + "px"; 
+                content.style.padding = '15px 15px 0 15px'; 
+                button.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Filtra las noticias (simulado)
+        function filterNews() {
+            const searchInput = document.getElementById('bovine-news-search').value.toLowerCase(); 
+            const newsContainer = document.getElementById('news-container');
+            const newsItems = newsContainer.querySelectorAll('.news-item');
+
+            newsItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchInput)) {
+                    item.style.display = ''; 
+                } else {
+                    item.style.display = 'none'; 
+                }
+            });
+        }
+
+        // Función de cambio de tema (Oscuro <-> Claro)
+        function toggleTheme() {
+            const pageContainer = document.getElementById('bovine-page'); // Nuevo ID
+            const icon = document.querySelector('#theme-toggle-btn i'); // Nuevo ID
+            
+            if (pageContainer.classList.contains('light-mode')) {
+                pageContainer.classList.remove('light-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                pageContainer.classList.add('light-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+
+        // Inicializa las secciones colapsadas
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.bovine-content').forEach(content => { // Nueva clase
+                content.style.maxHeight = null;
+                content.style.padding = '0 15px'; 
+            });
+        });
+    </script>
+</div>
 @endsection

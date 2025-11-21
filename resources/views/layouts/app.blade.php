@@ -21,6 +21,11 @@
   <link rel="stylesheet" href="{{ asset('css/register.css') }}">
   <link rel="stylesheet" href="{{ asset('css/finances.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Agronomy.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/recomendation.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/hen.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/avocado.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/coffe.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cattles.css') }}">
   {{-- Permite que vistas empujen estilos extra --}}
   @stack('styles')
 </head>
