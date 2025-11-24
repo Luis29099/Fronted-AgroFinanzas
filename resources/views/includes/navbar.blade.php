@@ -68,19 +68,41 @@
             {{-- 🔹 Imagen de perfil con menú oculto --}}
             <li class="af-profile-menu">
                 <div class="af-profile-trigger">
-                    {{-- Cambiamos ID y clase --}}
-                    <img src="/img/profile.png" alt="Perfil" class="af-profile-avatar" id="afProfileMenuBtn">
-                    {{-- Cambiamos ID y clase --}}
+
+                    {{-- Foto real del usuario o imagen por defecto --}}
+                    <img 
+                        src="{{ session('user.profile_photo') 
+                                ? asset('storage/profile_photos/' . session('user.profile_photo')) 
+                                : asset('img/profile.png') }}"
+                        
+                        class="af-profile-avatar"
+                        id="afProfileMenuBtn">
+
+                    {{-- Menú desplegable --}}
                     <div class="af-dropdown-content" id="afProfileMenu">
-                        <p class="af-dropdown-username">👤 {{ session('user')['name'] ?? 'Usuario' }}</p>
+
+                        {{-- Nombre del usuario --}}
+                        <p class="af-dropdown-username">👤 {{ session('user')['name'] }}</p>
+
                         <hr>
+
+                        {{-- Link a editar perfil --}}
+                        <a href="{{ route('perfil.editar') }}" class="af-dropdown-link">
+                             Editar perfil
+                        </a>
+
+                        <hr>
+
+                        {{-- Botón de logout --}}
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="af-logout-btn">🔒 Cerrar Sesión</button>
+                            <button type="submit" class="af-logout-btn"> Cerrar Sesión</button>
                         </form>
+
                     </div>
                 </div>
             </li>
+
         @endif
     </ul>
 </nav>

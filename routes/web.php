@@ -55,6 +55,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', [AuthController::class, 'home'])->name('home');
 
+Route::get('/editar-perfil', [AuthController::class, 'showEditProfile'])->name('perfil.editar');
+Route::post('/editar-perfil', [AuthController::class, 'updateProfile'])->name('perfil.actualizar');
+
+
 
 
 // // Cliente Finanzas
@@ -92,5 +96,13 @@ use App\Http\Controllers\FinanceApiController;
 Route::get('/finanzas', [FinanceClienteController::class, 'index'])->name('client.finances.index');
 Route::post('/finanzas/income', [FinanceClienteController::class, 'storeIncome'])->name('client.income.store');
 Route::post('/finanzas/expense', [FinanceClienteController::class, 'storeExpense'])->name('client.expense.store');
+// editar
+Route::put('/client/finances/{id}', [FinanceClienteController::class, 'update'])
+    ->name('client.finances.update');
+
+// eliminar
+Route::delete('/client/finances/{id}', [FinanceClienteController::class, 'destroy'])
+    ->name('client.finances.destroy');
+
 
 Route::get('/Agronomia', [AgronomyController::class, 'index'])->name('Agronomy.index');

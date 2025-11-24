@@ -16,40 +16,48 @@ class FinanceClienteController extends Controller
      * La vista se llama 'client/client_finances'.
      */
     public function index(Request $request)
-    {
-        // 1. Obtener filtro desde la URL (query)
-        $filter = $request->query('filter', 'all'); // por defecto 'all'
+{
+     // si necesitas el usuario
 
-        // 2. Llamada a la API para obtener todos los registros
-        $response = Http::get('http://api.AgroFinanzas.test/api/finances');
+    // ============================================================
+    // 1. Llamar a tu API backend (ajusta la URL al tuyo)
+    // ============================================================
+    $response = Http::get("http://api.AgroFinanzas.test/api/finances");
 
-        if ($response->successful()) {
-            $finances = $response->json();
+    // tu API devuelve una lista normal de finances
+    $finances = collect($response->json());
 
-            // 3. Filtrar los datos en el cliente (si el filtro no es 'all')
-            if ($filter !== 'all') {
-                $finances = array_filter($finances, function($item) use ($filter) {
-                    // Usar 'type' como fallback si el campo falta
-                    return ($item['type'] ?? 'N/A') === $filter;
-                });
-            }
-            
-            // Revertir el orden para mostrar el más reciente primero
-            $finances = array_reverse($finances); 
+    // ============================================================
+    // 2. Obtener filtro si existe
+    // ============================================================
+    $filter = $request->get('filter', 'all');
 
-            // 4. Retornar la vista unificada
-            return view('client.client_finances', [
-                'finances' => $finances,
-                'filter' => $filter // Se pasa el filtro para resaltar el botón correcto en la vista
-            ]);
-        }
-        
-        // Manejo de error de API
-        return view('client.client_finances', [
-            'finances' => [],
-            'filter' => $filter
-        ])->with('error', 'No se pudo cargar el historial de finanzas. Revisar API.');
+    $filteredFinances = $finances;
+
+    if ($filter !== 'all') {
+        $filteredFinances = $finances->where('type', $filter);
     }
+
+    // ============================================================
+    // 3. Calcular totales según tu estructura
+    // ============================================================
+    $totalIncome = $finances->where('type', 'income')->sum('amount');
+    $totalExpense = $finances->where('type', 'expense')->sum('amount');
+    $balance = $totalIncome - $totalExpense;
+
+    // ============================================================
+    // 4. Enviar a la vista el filtro + totales
+    // ============================================================
+    return view('client.client_finances', [
+        'finances' => $filteredFinances,
+        'filter' => $filter,
+
+        // valores que te estaban faltando 👇
+        'totalIncome' => $totalIncome,
+        'totalExpense' => $totalExpense,
+        'balance' => $balance,
+    ]);
+}
 
     // ----------------------------------------------------------------------
     // 2. ACCIONES DE GUARDADO (STORE)
@@ -141,4 +149,33 @@ class FinanceClienteController extends Controller
 
     // Los métodos createIncome() y createExpense() ya no son necesarios
     // ya que la vista index() los incluye todos.
+    public function update(Request $request, $id)
+{
+    $data = $request->validate([
+        'amount' => 'required|numeric',
+        'date' => 'required|date',
+        'description' => 'nullable|string'
+    ]);
+
+    $response = Http::put("http://api.AgroFinanzas.test/api/finances/$id", $data);
+
+    if ($response->successful()) {
+        return back()->with('success', 'Registro actualizado correctamente.');
+    }
+
+    return back()->with('error', 'Error al actualizar.');
+}
+
+
+public function destroy($id)
+{
+    $response = Http::delete("http://api.AgroFinanzas.test/api/finances/$id");
+
+    if ($response->successful()) {
+        return back()->with('success', 'Registro eliminado.');
+    }
+
+    return back()->with('error', 'Error al eliminar.');
+}
+
 }
