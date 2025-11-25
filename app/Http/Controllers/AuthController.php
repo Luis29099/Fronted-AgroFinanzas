@@ -31,13 +31,18 @@ class AuthController extends Controller
         ]);
 
         if ($response->successful()) {
-            $data = $response->json();
-            // Guardar usuario en sesión
-            session(['user' => $data['user']]);
-            // Regenera el ID de sesión tras el login para prevenir Session Fixation
-            $request->session()->regenerate();
-            return redirect()->route('inicio.index');
+        $data = $response->json();
+        $user = $data['user'];
+
+        // 🚨 CAMBIO AQUÍ: Si el Accessor de la API no funciona, lo construimos en el Front
+        if (!empty($user['profile_photo']) && !str_starts_with($user['profile_photo'], 'http')) {
+             $user['profile_photo'] = 'http://api.AgroFinanzas.test/storage/' . $user['profile_photo'];
         }
+        
+        session(['user' => $user]);
+        $request->session()->regenerate();
+        return redirect()->route('inicio.index');
+    }
 
         return back()->withErrors(['login_error' => 'Credenciales inválidas']);
     }
@@ -113,14 +118,21 @@ class AuthController extends Controller
         
 
         if ($response->successful()) {
-            // Obtener el cuerpo de la respuesta JSON
-            $responseData = $response->json(); 
+        $responseData = $response->json(); 
+        
+        if (isset($responseData['user'])) { 
+            $updatedUser = $responseData['user'];
             
-            // 🚨 CORRECCIÓN: Verificar que la respuesta contenga la clave 'user'
-            if (isset($responseData['user'])) { 
-                session(['user' => $responseData['user']]);
-                return back()->with('success', 'Perfil actualizado correctamente.');
+            // 🚨 CAMBIO AQUÍ: Si la API no devuelve la URL absoluta (usando el accessor)
+            // la construimos manualmente para la sesión del frontend.
+            if (!empty($updatedUser['profile_photo']) && !str_starts_with($updatedUser['profile_photo'], 'http')) {
+                $updatedUser['profile_photo'] = 'http://api.AgroFinanzas.test/storage/' . $updatedUser['profile_photo'];
             }
+            // ------------------------------------
+
+            session(['user' => $updatedUser]);
+            return back()->with('success', 'Perfil actualizado correctamente.');
+        }
             
             // Si la respuesta fue exitosa pero falta la clave 'user', puedes manejarlo aquí
             return back()->withErrors(['update_error' => 'Error: El API no devolvió los datos de usuario actualizados.']);

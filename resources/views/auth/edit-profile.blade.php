@@ -129,8 +129,11 @@
 
             <div class="profile-photo-container">
                 <div class="profile-photo-circle">
-                    <img id="imgPreview" 
-                        src="{{ $user['profile_photo'] ? asset('storage/'.$user['profile_photo']) : asset('img/default-user.png') }}">
+                    
+<img id="imgPreview" 
+    src="{{ $user['profile_photo'] 
+        ? $user['profile_photo'] // <-- ¡Usar directamente la URL ABSOLUTA de la sesión!
+        : asset('img/default-user.png') }}">
                 </div>
             </div>
 

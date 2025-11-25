@@ -70,13 +70,13 @@
                 <div class="af-profile-trigger">
 
                     {{-- Foto real del usuario o imagen por defecto --}}
-                    <img 
-                        src="{{ session('user.profile_photo') 
-                                ? asset('storage/profile_photos/' . session('user.profile_photo')) 
-                                : asset('img/profile.png') }}"
-                        
-                        class="af-profile-avatar"
-                        id="afProfileMenuBtn">
+                    
+<img 
+    src="{{ session('user.profile_photo') 
+        ? session('user.profile_photo') // <-- ¡Usar directamente la URL ABSOLUTA de la sesión!
+        : asset('img/profile.png') }}"
+    class="af-profile-avatar"
+    id="afProfileMenuBtn">
 
                     {{-- Menú desplegable --}}
                     <div class="af-dropdown-content" id="afProfileMenu">
