@@ -5,7 +5,7 @@
     <div class="login-wrapper"> 
         
         {{-- Fondo (ajusta la ruta de la imagen si es necesario) --}}
-        <img src="{{ asset('https://revistadiners.com.co/wp-content/uploads/2021/04/portada_paramo_1200x800x2021.webp') }}" class="fondo" alt="fondo"> 
+        <img src="{{ asset('/img/paramo.jpg') }}" class="fondo" alt="fondo"> {{-- https://www.utb.edu.co/wp-content/uploads/2023/05/Nevado_del_Ruiz.jpg--}}
         {{-- Contenedor Principal: El formulario en sí --}}
 
             {{-- Contenedor Principal: Se adapta la lógica del formulario de Laravel --}}
@@ -38,7 +38,9 @@
             <p class="Contraseña">Contraseña</p>
             <div class="password-container">
                 <input type="password" placeholder="********" name="password" id="password" class="contraseña" required>
-                <span class="toggle-password" onclick="mostrarOcultar()">👁️</span>
+                <span class="toggle-password" onclick="mostrarOcultar()">
+                        <i class="fa-solid fa-eye"></i>
+                    </span>
             </div>
 
             {{-- Recordar (opcional en Laravel, pero se mantiene el diseño) --}}
@@ -65,16 +67,19 @@
         </div>
 
     {{-- Script para mostrar/ocultar contraseña (JS puro, lo pones en tu app.js o directo en la vista si no hay otra opción) --}}
+     {{-- Script para mostrar/ocultar contraseña (Ahora usa la clase 'fa-eye' o 'fa-eye-slash') --}}
     <script>
         function mostrarOcultar() {
             const passwordField = document.getElementById('password');
-            const toggleSpan = document.querySelector('.toggle-password');
+            const toggleIcon = document.querySelector('.toggle-password i'); // Selecciona el icono dentro del span
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
-                toggleSpan.innerHTML = '🙈'; // Ocultar
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash'); // Icono de ojo tachado (ocultar)
             } else {
                 passwordField.type = 'password';
-                toggleSpan.innerHTML = '👁️'; // Mostrar
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye'); // Icono de ojo (mostrar)
             }
         }
     </script>

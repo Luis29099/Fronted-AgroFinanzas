@@ -1,5 +1,4 @@
-/* ===== Sección de Presentación (fondo negro sólido) ===== */
-/* Añade esto a tu CSS para compensar la altura de la navbar fija */
+
 
 .presentacion {
   background: #000; /* Fondo negro puro */
@@ -16,7 +15,7 @@
 }
 
 .presentacion h2 {
-  color: #18d92e; /* Verde característico del tema */
+  color: #8ac926; /* Verde característico del tema */
   font-weight: 700;
 }
 
@@ -25,4 +24,28 @@
   font-size: 1.1rem;
   line-height: 1.7;
   text-align: justify;
+}
+.btn-comenzar{
+  font-family: 'Poppins', sans-serif;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    background: linear-gradient(135deg, #8ac926, #99d98c); /* 80ffdb, 5390d9*/
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    /* Asegura que el color se aplique correctamente a la etiqueta <a> */
+    display: inline-block; 
+}
+.btn-comenzar:hover{
+  transform: scale(1.05);
+    background: linear-gradient(135deg, #5c8619, #618a59);
+    box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
+    color: #525252;
+}
+.remarcado{
+color:#8ac926 ;
 }

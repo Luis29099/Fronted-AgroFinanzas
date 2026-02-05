@@ -33,8 +33,10 @@
 
             <p class="Contraseña">Contraseña</p>
             <div class="password-container">
-                <input type="password" placeholder="********" name="password" id="password_register" class="contraseña" required> 
-                <span class="toggle-password" onclick="mostrarOcultar('password_register')">👁️</span> 
+                <input type="password" placeholder="********" name="password" id="password" class="contraseña" required>
+                <span class="toggle-password" onclick="mostrarOcultar()">
+                        <i class="fa-solid fa-eye"></i>
+                    </span>
             </div>
 
             <p class="texto">Fecha de Nacimiento</p>
@@ -55,19 +57,20 @@
     </div>
 
     <script>
-        function mostrarOcultar(fieldId) {
-            const passwordField = document.getElementById(fieldId);
-            const toggleSpan = passwordField.parentElement.querySelector('.toggle-password'); 
-            
+        function mostrarOcultar() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password i'); // Selecciona el icono dentro del span
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
-                toggleSpan.innerHTML = '🙈'; 
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash'); // Icono de ojo tachado (ocultar)
             } else {
                 passwordField.type = 'password';
-                toggleSpan.innerHTML = '👁️'; 
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye'); // Icono de ojo (mostrar)
             }
         }
     </script>
 </main>
-    </script>
+    
 @endsection

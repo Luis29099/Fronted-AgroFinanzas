@@ -24,11 +24,11 @@
 
     <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
 
-      <h1 class="display-5 fw-bold mb-3">Bienvenido a <span class="text-success">AgroFinanzas</span></h1>
+      <h1 class="display-5 fw-bold mb-3">Bienvenido a <span class="remarcado">AgroFinanzas</span></h1>
 
-      <p class="lead mb-4">Tu aliado digital para el crecimiento sostenible del campo colombiano 🌱</p>
+      <p class="lead mb-4">Tu aliado digital para el crecimiento sostenible del campo colombiano</p>
 
-      <a href="{{ route('register') }}" class="btn btn-success btn-lg shadow-sm px-4 py-2">Comenzar</a>
+      <a href="{{ route('register') }}" class="btn-comenzar">Comenzar</a>
 
     </div>
 
@@ -40,7 +40,7 @@
 
   <section class="presentacion container my-5 p-5 text-light">
 
-    <h2 class="text-center fw-bold text-success mb-4">¿Quiénes somos?</h2>
+    <h2 class="Titulo">¿Quiénes somos?</h2>
 
     <p class="lead text-justify mb-3">
 

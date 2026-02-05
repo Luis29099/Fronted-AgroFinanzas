@@ -1,121 +1,94 @@
-/*
- * Estilos CSS para el Contenido Principal (MAIN) de la vista de Aguacates.
- * Se asume que el estilo base (fondo, tipografía) está en style.css.
- * Se incluyen estilos nuevos para Datos Rápidos y Recomendaciones.
- */
+/* =========================
+   Estilos Avocado Mejorados
+========================= */
 
-/* ===== FUENTES Y COLOR BASE (Asumiendo que están definidos en style.css) ===== */
-/* :root {
-    --color-neon: #18d92e;
-    --color-text-light: #ccc;
-    --color-surface: rgba(255, 255, 255, 0.06);
-} */
 
-.avocado-main{
-    flex: 1;
-    padding: 50px 20px 20px;
-}
-
-/* ------------------- Sección Principal/Hero ------------------- */
-.info-hero {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.main-title {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #18d92e; /* Color Neón */
-    letter-spacing: 1px;
-    font-size: 2.5rem;
-}
-
-.intro-text {
-    max-width: 800px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    color: #ccc;
-    line-height: 1.6;
-}
-
-/* ------------------- Sección de Datos Rápidos ------------------- */
-.quick-data-section {
-    padding: 40px 0;
-}
-
-.quick-data-section h2, .varieties-section h2, .care-recommendations h2 {
+/* -------------------- Títulos de Sección -------------------- */
+.varieties-section h2,
+.care-recommendations h2,
+.quick-data-section h2 {
     text-align: center;
     color: #42f5b6;
-    margin-bottom: 30px;
-    font-size: 1.8rem;
-    text-transform: uppercase;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
 }
 
-.data-grid {
+/* -------------------- Galería de Variedades -------------------- */
+.contenedor-tarjetas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.data-card {
-    background: rgba(24, 217, 46, 0.1); /* Fondo semitransparente neón */
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid rgba(24, 217, 46, 0.3);
-    box-shadow: 0 0 10px rgba(24, 217, 46, 0.2);
-    transition: background 0.3s ease;
+.tarjeta {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(66, 245, 182, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.data-card:hover {
-    background: rgba(24, 217, 46, 0.2);
+.tarjeta:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(66, 245, 182, 0.3);
 }
 
-.data-card i {
-    font-size: 2.5rem;
-    color: #18d92e; /* Icono neón */
-    margin-bottom: 10px;
+.tarjeta img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-.data-card h3 {
-    font-size: 1.2rem;
+.tarjeta img:hover {
+    transform: scale(1.05);
+}
+
+.tarjeta h2 {
+    font-size: 1.4rem;
     color: #18d92e;
-    margin: 5px 0;
+    margin: 10px;
+    text-align: center;
 }
 
-.data-card p {
-    color: #fff;
-    font-weight: 300;
+.tarjeta p {
+    font-size: 0.95rem;
+    color: #ccc;
+    padding: 0 15px 15px;
+    text-align: justify;
+    line-height: 1.5;
 }
 
-/* ------------------- Sección de Recomendaciones ------------------- */
-.care-recommendations {
-    padding: 40px 0;
-    margin-top: 40px;
-}
-
+/* -------------------- Sección Recomendaciones -------------------- */
 .recommendation-list {
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
 }
 
 .recommendation-item {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     align-items: flex-start;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
     padding: 20px;
-    border-radius: 10px;
-    border-left: 5px solid #42f5b6; /* Borde de color secundario */
+    border-left: 5px solid #42f5b6;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recommendation-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(66,245,182,0.3);
 }
 
 .icon-number {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #42f5b6;
     background: #0a0a0a;
@@ -132,74 +105,199 @@
 .recommendation-item h3 {
     color: #18d92e;
     margin-top: 0;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 .recommendation-item p {
     color: #ccc;
+    margin: 5px 0 0 0;
 }
 
-
-/* ------------------- Galería de Variedades (Contenido Original) ------------------- */
-.varieties-section {
-    padding: 40px 0;
-}
-
-.contenedor-tarjetas {
+/* -------------------- Sección Datos Rápidos -------------------- */
+.data-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-.tarjeta {
-    background: rgba(255, 255, 255, 0.06);
+.data-card {
+    background: rgba(24, 217, 46, 0.1);
+    backdrop-filter: blur(8px);
     border-radius: 15px;
-    overflow: hidden;
-    border-left: 4px solid #18d92e;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(24, 217, 46, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.tarjeta:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 25px rgba(24, 217, 46, 0.3);
+.data-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(24,217,46,0.25);
 }
 
-.tarjeta img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.tarjeta h2 {
-    font-size: 20px;
-    margin: 10px;
+.data-card i {
+    font-size: 2.5rem;
     color: #18d92e;
-    text-transform: capitalize;
+    margin-bottom: 10px;
 }
 
-.tarjeta p {
-    font-size: 14px;
-    color: #ccc;
-    padding: 0 10px 15px;
+.data-card h3 {
+    font-size: 1.2rem;
+    color: #18d92e;
 }
 
-/* ===== RESPONSIVE PARA EL NUEVO CONTENIDO ===== */
+.data-card p {
+    color: #fff;
+    font-weight: 300;
+}
+
+/* -------------------- Responsive -------------------- */
 @media (max-width: 768px) {
-    .main-title {
-        font-size: 2rem;
+    .tarjeta img {
+        height: 180px;
     }
-    .intro-text {
-        font-size: 1rem;
+    .recommendation-list {
+        grid-template-columns: 1fr;
     }
     .data-grid {
         grid-template-columns: 1fr;
     }
-    .recommendation-item {
-        flex-direction: column;
-        text-align: center;
-    }
     .icon-number {
         margin: 0 auto 10px;
     }
+    .tarjeta h2 {
+        font-size: 1.2rem;
+    }
+}
+.tarjeta {
+    position: relative;
+    overflow: hidden;
+}
+
+.tarjeta::after {
+    content: "Ver más";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: rgba(24, 217, 46, 0.95); /* más opaco */
+    color: #0a0a0a;
+    font-weight: bold;
+    padding: 15px 0;
+    font-size: 1.1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none; /* el overlay no bloquea el click */
+}
+
+.tarjeta:hover::after {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.tarjeta:hover img {
+    transform: scale(1.08) rotate(1deg);
+}
+
+
+
+
+.recommendation-item:nth-child(odd) {
+    justify-self: start;
+}
+.recommendation-item:nth-child(even) {
+    justify-self: end;
+}
+
+@keyframes slideIn {
+    0% { opacity: 0; transform: translateY(20px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+
+.recommendation-item {
+    animation: slideIn 0.8s ease forwards;
+}
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #0f111a;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #42f5b6;
+}
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #0f111a;
+    color: #42f5b6;
+    border-bottom: 2px solid #18d92e;
+}
+
+.main-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.main-header .logo img {
+    height: 40px;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav ul li a {
+    color: #42f5b6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.main-nav ul li a:hover {
+    color: #18d92e;
 }

@@ -1,176 +1,636 @@
-/*
- * Estilos CSS para el Contenido Principal (MAIN) de la vista de Café.
- * Se reutiliza la estética oscura/neón y se crean las secciones informativas.
- */
+/* ===========================================
+    1. ANIMACIONES GLOBALES
+=========================================== */
+:root {
+    /* Variables de Color (Para mejor mantenimiento) */
+    --color-dark-bg: #1a1a1a;
+    --color-dark-bg-card: #1f1f1f;
+    --color-primary-green: #18d92e;
+    --color-accent-green: #38ef7d;
+    --color-danger-red: #ff6b6b;
+    --color-text-light: #efebe9;
+    --color-text-muted: #999;
+    --color-text-subtle: #ccc;
 
-/* ===== COLORES BASE (Del estilo original) ===== */
-/* --color-neon: #18d92e;
-   --color-secundario: #42f5b6; 
-   --color-fondo: #0a0a0a; */
+    /* Variables para el tema Café */
+    --color-coffee-bg: #2b2b2b;
+    --color-coffee-darker: #1e1e1e;
+}
 
-.coffe-main {
+canvas {
+    animation: fadeInScale .7s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===========================================
+    2. ESTILOS DE FINANZAS (Originales)
+=========================================== */
+.finances-dashboard {
+    max-width: 1000px;
+    margin: 120px auto 50px;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.main-card {
+    background-color: var(--color-dark-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(24, 217, 46, 0.2);
+    padding: 30px;
+}
+
+/* === Pestañas de Navegación === */
+.tab-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #282828;
+}
+
+.tab-link {
     flex: 1;
-    padding: 5px 20px 10px; /* Ajuste para el navbar fijo */
+    padding: 15px 10px;
+    background: transparent;
+    color: var(--color-text-muted);
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    text-transform: uppercase;
+}
+
+.tab-link:hover {
+    color: var(--color-primary-green);
+}
+
+.tab-link.active {
+    color: var(--color-primary-green);
+    border-bottom: 3px solid var(--color-primary-green);
+    box-shadow: 0 2px 5px rgba(24, 217, 46, 0.3);
+}
+
+/* === Títulos de Contenido === */
+.tab-content {
+    display: none;
+    padding-top: 20px;
+}
+.tab-content.active {
     display: block;
 }
 
-/* ------------------- Sección Principal/Hero ------------------- */
-.info-hero {
-    text-align: center;
-    margin-bottom: 50px;
-    padding: 20px;
+.tab-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
 }
+.income-title { color: var(--color-accent-green); }
+.expense-title { color: var(--color-danger-red); }
+.history-title { color: var(--color-primary-green); }
 
-.main-title {
-    text-align: center;
+/* === Formularios === */
+.form-group {
     margin-bottom: 20px;
-    color: #18d92e; /* Color Neón */
-    letter-spacing: 1px;
-    font-size: 2.8rem;
-    text-shadow: 0 0 10px rgba(24, 217, 46, 0.4);
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-text-subtle);
+    font-weight: 500;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background-color: #282828;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--color-primary-green);
+    outline: none;
+    box-shadow: 0 0 5px rgba(24, 217, 46, 0.5);
 }
 
-.intro-text {
-    max-width: 850px;
-    margin: 0 auto;
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
     font-size: 1.1rem;
-    color: #cfeeda;
-    line-height: 1.6;
-}
-
-/* ------------------- Títulos de Sección ------------------- */
-.quick-data-section h2, .process-section h2, .care-recommendations h2 {
-    text-align: center;
-    color: #42f5b6; /* Neón secundario */
-    margin-top: 50px;
-    margin-bottom: 30px;
-    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-/* ------------------- Sección de Datos Rápidos ------------------- */
-.data-grid {
+.income-btn { background-color: var(--color-accent-green); }
+.expense-btn { background-color: var(--color-danger-red); }
+
+.income-btn:hover {
+    background-color: #11998e;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4);
+}
+.expense-btn:hover {
+    background-color: #e84c4c;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+/* === Historial y Tabla === */
+.filter-buttons {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.filter-btn {
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid #333;
+    color: #aaa;
+}
+
+.filter-btn:hover {
+    border-color: var(--color-primary-green);
+    color: var(--color-primary-green);
+}
+
+.filter-btn.active-all {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
+}
+.filter-btn.active-income {
+    background-color: var(--color-accent-green);
+    color: #000;
+    border-color: var(--color-accent-green);
+}
+.filter-btn.active-expense {
+    background-color: var(--color-danger-red);
+    color: #000;
+    border-color: var(--color-danger-red);
+}
+
+.history-table-container {
+    overflow-x: auto;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.history-table th,
+.history-table td {
+    padding: 15px;
+    text-align: left;
+}
+
+.history-table th {
+    background-color: #0b0f0c;
+    color: var(--color-primary-green);
+    font-weight: 700;
+    border-bottom: 2px solid var(--color-primary-green);
+    text-transform: uppercase;
+}
+
+.history-table td {
+    border-bottom: 1px solid #282828;
+    color: var(--color-text-subtle);
+    background-color: var(--color-dark-bg-card);
+}
+
+.row-income td { color: #a0ffc0; }
+.row-expense td { color: #ffadad; }
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+.bg-success { background-color: var(--color-accent-green); color: #000; }
+.bg-danger { background-color: var(--color-danger-red); color: #000; }
+
+.text-center-empty {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+/* --- Alertas y Botones --- */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+}
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.actions-cell {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.action-btn {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    margin: 0 0.1rem;
+    transition: background-color 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.action-btn i {
+    margin-right: 0.25rem;
+}
+
+.edit-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+}
+.edit-btn:hover {
+    background-color: #2563eb;
+}
+
+.delete-btn {
+    background-color: var(--color-danger-red);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+/* Tarjetas de Resumen */
+.summary-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
+    margin-bottom: 30px;
 }
 
-.data-card {
-    background: rgba(24, 217, 46, 0.08); 
+.summary-card {
     padding: 20px;
     border-radius: 12px;
-    text-align: center;
-    border: 1px solid rgba(24, 217, 46, 0.3);
-    box-shadow: 0 0 15px rgba(24, 217, 46, 0.15);
-    transition: background 0.3s ease;
-}
-
-.data-card:hover {
-    background: rgba(24, 217, 46, 0.15);
-}
-
-.data-card i {
-    font-size: 3rem;
-    color: #18d92e; /* Icono neón */
-    margin-bottom: 15px;
-}
-
-.data-card h3 {
-    font-size: 1.2rem;
+    background: #0b0f0c;
+    border-left: 5px solid;
     color: #fff;
-    margin: 5px 0;
-}
-
-.data-card p {
-    color: #cfeeda;
-    font-weight: 300;
-}
-
-/* ------------------- Sección de Recomendaciones ------------------- */
-.care-recommendations {
-    padding: 40px 0;
-    margin-top: 20px;
-}
-
-.recommendation-list {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.recommendation-item {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 25px;
-    border-radius: 12px;
-    border-left: 5px solid #18d92e; 
+    text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-.icon-number {
-    font-size: 1.8rem;
+.income-card { border-color: var(--color-accent-green); }
+.expense-card { border-color: var(--color-danger-red); }
+.balance-card { border-color: var(--color-primary-green); }
+
+.summary-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #ddd;
+}
+
+.summary-card p {
+    font-size: 2rem;
     font-weight: bold;
-    color: #18d92e;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid #18d92e;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    display: flex;
+    margin: 0;
+}
+
+.positive { color: var(--color-accent-green); }
+.negative { color: var(--color-danger-red); }
+
+/* --- MODAL EDITAR --- */
+.btn-edit,
+.btn-delete {
+    border: none;
+    background: #333;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-edit:hover { background: var(--color-accent-green); }
+.btn-delete:hover { background: var(--color-danger-red); }
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.70);
+    backdrop-filter: blur(6px);
+    display: none;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
-    box-shadow: 0 0 10px #18d92e;
+    z-index: 9999;
 }
 
-.recommendation-item h3 {
-    color: #42f5b6;
-    margin-top: 0;
-    font-size: 1.3rem;
+.edit-modal-box {
+    width: 430px;
+    background: #111;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(24, 217, 46, 0.35);
+    animation: fadeInScale .4s ease-out;
 }
 
-.recommendation-item p {
-    color: #ccc;
+.modal-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--color-primary-green);
+    margin-bottom: 25px;
+    font-weight: bold;
 }
 
-/* ------------------- Contenedor de Tarjetas (Original) ------------------- */
-.process-section {
-    padding: 40px 0;
+.modal-field {
+    margin-bottom: 20px;
 }
 
-.contenedor-tarjetas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 26px;
-    align-items: stretch; /* Asegura que todas las tarjetas tengan la misma altura */
+.modal-field label {
+    font-size: 1rem;
+    color: #bbb;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
 }
 
-/* Las tarjetas en sí ya están estilizadas en el CSS base que enviaste */
+.modal-field input,
+.modal-field textarea {
+    width: 100%;
+    background: #222;
+    border: 1px solid #333;
+    padding: 12px;
+    font-size: 1rem;
+    color: white;
+    border-radius: 8px;
+    transition: border-color .3s, box-shadow .3s;
+}
 
-/* ===== RESPONSIVE PARA EL NUEVO CONTENIDO ===== */
+.modal-field input:focus,
+.modal-field textarea:focus {
+    border-color: var(--color-primary-green);
+    box-shadow: 0 0 8px rgba(24, 217, 46, 0.4);
+    outline: none;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.modal-btn {
+    width: 48%;
+    padding: 12px 0;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.update-btn {
+    background: var(--color-accent-green);
+    color: black;
+}
+
+.update-btn:hover {
+    background: #11998e;
+    color: white;
+    box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4);
+}
+
+.close-btn {
+    background: var(--color-danger-red);
+    color: black;
+}
+
+.close-btn:hover {
+    background: #e84c4c;
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+/* ===========================================
+    3. ESTILOS TEMA CAFÉ
+=========================================== */
+body.coffee-theme {
+    background-color: var(--color-coffee-bg) !important;
+    color: var(--color-text-light) !important;
+    font-family: 'Inter', sans-serif;
+}
+
+.coffee-main {
+    max-width: 1200px;
+    margin: 120px auto 50px;
+    padding: 0 20px;
+}
+
+/* Título principal */
+.main-title {
+    color: var(--color-text-light);
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--color-accent-green);
+    padding-bottom: 15px;
+}
+
+/* Tarjetas del tema café */
+.coffee-card .card-body {
+    /* Asegura que el cuerpo use el fondo oscuro para fusionarse */
+    background-color: var(--color-coffee-darker); 
+    /* Añade padding solo en el cuerpo si quitaste el p-3 del padre */
+    padding: 1rem; 
+    border-radius: 0 0 8px 8px; /* Opcional: redondeo inferior */
+}
+.coffee-card .card-body p {
+    background: transparent;
+    margin-bottom: 0; /* Si es el último elemento en el cuerpo */
+}
+
+.coffee-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.9);
+}
+
+.card-image {
+    object-fit: cover;
+    height: 200px;
+    border-radius: 8px 8px 0 0;
+}
+
+.main-card {
+    background-color: var(--color-coffee-darker);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+
+/* Eliminación de espacios verticales */
+.card-body .card-text {
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+/* Textos y títulos del tema café */
+.text-coffee-accent {
+    color: var(--color-accent-green);
+    font-weight: 700;
+}
+
+.text-light-coffee {
+    color: var(--color-text-subtle);
+}
+
+.section-title,
+.slide-title {
+    color: var(--color-text-light);
+    font-weight: 800;
+}
+
+.section-subtitle {
+    color: var(--color-text-muted);
+}
+
+/* Botones tema café */
+.btn-coffee-primary {
+    background-color: var(--color-accent-green);
+    color: #000;
+    font-weight: 600;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-coffee-primary:hover {
+    background-color: #11998e;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4);
+}
+
+.btn-coffee-secondary {
+    background-color: #333;
+    color: var(--color-primary-green);
+    border: 1px solid var(--color-primary-green);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-coffee-secondary:hover {
+    background-color: var(--color-primary-green);
+    color: #000;
+}
+
+/* Línea de tiempo */
+.timeline {
+    list-style: none;
+    padding-left: 0;
+    border-left: 2px solid var(--color-accent-green);
+    margin-left: 10px;
+}
+
+.timeline li {
+    padding: 10px 0 10px 20px;
+    position: relative;
+    color: var(--color-text-light);
+}
+
+.timeline li::before {
+    content: '•';
+    position: absolute;
+    left: -11px;
+    color: var(--color-accent-green);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* Separadores */
+.coffee-divider {
+    border: none;
+    height: 1px;
+    background-color: #333;
+    margin: 50px 0;
+}
+
+.card-body .card-date {
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .main-title {
-        font-size: 2.2rem;
+    .tab-buttons {
+        flex-wrap: wrap;
     }
-    .intro-text {
-        font-size: 1rem;
+    .tab-link {
+        flex-basis: 100%;
     }
-    .data-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    .filter-buttons {
+        flex-wrap: wrap;
     }
-    .recommendation-item {
-        flex-direction: column;
-        align-items: center;
+    .history-table th,
+    .history-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    .coffee-slider .row > .order-md-2 {
+        order: 1 !important;
+    }
+    .coffee-slider .row > .order-md-1 {
+        order: 2 !important;
+    }
+    .coffee-slider .slider-text {
         text-align: center;
-    }
-    .icon-number {
-        margin: 0 auto 10px;
+        padding-top: 20px;
     }
 }

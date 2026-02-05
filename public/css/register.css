@@ -58,7 +58,7 @@ img.fondo {
 }
 
 .register-title {
-    color: #18d92e;
+    color: #8ac926;
     font-size: 28px;
     margin-bottom: 20px;
     text-align: center;
@@ -76,12 +76,12 @@ img.fondo {
 .register-button {
     width: 70%;
     padding: 12px 0;
-    background: linear-gradient(135deg, #38ef7d, #11998e);
+    background: linear-gradient(135deg, #8ac926, #99d98c);
     border: none;
     border-radius: 12px;
     font-size: 17px;
     font-weight: 600;
-    color: white;
+    color: black;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -90,6 +90,11 @@ img.fondo {
     align-items: center;
     box-shadow: 0 0 10px rgba(24, 217, 46, 0.3);
     margin-top: 20px;
+}
+.register-button:hover{
+    transform: scale(1.07);
+  background: linear-gradient(135deg, #7bb222, #7cb072);
+    box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
 }
 
 /* ---------------- LINK ---------------- */

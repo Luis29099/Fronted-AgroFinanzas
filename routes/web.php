@@ -20,8 +20,8 @@ Route::get('user_apps', [UserAppController::class, 'index'])
     ->name('user_apps');
 Route::get('user_apps/{user_app}', [UserAppController::class, 'show'])->name('user_app.show');
 
-Route::get('recommendations', [RecommendationController::class, 'index'])->name('recommendations');
-Route::get('recommendations/{recommendation}', [RecommendationController::class, 'show'])->name('recommendation.show');
+Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations.index');
+Route::post('/recommendations', [RecommendationController::class, 'store'])->name('recommendations.store');
 
 Route::get('hens', [HenController::class, 'index'])->name('hens');
 Route::get('hens/{hen}', [HenController::class, 'show'])->name('hen.show');
@@ -89,9 +89,10 @@ Route::post('/recommendations', [RecommendationController::class, 'store'])->nam
 
 
 Route::get('/inicio', [ClimaController::class, 'index'])->name('inicio.index');
+Route::get('/api/clima', [ClimaController::class, 'apiClima']);
 
 
-use App\Http\Controllers\FinanceApiController;
+
 
 Route::get('/finanzas', [FinanceClienteController::class, 'index'])->name('client.finances.index');
 Route::post('/finanzas/income', [FinanceClienteController::class, 'storeIncome'])->name('client.income.store');

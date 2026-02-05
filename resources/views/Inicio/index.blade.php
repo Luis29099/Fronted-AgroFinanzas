@@ -7,11 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgroFinanzas - Solución Carrusel</title>
-    <!-- Carga de Tailwind CSS para estilos base -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Carga del CSS personalizado (asumiendo que se llama styles.css o similar) -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-2u1heYdEx+kt1lQGehGII4XESyqCCpt5TR1+t0NenE2no0RvrRZtGJPD7Wv5ManIeZDV4SSQdlqzTeWY5Avb+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         /* Aplicamos el fondo oscuro global para que coincida con el Navbar */
         body {
@@ -23,18 +23,17 @@
 </head>
 <body class="bg-gray-100">
 
-<!-- 1. Sección del Carrusel (FUERA del contenedor principal para ancho completo) -->
 <div class="hero-principal">
     {{-- Carrusel de Noticias Destacadas --}}
     <div class="hero-carrusel-container">
         <div class="carrusel-slides" id="carruselSlides">
             {{-- Slide 1: Imagen Principal --}}
             <div class="carrusel-slide active">
-                    <img src="https://images.unsplash.com/photo-1580570598977-4b2412d01bbc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1167" alt="Noticia 3: Tecnología Agrícola">
-                    <div class="carrusel-caption">
-                        <h3></h3>
-                    </div>
+                <img src="https://images.unsplash.com/photo-1580570598977-4b2412d01bbc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1167" alt="Noticia 3: Tecnología Agrícola">
+                <div class="carrusel-caption">
+                    <h3></h3>
                 </div>
+            </div>
             <div class="carrusel-slide">
                 <img src="https://fpsuperiorufv.es/blog/wp-content/uploads/2023/02/19962385_6206720-scaled.jpg" alt="Noticia 1: Mercados Internacionales" onerror="this.onerror=null;this.src='https://placehold.co/1920x400/0e3a15/ffffff?text=Noticia+1';">
                 <div class="carrusel-caption">
@@ -66,22 +65,7 @@
         </div>
     </div>
 </div>
-
-<!-- 2. Contenido de la página (DENTRO del contenedor principal) -->
-<main class="container mx-auto p-4 md:p-8">
-
-    {{-- Sección del clima (con datos simulados) --}}
-    <section class="clima-section">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">☁️ Estado del Clima Actual</h2>
-        <div class="clima-card text-gray-700">
-            <p><strong>Ubicación:</strong> Ciudad de México</p>
-            <p><strong>Temperatura:</strong> 22.5 °C</p>
-            <p><strong>Humedad:</strong> 65%</p>
-            <p><strong>Viento:</strong> 5.2 m/s</p>
-            <p><strong>Condición:</strong> Parcialmente Nublado</p>
-        </div>
-    </section>
-
+ 
     {{-- Sección de Noticias --}}
     <section class="noticias">
 
@@ -112,7 +96,7 @@
             </div>
         </div>
 
-        {{-- Noticia 4: Riego Inteligente (Adicional) --}}
+        {{-- Noticia 4: Riego Inteligente --}}
         <div class="noticia" onclick="openModal(this)">
             <img src="https://grupohidraulica.com/wp-content/uploads/2021/10/AdobeStock_33552553-scaled-e1634742242695-1536x752-1.jpeg" alt="Riego Inteligente" onerror="this.onerror=null;this.src='https://placehold.co/300x180/0e3a15/ffffff?text=Riego+Inteligente';">
             <div class="noticia-content">
@@ -121,7 +105,7 @@
             </div>
         </div>
 
-        {{-- Noticia 5: Subsidios Agrícolas (Adicional) --}}
+        {{-- Noticia 5: Subsidios Agrícolas --}}
         <div class="noticia" onclick="openModal(this)">
             <img src="https://img.freepik.com/fotos-premium/bolsa-dinero-antecedentes-campo-agricola-prestamos-subsidios-agricultores-subvenciones-apoyo-financiero-ganancias-agronegocios-valuacion-valor-tierra-impuesto-sobre-tierra-nuevas-empresas-agricolas-prestamo-garantizado-inversiones_72572-3090.jpg?w=360" alt="Subsidios Agrícolas" onerror="this.onerror=null;this.src='https:placehold.co/300x180/0e3a15/ffffff?text=Subsidios+Agrícolas';">
             <div class="noticia-content">
@@ -130,12 +114,30 @@
             </div>
         </div>
 
-        {{-- Noticia 6: Plagas y Enfermedades (Adicional) --}}
+        {{-- Noticia 6: Plagas y Enfermedades --}}
         <div class="noticia" onclick="openModal(this)">
             <img src="https://bioprotectionportal.com/wp-content/uploads/2024/09/SPANISH-blog-1.jpg?x18658" alt="Prevención de Plagas" onerror="this.onerror=null;this.src='https:placehold.co/300x180/0e3a15/ffffff?text=Prevención+Plagas';">
             <div class="noticia-content">
                 <h3 class="text-xl font-bold text-green-800">Prevención y Control de Plagas</h3>
                 <p class="text-gray-600">Identifica y combate las plagas más comunes en tu región antes de que afecten gravemente tu producción y cosecha.</p>
+            </div>
+        </div>
+
+        {{-- Noticia 7: Precio de Semillas (NUEVA) --}}
+        <div class="noticia" onclick="openModal(this)">
+            <img src="https://todoparacafe.com/media/user_YnwzAmzlRo/2426/WhatsApp-Image-2025-04-21-at-21.02.49.jpeg" alt="Precios de Semillas" onerror="this.onerror=null;this.src='https:placehold.co/300x180/0e3a15/ffffff?text=Precios+Semillas';">
+            <div class="noticia-content">
+                <h3 class="text-xl font-bold text-green-800">Análisis de Precios de Semillas</h3>
+                <p class="text-gray-600">Revisa la última fluctuación en los precios de las semillas clave para una siembra rentable en la próxima temporada.</p>
+            </div>
+        </div>
+
+        {{-- Noticia 8: Maquinaria Agrícola (NUEVA) --}}
+        <div class="noticia" onclick="openModal(this)">
+            <img src="https://bloglatam.jacto.com/wp-content/uploads/2023/09/cosecha-de-cafe-925x308.jpg" alt="Maquinaria Agrícola" onerror="this.onerror=null;this.src='https:placehold.co/300x180/0e3a15/ffffff?text=Maquinaria+Agrícola';">
+            <div class="noticia-content">
+                <h3 class="text-xl font-bold text-green-800">Mantenimiento de Maquinaria</h3>
+                <p class="text-gray-600">Consejos esenciales para el mantenimiento preventivo de tractores y equipos para maximizar su vida útil y eficiencia.</p>
             </div>
         </div>
 
@@ -235,6 +237,100 @@
         document.body.style.overflow = 'auto'; // Restaura el scroll del fondo
     }
 </script>
+
+<div id="weather-widget" class="weather-widget">
+    <div class="weather-icon">
+       <i id="faIcon" class="fa-solid fa-sun"></i>
+    </div>
+
+    <div id="weather-tooltip" class="weather-tooltip">
+        <h3 style="margin:0; font-size: 18px; font-weight: bold; text-align:center;">
+            Clima Actual
+        </h3>
+        <hr>
+        <p id="ubicacion" class="location">📍 Bogotá, Colombia</p>
+        <p id="temperatura">🌡 temperatura -- °C</p>
+        <p id="humedad">💧 Humedad: --%</p>
+        <p id="viento">💨 Viento: -- m/s</p>
+        <p id="condicion">🔎 --</p>
+    </div>
+</div>
+
+{{-- ================================
+     JAVASCRIPT DEL WIDGET
+     ================================ --}}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const widget = document.getElementById('weather-widget');
+    const tooltip = document.getElementById('weather-tooltip');
+
+    const faIcon = document.getElementById('faIcon');
+    const ubicacion = document.getElementById('ubicacion');
+    const temperatura = document.getElementById('temperatura');
+    const humedad = document.getElementById('humedad');
+    const viento = document.getElementById('viento');
+    const condicion = document.getElementById('condicion');
+
+
+    function setWeatherIconFromDesc(desc) {
+        desc = (desc || '').toLowerCase();
+
+        // Elimina las clases anteriores de color/icono
+        faIcon.className = '';
+        faIcon.style.color = '';
+        widget.classList.remove('sun', 'cloud', 'rain', 'snow', 'other', 'error');
+
+        if (desc.includes('clear') || desc.includes('sun')) {
+            faIcon.className = 'fa-solid fa-sun';
+            faIcon.style.color = '#ffcc00'; // Sol amarillo
+        } else if (desc.includes('cloud')) {
+            faIcon.className = 'fa-solid fa-cloud';
+            faIcon.style.color = '#b0bec5'; // Nube gris
+        } else if (desc.includes('rain') || desc.includes('drizzle')) {
+            faIcon.className = 'fa-solid fa-cloud-showers-heavy';
+            faIcon.style.color = '#5dade2'; // Lluvia azul
+        } else if (desc.includes('snow')) {
+            faIcon.className = 'fa-solid fa-snowflake';
+            faIcon.style.color = '#aee3ff'; // Nieve azul claro
+        } else {
+            faIcon.className = 'fa-solid fa-cloud-sun';
+            faIcon.style.color = '#f4d03f'; // Icono mixto/otro
+        }
+    }
+
+
+    widget.addEventListener('click', async () => {
+
+    widget.classList.toggle('show');
+
+    try {
+        const response = await fetch('/api/clima');
+        const data = await response.json();
+
+        ubicacion.textContent = "📍 Bogotá, Colombia";
+        temperatura.textContent = `🌡 Temperatura: ${data.main.temp} °C`;
+        humedad.textContent = `💧 Humedad: ${data.main.humidity}%`;
+        viento.textContent = `💨 Viento: ${data.wind.speed} m/s`;
+        condicion.textContent = `🔎 ${data.weather[0].description}`;
+
+        setWeatherIconFromDesc(data.weather[0].description);
+
+    } catch (err) {
+        ubicacion.textContent = "❌ Error al obtener clima";
+        temperatura.textContent = "";
+        humedad.textContent = "";
+        viento.textContent = "";
+        condicion.textContent = "";
+        faIcon.className = "fa-solid fa-triangle-exclamation error-weather-icon";
+        faIcon.style.color = '#ff5e5e'; // Color de error
+    }
+});
+
+});
+</script>
+
+
 
 </body>
 </html>

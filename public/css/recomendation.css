@@ -1,188 +1,174 @@
-/* --- Paleta de Colores (Estilo Oscuro/Neón Verde) ---
- * Fondo Principal: #0b0f0c (Usado en body, no aquí)
- * Acento / Neón Verde: #18d92e
- * Fondo de Tarjetas: rgba(255, 255, 255, 0.05) (Dark semi-transparente)
- * Texto Principal: #ffffff / #d4d4d4
-*/
+/* --------------------------------- EFECTOS GLOBALES DE LA VISTA --------------------------------- */
 
-/* 1. Contenedor Principal (Ajuste de color de texto para asegurar la visibilidad sobre el fondo oscuro) */
-.comments-page {
-    max-width: 896px;
-    margin: 0 auto;
-    padding: 2.5rem 1rem;
-    color: #ffffff; /* Aseguramos que el texto principal sea blanco */
+/* Clase aplicada al <main> en la vista Blade para el fondo animado */
+.comments-bg {
+    /* CLAVES para que la imagen ocupe toda la pantalla visible */
+    width: 100vw;
+    min-height: 100vh; 
+    
+    /* Propiedades del fondo */
+    background-color: #0c0c0c; /* Fondo base oscuro */
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/20/Nevado_del_Ruiz_nos_saludo_4.jpg'); /* Imagen del Nevado del Ruiz */
+    background-size: cover;
+    background-position: center bottom; /* Empieza desde abajo */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Mantiene la imagen fija */
+    
+    /* Animación de desplazamiento lento */
+    animation: background-pan 60s linear infinite alternate;
+    
+    /* Padding para que el contenido no se pegue a los bordes superior/inferior del viewport */
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-/* 2. Título Principal */
-.comments-title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    color: #ffffff; /* Blanco */
-    margin-bottom: 2rem;
-    border-bottom: 4px solid #18d92e; /* Borde de acento verde */
-    padding-bottom: 0.5rem;
-    letter-spacing: 0.05em;
-    text-shadow: 0 0 8px rgba(24, 217, 46, 0.5); /* Suave glow verde */
-}
-
-/* 3. Estilo de la Tarjeta de Formulario (para dejar un comentario) */
-.form-card {
-    background-color: rgba(255, 255, 255, 0.05); /* Fondo oscuro semi-transparente */
-    box-shadow: 0 0 15px rgba(24, 217, 46, 0.2); /* Sombra/Glow verde */
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(24, 217, 46, 0.3); /* Borde sutil verde */
-}
-
-.form-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #18d92e; /* Título en verde vibrante */
-    margin-bottom: 1rem;
-}
-
-/* 4. Estilos de Input/Textarea */
-.form-input-textarea {
-    width: 100%;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.3); /* Fondo de input aún más oscuro */
-    color: #ffffff;
-    border: 1px solid rgba(24, 217, 46, 0.5); /* Borde inicial verde sutil */
-    border-radius: 0.75rem;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra interna oscura */
-    resize: vertical;
-}
-
-.form-input-textarea::placeholder {
-    color: #a0a0a0;
-}
-
-.form-input-textarea:focus {
-    border-color: #18d92e; /* Foco de borde verde brillante */
-    box-shadow: 0 0 10px rgba(24, 217, 46, 0.8), inset 0 0 5px rgba(24, 217, 46, 0.4); /* Foco con glow fuerte */
-    outline: none;
-}
-
-/* 5. Botón de Enviar */
-.submit-btn {
-    width: 100%;
-    padding: 0.75rem 1.5rem;
-    background-color: #18d92e; /* Botón de acento verde */
-    color: #0b0f0c; /* Texto oscuro sobre el botón */
-    font-weight: 700;
-    border-radius: 0.75rem;
-    box-shadow: 0 0 15px rgba(24, 217, 46, 0.6); /* Glow fuerte del botón */
-    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-}
-.submit-btn:hover {
-    background-color: #38e84a; /* Un verde ligeramente más claro en hover */
-    transform: scale(1.02);
-    box-shadow: 0 0 20px rgba(24, 217, 46, 0.8);
-}
-
-/* Media query para hacer el botón más compacto en escritorio */
-@media (min-width: 640px) {
-    .submit-btn {
-        width: auto;
+@keyframes background-pan {
+    0% {
+        background-position: center bottom;
+    }
+    100% {
+        background-position: center top;
     }
 }
 
-/* 6. Contenedor de la Lista de Comentarios */
-.list-card {
-    background-color: rgba(255, 255, 255, 0.05); /* Fondo oscuro semi-transparente */
-    box-shadow: 0 0 10px rgba(24, 217, 46, 0.1); /* Sombra/Glow más suave */
-    border-radius: 1rem;
-    padding: 1.5rem;
-    border: 1px solid rgba(24, 217, 46, 0.1);
+/* ===== CONTENEDOR GENERAL (Más profesional) ===== */
+.comments-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px; 
+    /* Fondo semi-transparente para ver la imagen de fondo */
+    background: rgba(13, 13, 13, 0.9); 
+    border-radius: 18px; 
+    /* Sombra con el nuevo color Verde Menta */
+    box-shadow: 0 0 30px rgba(66, 184, 131, 0.3); 
+    color: #e8ffe9;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid rgba(66, 184, 131, 0.1);
+    z-index: 10; 
+    position: relative; 
 }
 
-.list-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #ffffff; /* Título de la lista blanco */
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(24, 217, 46, 0.3); /* Separador sutil */
-    padding-bottom: 0.75rem;
+/* ===== TÍTULO (Verde Menta Suave) ===== */
+.title {
+    text-align: center;
+    color: #42b883; /* Verde Menta */
+    text-shadow: 0 0 6px rgba(66, 184, 131, 0.5);
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: 700;
 }
 
-/* 7. Comentario Individual */
-.comments-list {
+/* ===== FORMULARIO ===== */
+.comment-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 15px;
 }
 
+.form-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    background: #181818;
+    border: 1px solid rgba(66, 184, 131, 0.4);
+    color: #e8ffe9;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-input:focus {
+    box-shadow: 0 0 15px rgba(66, 184, 131, 0.7);
+    border-color: #42b883;
+    background: #222;
+}
+
+textarea.form-input {
+    height: 120px;
+    resize: none;
+}
+
+/* ===== BOTÓN (Pastel Degradado) ===== */
+.btn-submit {
+    padding: 12px;
+    /* Degradado de Pastel: Verde Agua Suave a Menta Claro */
+    background: linear-gradient(135deg, #8ac926, #99d98c); /* segundo color 8ac926 ,99d98c*/
+    border: none;
+    border-radius: 8px;
+    color: #1a1a1a; /* Texto oscuro para contraste */
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(128, 203, 196, 0.4);
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #7bb222, #7cb072); /*7bb222, 7cb072  */
+    box-shadow: 0 6px 20px rgba(128, 203, 196, 0.7);
+    transform: translateY(-2px);
+}
+
+/* ===== LISTA DE COMENTARIOS ===== */
+.comments-list {
+    margin-top: 30px;
+}
+
+/* ===== TARJETA (Ajuste de color y sombra) ===== */
 .comment-card {
-    background-color: rgba(255, 255, 255, 0.02); /* Fondo de tarjeta muy sutil */
-    padding: 1.25rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-    border-left: 4px solid #18d92e; /* Borde izquierdo verde fuerte */
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
-}
-.comment-card:hover {
-    box-shadow: 0 0 15px rgba(24, 217, 46, 0.4); /* Glow en hover */
-    background-color: rgba(255, 255, 255, 0.05); /* Ligeramente más brillante en hover */
+    background: #1a1a1a;
+    border-left: 5px solid #8ac926; /* Nuevo verde menta */
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
 }
 
+.comment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(66, 184, 131, 0.3);
+}
+
+/* ===== CABECERA ===== */
 .comment-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-}
-
-.comment-username {
-    font-weight: 800;
-    font-size: 1.125rem;
-    color: #ffffff; /* Nombre de usuario en blanco */
-    display: flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 
-.comment-username i {
-    color: #18d92e; /* Icono en verde acento */
-    margin-right: 0.5rem;
-    font-size: 1.25rem;
+/* ===== TAG CATEGORÍA (Paleta Pastel) ===== */
+.tag {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-transform: capitalize;
 }
 
+/* Definición de colores pastel */
+.tag-recomendacion { background: #80b918; } /* Verde Salvia */
+.tag-opinion { background: #3f37c9; } /* Azul Celeste Suave */
+.tag-duda { background: #f6bd60; } /* Naranja Melocotón */
+.tag-problema { background: #ef233c; } /* Rojo Coral Suave */
+
+/* ===== FECHA ===== */
 .comment-date {
-    font-size: 0.875rem;
-    color: #a0a0a0; /* Fecha en gris claro */
-    font-style: italic;
-}
-.comment-date i {
-    margin-right: 0.25rem;
+    color: #a0a0a0;
+    font-size: 12px;
 }
 
+/* ===== TEXTO ===== */
 .comment-text {
-    color: #d4d4d4; /* Texto del comentario en gris claro */
-    line-height: 1.625;
-    word-break: break-word;
-    margin-top: 0.25rem;
+    margin: 8px 0;
+    color: #d3ffd9;
+    line-height: 1.6;
 }
 
-/* 8. Estilo para cuando no hay comentarios (empty state) */
-.empty-state {
-    text-align: center;
-    padding: 2rem 0;
-    background-color: rgba(24, 217, 46, 0.05); /* Fondo muy sutil con acento verde */
-    border-radius: 0.75rem;
-    border: 2px dashed rgba(24, 217, 46, 0.3); /* Borde punteado verde */
-}
-.empty-state i {
-    color: #18d92e; /* Icono de comentarios en verde acento */
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 5px rgba(24, 217, 46, 0.5);
-}
-.empty-state p {
-    color: #ffffff; /* Texto en blanco */
-    font-weight: 500;
+/* ===== USUARIO ===== */
+.comment-user small {
+    color: #42b883; /* Nuevo verde menta */
+    font-weight: bold;
 }

@@ -129,7 +129,7 @@ input:focus {
 .recordar input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  accent-color: #18d92e; /* Cambia el color del check */
+  accent-color: #8ac926; /* Cambia el color del check */
   cursor: pointer;
   transform: translateY(1px);
 }
@@ -145,12 +145,12 @@ input:focus {
 .boton {
   width: 70%;
   padding: 12px 0;
-  background: linear-gradient(135deg, #38ef7d, #11998e);
+  background: linear-gradient(135deg, #8ac926, #99d98c);
   border: none;
   border-radius: 12px;
   font-size: 17px;
   font-weight: 600;
-  color: white;
+  color: rgb(0, 0, 0);
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -163,7 +163,8 @@ input:focus {
 
 .boton:hover {
   transform: scale(1.07);
-  box-shadow: 0 0 25px rgba(24, 217, 46, 0.6);
+  background: linear-gradient(135deg, #7bb222, #7cb072);
+    box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
 }
 
 /* ---------- LINK DE REGISTRO ---------- */
@@ -174,11 +175,18 @@ input:focus {
 }
 
 .registro-link a {
-  color: #18d92e;
+  color: #8ac926;
   font-weight: 600;
   text-decoration: none;
 }
 
 .registro-link a:hover {
   text-decoration: underline;
+}
+.titulo-inicio{
+  color: #8ac926;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1px;
 }

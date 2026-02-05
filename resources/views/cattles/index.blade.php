@@ -1,233 +1,319 @@
 @extends('layouts.app')
 
+{{-- 1. APLICA EL TEMA OSCURO DE GANADERÍA --}}
+@section('body_class', 'cattle-theme') 
+
 @section('content')
-<!-- Enlace al CSS externo (asumiendo que se carga correctamente en el entorno de Blade) -->
-<link rel="stylesheet" href="bovine_style.css"> 
-<!-- Fuente Poppins y Font Awesome para íconos profesionales -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<div class="cattle-main container">
+    <h1 class="main-title text-center mb-5">Manejo y Producción Ganadera</h1>
+    
+    {{-- Slider de Introducción --}}
+    <section class="cattle-slider py-5">
+        <div id="cattleCarousel" class="carousel slide" data-bs-ride="carousel">
 
-<!-- Contenedor principal para encapsular estilos y tema -->
-<div id="bovine-page" class="bovine-page">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#cattleCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#cattleCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#cattleCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#cattleCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
 
-    <!-- Botón Flotante de Modo Oscuro - ID Único -->
-    <button id="theme-toggle-btn" onclick="toggleTheme()" class="floating-btn dark-mode">
-        <i class="fas fa-moon"></i> Cambiar tema
-    </button>
-
-
-    <!-- ===== CONTENIDO PRINCIPAL - Clase Única ===== -->
-    <main class="bovine-container">
-        <h1>🐄 Ganado Bovino: Manejo y Producción</h1>
-
-        <!-- Razas - Clase Única -->
-        <section class="bovine-card" id="razas">
-            <h2>Razas más comunes 
-                <button onclick="toggleSection('razas-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
-            </h2>
-            <div id="razas-content" class="bovine-content">
-                <p>
-                    Entre las más conocidas están: <strong>Holstein</strong> (alta producción de leche), 
-                    <strong>Jersey</strong> (leche rica en grasa), <strong>Angus</strong> (carne de calidad) y 
-                    <strong>Brahman</strong> (resistencia a climas cálidos).
-                </p>
-                <div class="bovine-collage">
-                    <img src="https://licnz.com/wp-content/uploads/2020/10/Holstein-Friesian-bull-Mint-Edition-Front-on.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=HOLSTEIN';" alt="Vaca Holstein" onclick="enlargeImage(this)">
-                    <img src="https://i.pinimg.com/originals/e5/79/01/e57901f813294688ca0bf4f313e5c840.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=JERSEY';" alt="Vaca Jersey" onclick="enlargeImage(this)">
-                    <img src="https://www.lechedeflorida.com/core/fileparse.php/278/urlt/Holstein-Cow-Headshot.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=LECHE';" alt="Vaca de leche" onclick="enlargeImage(this)">
-                    <img src="https://www.miguelvergara.com/actualidad/wp-content/uploads/2023/10/vaca-frisona-listado.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=FRISONA';" alt="Vaca frisona" onclick="enlargeImage(this)">
+            <div class="carousel-inner p-4 p-md-5 rounded main-card"> 
+                
+                {{-- Slide 1: Razas Bovinas --}}
+                <div class="carousel-item active">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 order-md-2">
+                            <img src="https://aurocha.com/wp-content/uploads/2021/12/vacas-angus-aberdeen-scaled.jpg" class="img-fluid rounded shadow-lg slider-img" alt="Ganado Angus y Hereford">
+                        </div>
+                        <div class="col-md-6 order-md-1 slider-text">
+                            <h2 class="slide-title">Principales Razas</h2>
+                            <p class="text-light-cattle">
+                                Domina las diferencias entre razas de **carne** (Angus, Brangus) y **leche** (Holstein, Jersey).
+                                La genética es el primer paso para una producción eficiente y rentable.
+                            </p>
+                            <a href="#razasBovinas" class="btn btn-cattle-primary scroll-suave">Ver Catálogo</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Suelo y pasturas -->
-        <section class="bovine-card" id="suelo">
-            <h2>Suelo y pasturas 
-                <button onclick="toggleSection('suelo-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
-            </h2>
-            <div id="suelo-content" class="bovine-content">
-                <p>
-                    Prefieren suelos bien drenados, con pastos nutritivos como <em>kikuyo</em>, 
-                    <em>ryegrass</em> y <em>trébol</em>. El pH ideal está entre 6 y 7, con alto contenido
-                    de materia orgánica.
-                </p>
-                <div class="bovine-collage two-cols">
-                    <img src="https://images.unsplash.com/photo-1714983894044-44ca0451216b?q=80&w=1170&auto=format&fit=crop" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=PASTURAS';" alt="Pasturas nutritivas" onclick="enlargeImage(this)">
-                    <img src="https://www.gob.mx/cms/uploads/article/main_image/72605/vacas.jpg" onerror="this.onerror=null; this.src='https://placehold.co/300x200/222/18d92e?text=FORRAJE';" alt="Forrajes para ganado" onclick="enlargeImage(this)">
+                {{-- Slide 2: Ciclo de Producción --}}
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?q=80&w=1000&auto=format&fit=crop" class="img-fluid rounded shadow-lg slider-img" alt="Terneros en pastoreo">
+                        </div>
+                        <div class="col-md-6 slider-text">
+                            <h2 class="slide-title">Ciclo del Ganado</h2>
+                            <p class="text-light-cattle">
+                                Desde la cría y el levante hasta la ceba final. Cada etapa requiere 
+                                un manejo nutricional específico para maximizar el rendimiento.
+                            </p>
+                            <a href="#procesoGanado" class="btn btn-cattle-primary scroll-suave">Ver Etapas</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Alimentación -->
-        <section class="bovine-card" id="alimentacion">
-            <h2>Alimentación 
-                <button onclick="toggleSection('alimentacion-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
-            </h2>
-            <div id="alimentacion-content" class="bovine-content">
-                <p>
-                    La dieta del ganado vacuno se basa principalmente en pasto, silo y heno. 
-                    También se puede complementar con granos (maíz, sorgo) y suplementos proteicos.
-                </p>
-                <ul>
-                    <li><i class="fas fa-seedling"></i> <strong>Pasto fresco:</strong> principal fuente de nutrientes.</li>
-                    <li><i class="fas fa-tractor"></i> <strong>Heno y ensilaje:</strong> reservas para épocas secas.</li>
-                    <li><i class="fas fa-pills"></i> <strong>Suplementos:</strong> sales minerales y vitaminas.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Producción de leche -->
-        <section class="bovine-card" id="leche">
-            <h2>Producción de leche 
-                <button onclick="toggleSection('leche-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
-            </h2>
-            <div id="leche-content" class="bovine-content">
-                <p>
-                    Una vaca lechera puede producir entre <strong>20 y 40 litros diarios</strong> de leche,
-                    dependiendo de la raza, la genética, la alimentación y el manejo.
-                </p>
-                <p>
-                    La <strong>Holstein</strong> es la más productiva, mientras que la <strong>Jersey</strong> 
-                    destaca por la calidad y el contenido graso de su leche.
-                </p>
-            </div>
-        </section>
-
-        <!-- Producción de carne -->
-        <section class="bovine-card" id="carne">
-            <h2>Producción de carne 
-                <button onclick="toggleSection('carne-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
-            </h2>
-            <div id="carne-content" class="bovine-content">
-                <p>
-                    Las razas de carne como <strong>Angus</strong> y <strong>Hereford</strong> 
-                    son criadas por su carne de alta calidad y rápido crecimiento.
-                </p>
-                <p>
-                    El manejo adecuado de la alimentación y el pastoreo influye directamente 
-                    en la calidad del producto final.
-                </p>
-            </div>
-        </section>
-
-        <!-- Salud y manejo -->
-        <section class="bovine-card" id="salud">
-            <h2>Salud y manejo 
-                <button onclick="toggleSection('salud-content')" class="mostrar"><i class="fas fa-chevron-down"></i></button>
-            </h2>
-            <div id="salud-content" class="bovine-content">
-                <p>
-                    El ganado requiere cuidados veterinarios periódicos: vacunación, desparasitación 
-                    y control de parásitos externos. 
-                </p>
-                <ul>
-                    <li><i class="fas fa-syringe"></i> Vacunas contra fiebre aftosa y brucelosis.</li>
-                    <li><i class="fas fa-bug"></i> Desparasitación interna y externa.</li>
-                    <li><i class="fas fa-house-chimney"></i> Corrales limpios y ventilados.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Noticias -->
-        <section class="bovine-card">
-            <h2>📰 Noticias sobre ganado</h2>
-            <input type="text" id="bovine-news-search" placeholder="Buscar noticias..." onkeyup="filterNews()" class="buscador">
-            <div id="news-container">
-                <!-- Contenido de noticias simulado para el filtro -->
-                <div class="news-item">
-                    <h3 class="text-neon">Inversión en Genética Bovina</h3>
-                    <p>El gobierno anuncia nuevos programas de apoyo para la mejora genética de las razas lecheras y cárnicas.</p>
+                {{-- Slide 3: Nutrición y Pastoreo --}}
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 order-md-2">
+                            <img src="https://i.pinimg.com/736x/3d/3a/6e/3d3a6e311ff5e5285a84de5dc938cc42.jpg" class="img-fluid rounded shadow-lg slider-img" alt="Pastoreo rotacional">
+                        </div>
+                        <div class="col-md-6 order-md-1 slider-text">
+                            <h2 class="slide-title">Manejo de Praderas</h2>
+                            <p class="text-light-cattle">
+                                Implementa sistemas de **pastoreo rotacional** para mejorar la carga animal.
+                                Un suelo sano significa animales más productivos y resistentes.
+                            </p>
+                            <a href="#metodosCosecha" class="btn btn-cattle-primary scroll-suave">Sistemas de Pastoreo</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="news-item">
-                    <h3 class="text-neon">Estrategias de Pastoreo Rotacional</h3>
-                    <p>Expertos discuten las mejores prácticas para maximizar la eficiencia del pastoreo en climas variables.</p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Modal de imágenes -->
-        <div id="image-modal" class="modal" onclick="closeModal()">
-            <img id="modal-img" src="" alt="imagen ampliada">
-            <span class="close" onclick="closeModal(event)">✖</span>
+                {{-- Slide 4: Noticias del Sector --}}
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <img src="https://montanaweb-bucket.s3.amazonaws.com/web/blog/1/produccion-de-terneros.png" class="img-fluid rounded shadow-lg slider-img" alt="Tecnología en el campo">
+                        </div>
+                        <div class="col-md-6 slider-text">
+                            <h2 class="slide-title">Actualidad Pecuaria</h2>
+                            <p class="text-light-cattle">
+                                Mantente al día con los precios del ganado, tendencias en genética
+                                y nuevas tecnologías para el monitoreo de hatos en tiempo real.
+                            </p>
+                            <a href="#noticiasGanado" class="btn btn-cattle-primary scroll-suave">Noticias</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#cattleCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#cattleCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
         </div>
-    </main>
+    </section>
 
+    <hr class="cattle-divider">
 
-    <!-- ===== JAVASCRIPT DE INTERACTIVIDAD (Nombres de ID/Clase actualizados) ===== -->
-    <script>
-        // Cierra el modal de imagen, evitando que el clic en el botón cierre el modal
-        function closeModal(event) {
-            if (event && event.target.classList.contains('close')) {
-                event.stopPropagation();
-            }
-            document.getElementById('image-modal').style.display = 'none';
-        }
+    {{-- Razas de Ganado --}}
+    <section id="razasBovinas" class="py-5">
+        <h2 class="section-title text-center mb-4">Principales Razas de Explotación</h2>
+        <p class="section-subtitle text-center mb-5">Selecciona la genética adecuada según tu propósito comercial.</p>
 
-        // Abre y muestra la imagen en el modal
-        function enlargeImage(imgElement) {
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('modal-img');
-            modal.style.display = 'flex';
-            modalImg.src = imgElement.src;
-        }
-
-        // Muestra/Oculta secciones con transición
-        function toggleSection(id) {
-            const content = document.getElementById(id);
-            const button = content.previousElementSibling.querySelector('.mostrar i');
+        <div class="row g-4 mt-4">
             
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-                // Usamos la misma lógica de padding que en el CSS para una transición suave
-                content.style.padding = '0 15px'; 
-                button.style.transform = 'rotate(0deg)';
-            } else {
-                // Usamos scrollHeight + un margen para asegurar que se muestre todo el contenido
-                content.style.maxHeight = content.scrollHeight + 30 + "px"; 
-                content.style.padding = '15px 15px 0 15px'; 
-                button.style.transform = 'rotate(180deg)';
-            }
-        }
+            {{-- Tarjeta: Angus --}}
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow">
+                    <img src="https://asoangusbrangus.org.co/images/razas/raza_angus.jpg" class="card-img-top card-image" alt="Raza Angus">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Angus (Cárnico)</h5>
+                        <p class="card-text text-light-cattle small">
+                            <strong class="text-cattle-accent">Fortaleza:</strong> Calidad de carne (marmoleo) y precocidad.
+                            <br><strong class="text-cattle-accent">Adaptación:</strong> Excelente en climas templados.
+                            <br><strong class="text-cattle-accent">Mercado:</strong> El estándar de oro para exportación.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-        // Filtra las noticias (simulado)
-        function filterNews() {
-            const searchInput = document.getElementById('bovine-news-search').value.toLowerCase(); 
-            const newsContainer = document.getElementById('news-container');
-            const newsItems = newsContainer.querySelectorAll('.news-item');
-
-            newsItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                if (text.includes(searchInput)) {
-                    item.style.display = ''; 
-                } else {
-                    item.style.display = 'none'; 
-                }
-            });
-        }
-
-        // Función de cambio de tema (Oscuro <-> Claro)
-        function toggleTheme() {
-            const pageContainer = document.getElementById('bovine-page'); // Nuevo ID
-            const icon = document.querySelector('#theme-toggle-btn i'); // Nuevo ID
+            {{-- Tarjeta: Holstein --}}
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow">
+                    <img src="https://molinoschampion.com/wp-content/uploads/2021/03/Mesa-de-trabajo-1-copia-14-100.jpg" class="card-img-top card-image" alt="Raza Holstein">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Holstein (Lácteo)</h5>
+                        <p class="card-text text-light-cattle small">
+                            <strong class="text-cattle-accent">Producción:</strong> La raza con mayor volumen de leche.
+                            <br><strong class="text-cattle-accent">Uso:</strong> Principal proveedor de la industria láctea.
+                            <br><strong class="text-cattle-accent">Cuidado:</strong> Requiere alta suplementación nutricional.
+                        </p>
+                    </div>
+                </div>
+            </div>
             
-            if (pageContainer.classList.contains('light-mode')) {
-                pageContainer.classList.remove('light-mode');
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            } else {
-                pageContainer.classList.add('light-mode');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
-        }
+            {{-- Tarjeta: Brahman --}}
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow">
+                    <img src="https://diariolaeconomia.com/media/k2/items/cache/891bc0e45e0849a552d0ba70b9f8ec5e_XL.jpg" class="card-img-top card-image" alt="Raza Brahman">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Brahman (Rústico)</h5>
+                        <p class="card-text text-light-cattle small">
+                            <strong class="text-cattle-accent">Resistencia:</strong> Alta tolerancia al calor y parásitos.
+                            <br><strong class="text-cattle-accent">Hibridación:</strong> Base perfecta para cruces F1.
+                            <br><strong class="text-cattle-accent">Zona:</strong> Ideal para ganadería en trópico bajo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
 
-        // Inicializa las secciones colapsadas
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.bovine-content').forEach(content => { // Nueva clase
-                content.style.maxHeight = null;
-                content.style.padding = '0 15px'; 
-            });
-        });
-    </script>
+    <hr class="cattle-divider">
+
+    {{-- Ciclo de Manejo --}}
+    <section id="procesoGanado" class="py-5">
+        <h2 class="section-title text-center mb-5">El Ciclo de Vida: Del Nacimiento al Mercado</h2>
+
+        <div class="row mt-4 align-items-center">
+
+            <div class="col-md-6 order-md-2">
+                <img src="https://desarrollorural.yucatan.gob.mx/files-content/galerias/5e35b133328bb9efa0466a7ee62e7606.jpg"
+                    class="img-fluid rounded shadow-lg process-image" alt="Pesaje de ganado">
+            </div>
+
+            <div class="col-md-6 order-md-1">
+                
+                <div class="mb-5">
+                    <h3 class="sub-section-title text-cattle-accent">Línea de Tiempo Productiva</h3>
+                    <ul class="timeline">
+                        <li><span>Nacimiento & Calostrado</span>: Fase crítica para la inmunidad del ternero.</li>
+                        <li><span>Crianza (Lactancia)</span>: Desarrollo del sistema digestivo inicial.</li>
+                        <li><span>Destete</span>: Transición a dieta sólida basada en forraje y concentrado.</li>
+                        <li><span>Levante (Recría)</span>: Crecimiento óseo y muscular sostenido.</li>
+                        <li><span>Ceba (Engorde)</span>: Finalización para alcanzar el peso óptimo de sacrificio.</li>
+                        <li><span>Comercialización</span>: Gestión de logística y transporte bajo normas de bienestar animal.</li>
+                    </ul>
+                </div>
+
+                <div class="mt-5">
+                    <h3 class="sub-section-title text-cattle-accent">Bienestar y Sanidad Animal</h3>
+                    <div class="ratio ratio-16x9 rounded shadow-lg video-container">
+                        {{-- Video sugerido sobre manejo de ganado --}}
+                        <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/0b5iyRCG3P0" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <hr class="cattle-divider">
+
+    {{-- Métodos de Alimentación --}}
+    <section id="metodosCosecha" class="py-5">
+        <h2 class="section-title text-center mb-5">Sistemas de Alimentación y Pastoreo</h2>
+
+        <div class="row mt-4">
+
+            {{-- Pastoreo Extensivo --}}
+            <div class="col-md-4 mb-4">
+                <div class="card cattle-card h-100 shadow">
+                    <img src="https://www.uoc.edu/content/dam/news/images/noticies/2023/200-la-tecnologia-dona-pas-al-pasturatge-digital.jpg" class="card-img-top card-image" alt="Pastoreo Extensivo">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Pastoreo Extensivo</h5>
+                        <p class="card-date text-muted fst-italic">Bajo Insumo</p>
+                        <p class="card-text text-light-cattle small">
+                            Los animales recorren grandes áreas. Requiere menos inversión pero tiene menor carga por hectárea.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Pastoreo Rotacional --}}
+            <div class="col-md-4 mb-4">
+                <div class="card cattle-card h-100 shadow">
+                    <img src="https://infopastosyforrajes.com/wp-content/uploads/2020/04/Sistemas-de-Pastoreo-2.jpg" class="card-img-top card-image" alt="Pastoreo Rotacional">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Rotacional (Voisin)</h5>
+                        <p class="card-date text-muted fst-italic">Alta Eficiencia</p>
+                        <p class="card-text text-light-cattle small">
+                            División de potreros con cercas eléctricas. Optimiza el descanso del pasto y la nutrición animal.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Feedlot --}}
+            <div class="col-md-4 mb-4">
+                <div class="card cattle-card h-100 shadow"> 
+                    <img src="https://a.storyblok.com/f/160385/a33fe0d0ac/aumentar-espacio-vital-ganado-esta-confinamiento.jpg" class="card-img-top card-image" alt="Feedlot / Confinamiento">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Confinamiento (Feedlot)</h5>
+                        <p class="card-date text-muted fst-italic">Intensivo</p>
+                        <p class="card-text text-light-cattle small">
+                            Alimentación controlada en corrales. Máxima ganancia de peso diaria en el menor tiempo posible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <hr class="cattle-divider">
+    
+    {{-- Noticias --}}
+    {{-- Noticias y Actualidad (Estático) --}}
+    <section id="noticiasGanado" class="py-5">
+        <h2 class="section-title text-center mb-5">Actualidad y Mercados Pecuarios</h2>
+        <div class="row mt-4">
+            
+            {{-- Noticia 1 --}}
+            <div class="col-md-4 mb-4">
+                <div class="card news-card h-100 shadow cattle-card">
+                    <img src="https://www.asoregan.co/wp-content/uploads/2024/09/Claves-para-la-Compra-Rentable-de-Ganado.jpg" class="card-img-top card-image" alt="Precios del ganado">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Tendencia de Precios en Subasta</h5>
+                        <p class="card-text text-light-cattle">El precio del ganado en pie presenta una estabilidad esta semana. Los machos de levante se mantienen como la categoría más demandada por los cebadores.</p>
+                        <span class="badge bg-success">Mercado</span>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Noticia 2 --}}
+            <div class="col-md-4 mb-4">
+                <div class="card news-card h-100 shadow cattle-card">
+                    <img src="https://img.lalr.co/cms/2020/04/13165837/Eco_vacunacionAftosa_AGRO.jpg?r=4_3" class="card-img-top card-image" alt="Salud Animal">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Ciclo de Vacunación 2024</h5>
+                        <p class="card-text text-light-cattle">Las autoridades sanitarias anuncian las fechas oficiales para el primer ciclo contra la fiebre aftosa y brucelosis bovina. ¡Prepara tu hato!</p>
+                        <span class="badge bg-danger">Sanidad</span>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Noticia 3 --}}
+            <div class="col-md-4 mb-4">
+                <div class="card news-card h-100 shadow cattle-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd4Ez5yfKD6A81dZd55Q1Cx2s1bi16_v30ug&s" class="card-img-top card-image" alt="Tecnología">
+                    <div class="card-body">
+                        <h5 class="card-title text-cattle-accent">Tecnología de Identificación</h5>
+                        <p class="card-text text-light-cattle">El uso de crotales con tecnología RFID permite un control más preciso de la ganancia diaria de peso y el historial sanitario individual.</p>
+                        <span class="badge bg-primary">Innovación</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
 </div>
+
+<script>
+    document.querySelectorAll('.scroll-suave').forEach(link => {
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href'))
+                    .scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
 @endsection

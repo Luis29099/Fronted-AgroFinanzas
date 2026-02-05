@@ -7,16 +7,12 @@ use Illuminate\Support\Facades\Http;
 
 class RecommendationController extends Controller
 {
-    private function fetchDataFromApi($url)
-{
-    $response = Http::get($url);
-    return $response->json();
-}
-
-public function index()
+    public function index()
     {
         $response = Http::get('http://api.AgroFinanzas.test/api/recommendations');
-        $recommendations = $response->json();
+
+        // Asegura que siempre sea un array
+        $recommendations = $response->json() ?? [];
 
         return view('recommendations.index', compact('recommendations'));
     }
@@ -27,10 +23,10 @@ public function index()
 
         Http::post('http://api.AgroFinanzas.test/api/recommendations', [
             'text' => $request->text,
+            'category' => $request->category,   // FALTA EN TU CONTROLADOR
             'id_user_app' => $user['id'] ?? null,
         ]);
 
         return redirect()->route('recommendations.index');
     }
-
 }

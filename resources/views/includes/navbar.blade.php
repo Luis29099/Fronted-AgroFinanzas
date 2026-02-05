@@ -40,13 +40,13 @@
 
         @else
             {{-- ✅ Usuario autenticado --}}
-            <li>
+            {{-- <li>
                 <a href="{{ route('crops') }}" 
                     class="af-nav-link {{ str_contains($currentRoute, 'Culivos') ? 'active' : '' }}">
                     Cultivos
                 </a>
             </li>
-            <li>
+            <li> --}}
                 <a href="{{ route('Agronomy.index') }}" 
                     class="af-nav-link {{ str_contains($currentRoute, 'animalproductions') ? 'active' : '' }}">
                     Agronomía

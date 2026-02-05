@@ -7,28 +7,21 @@ use Illuminate\Support\Facades\Http;
 
 class CoffeCropController extends Controller
 {
-    private function fetchDataFromApi($url)
-{
-    $response = Http::get($url);
-    return $response->json();
-}
+    public function index()
+    {
+        // API de noticias sobre café
+        $apiKey = '2338b8d89f4c42019391fb8f22e02976'; // Pon tu NewsAPI Key
+        $url = 'https://newsapi.org/v2/everything?q=coffee&language=es&pageSize=6&apiKey=' . $apiKey;
 
-public function index()   // http://api.codersfree.test/v1/coffe_crops?included=posts
-{
-    $url = env('URL_SERVER_API');
+        $response = Http::get($url);
 
-    $coffecrops = $this->fetchDataFromApi($url . '/coffe_crops');
+        // Verificamos si la respuesta fue exitosa
+        $noticias = [];
+        if ($response->successful()) {
+            $noticias = $response->json()['articles'];
+        }
 
-    return view('coffecrops.index', compact('coffecrops'));
-}
-
-public function show($id)
-{
-    $url = env('URL_SERVER_API');
-
-    $coffecrop = $this->fetchDataFromApi($url . '/coffe_crops/' . $id);
-
-    return view('coffecrops.show', compact('coffecrop'));
-}
-
+        // Pasamos las noticias a la vista
+        return view('coffecrops.index', compact('noticias'));
+    }
 }
