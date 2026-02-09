@@ -1,170 +1,199 @@
 @extends('layouts.app')
 
+{{-- 1. APLICA EL TEMA OSCURO (Reutilizando la lógica de Cattle Theme) --}}
+@section('body_class', 'cattle-theme') 
+
 @section('content')
-<main class="avocado-main">
-
-    <!-- Galería de Variedades -->
-    <section class="varieties-section">
-        <h2>Conoce las Variedades</h2>
-        <div class="contenedor-tarjetas">
-            {{-- Tarjeta Hass --}}
-            <div class="tarjeta" onclick="abrirModal('Hass','https://www.reyesgutierrez.com/wp-content/uploads/2021/04/aguacate-hass.jpg','La variedad más popular. Piel rugosa que se oscurece al madurar, pulpa cremosa y excelente sabor a nuez.')">
-                <img src="https://www.reyesgutierrez.com/wp-content/uploads/2021/04/aguacate-hass.jpg" alt="Aguacate Hass">
-                <h2>Hass</h2>
-                <p>La variedad más popular. Piel rugosa que se oscurece al madurar, pulpa cremosa y excelente sabor a nuez.</p>
+<div class="cattle-main container">
+    <h1 class="main-title text-center mb-5">Manual Técnico del Cultivo de Aguacate</h1>
+    
+    {{-- Slider de Introducción --}}
+    <section class="cattle-slider py-5">
+        <div id="avocadoCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#avocadoCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#avocadoCarousel" data-bs-slide-to="1"></button>
             </div>
 
-            {{-- Tarjeta Fuerte --}}
-            <div class="tarjeta" onclick="abrirModal('Fuerte','https://fertilizantesecoforce.es/wp-content/uploads/2022/06/Comprar-arbol-aguacate-fuerte.jpeg','Híbrido de piel suave y verde, forma de pera. Resistente y se cultiva principalmente en México y Centroamérica.')">
-                <img src="https://fertilizantesecoforce.es/wp-content/uploads/2022/06/Comprar-arbol-aguacate-fuerte.jpeg" alt="Aguacate Fuerte">
-                <h2>Fuerte</h2>
-                <p>Híbrido de piel suave y verde, forma de pera. Resistente y se cultiva principalmente en México y Centroamérica.</p>
-            </div>
-
-            {{-- Tarjeta Gwen --}}
-            <div class="tarjeta" onclick="abrirModal('Gwen','https://i.etsystatic.com/32029892/r/il/1db8dd/4476791049/il_1080xN.4476791049_7t7k.jpg','Se caracteriza por su textura cremosa, sabor a mantequilla y piel gruesa. Excelente opción para el consumo fresco.')">
-                <img src="https://i.etsystatic.com/32029892/r/il/1db8dd/4476791049/il_1080xN.4476791049_7t7k.jpg" alt="Aguacate Gwen">
-                <h2>Gwen</h2>
-                <p>Se caracteriza por su textura cremosa, sabor a mantequilla y piel gruesa. Excelente opción para el consumo fresco.</p>
-            </div>
-
-            {{-- Tarjeta Lamb Hass --}}
-            <div class="tarjeta" onclick="abrirModal('Lamb Hass','https://sigfridofruit.com/wp-content/uploads/Lamb-Hass.webp','Variedad de maduración tardía, ofrece frutos grandes y de alta resistencia a las enfermedades, ideal para exportación.')">
-                <img src="https://sigfridofruit.com/wp-content/uploads/Lamb-Hass.webp" alt="Aguacate Lamb Hass">
-                <h2>Lamb Hass</h2>
-                <p>Variedad de maduración tardía, ofrece frutos grandes y de alta resistencia a las enfermedades, ideal para exportación.</p>
-            </div>
-
-            {{-- Tarjeta Zutano --}}
-            <div class="tarjeta" onclick="abrirModal('Zutano','https://sigfridofruit.com/wp-content/uploads/Aguacate-Zutano.webp','De origen mexicano, con piel delgada y lisa. Conocido por ser un buen polinizador en huertos mixtos.')">
-                <img src="https://sigfridofruit.com/wp-content/uploads/Aguacate-Zutano.webp" alt="Aguacate Zutano">
-                <h2>Zutano</h2>
-                <p>De origen mexicano, con piel delgada y lisa. Conocido por ser un buen polinizador en huertos mixtos.</p>
-            </div>
-
-            {{-- Tarjeta Pinkerton --}}
-            <div class="tarjeta" onclick="abrirModal('Pinkerton','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStG5Dzo1AbS8dj0SB-_5Pkm-R6yXIppNx5Yw&s','Híbrido de origen guatemalteco y mexicano. Tiene forma alargada, piel rugosa y pulpa cremosa, buen rendimiento.')">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStG5Dzo1AbS8dj0SB-_5Pkm-R6yXIppNx5Yw&s" alt="Aguacate Pinkerton">
-                <h2>Pinkerton</h2>
-                <p>Híbrido de origen guatemalteco y mexicano. Tiene forma alargada, piel rugosa y pulpa cremosa, buen rendimiento.</p>
-            </div>
-
-            {{-- Tarjeta Lorena --}}
-            <div class="tarjeta" onclick="abrirModal('Lorena','https://la-canasta.org/wp-content/uploads/2025/06/Aguacate_Lorena.jpg','Cultivada en Colombia. Grande, piel lisa y verde brillante. Pulpa cremosa y sabor suave.')">
-                <img src="https://la-canasta.org/wp-content/uploads/2025/06/Aguacate_Lorena.jpg" alt="Aguacate Lorena">
-                <h2>Lorena</h2>
-                <p>Cultivada en Colombia. Grande, piel lisa y verde brillante. Pulpa cremosa y sabor suave.</p>
-            </div>
-
-            {{-- Tarjeta Carlos --}}
-            <div class="tarjeta" onclick="abrirModal('Carlos','https://www.freshplaza.es/remote/https/agfstorage.blob.core.windows.net/misc/FP_es/2025/01/29/JE_5_.jpg?preset=ContentFullSmall','Originario de los Andes colombianos. Piel rugosa, pulpa amarilla intensa y sabor ligeramente dulce.')">
-                <img src="https://www.freshplaza.es/remote/https/agfstorage.blob.core.windows.net/misc/FP_es/2025/01/29/JE_5_.jpg?preset=ContentFullSmall" alt="Aguacate Carlos">
-                <h2>Carlos</h2>
-                <p>Originario de los Andes colombianos. Piel rugosa, pulpa amarilla intensa y sabor ligeramente dulce.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Recomendaciones de cuidado -->
-    <section class="care-recommendations">
-        <h2>Recomendaciones Clave para el Cuidado</h2>
-        <div class="recommendation-list">
-            <div class="recommendation-item">
-                <span class="icon-number">1</span>
-                <div>
-                    <h3>Poda Estratégica</h3>
-                    <p>Realice podas de formación en los primeros años y podas sanitarias para eliminar ramas secas o enfermas. Favorece la ventilación y la entrada de luz.</p>
+            <div class="carousel-inner p-4 p-md-5 rounded main-card" style="background-color: var(--color-coffee-darker);"> 
+                {{-- Slide 1: Variedades --}}
+                <div class="carousel-item active">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 order-md-2">
+                            <img src="https://www.reyesgutierrez.com/wp-content/uploads/2021/04/aguacate-hass.jpg" class="img-fluid rounded shadow-lg slider-img" alt="Aguacate Hass">
+                        </div>
+                        <div class="col-md-6 order-md-1 slider-text">
+                            <h2 class="slide-title">Variedades de Exportación</h2>
+                            <p class="text-light-cattle">
+                                Desde el estándar mundial **Hass** hasta variedades tropicales como **Lorena**. 
+                                La elección de la semilla define el éxito de su mercado.
+                            </p>
+                            <a href="#variedadesAguacate" class="btn btn-cattle-primary scroll-suave">Ver Variedades</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="recommendation-item">
-                <span class="icon-number">2</span>
-                <div>
-                    <h3>Manejo de Plagas</h3>
-                    <p>Monitoree trips, ácaros y cochinillas. Use control biológico como insectos benéficos y productos orgánicos certificados.</p>
-                </div>
-            </div>
-            <div class="recommendation-item">
-                <span class="icon-number">3</span>
-                <div>
-                    <h3>Fertilización</h3>
-                    <p>Aplique fertilizantes ricos en NPK, además de calcio y magnesio según análisis de suelo. Ajuste dosis según etapa de crecimiento y fruto.</p>
-                </div>
-            </div>
-            <div class="recommendation-item">
-                <span class="icon-number">4</span>
-                <div>
-                    <h3>Riego</h3>
-                    <p>Riego constante pero sin encharcamiento. Sistemas por goteo o microaspersión son ideales. Monitoree humedad y clima.</p>
-                </div>
-            </div>
-            <div class="recommendation-item">
-                <span class="icon-number">5</span>
-                <div>
-                    <h3>Polinización</h3>
-                    <p>Instale colmenas de abejas cerca de los árboles para mejorar la polinización y aumentar la producción de frutos.</p>
+
+                {{-- Slide 2: Manejo Técnico --}}
+                <div class="carousel-item">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <img src="https://www.bbva.com/wp-content/uploads/2021/09/BBVA-tecnologias_riego_eficientes-sostenibilidad-innovacion.jpg" class="img-fluid rounded shadow-lg slider-img" alt="Riego Aguacate">
+                        </div>
+                        <div class="col-md-6 slider-text">
+                            <h2 class="slide-title">Tecnología de Riego</h2>
+                            <p class="text-light-cattle">
+                                El aguacate requiere precisión hídrica. Evite la asfixia radicular mediante sistemas 
+                                de microaspersión y monitoreo constante de humedad.
+                            </p>
+                            <a href="#procesoAguacate" class="btn btn-cattle-primary scroll-suave">Ver Plan de Manejo</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Datos Rápidos -->
-    <section class="quick-data-section">
-        <h2>Datos Rápidos del Cultivo</h2>
-        <div class="data-grid">
-            <div class="data-card">
-                <i class="fas fa-temperature-low"></i>
-                <h3>Temperatura Ideal</h3>
-                <p>15°C a 30°C</p>
+    <hr class="cattle-divider">
+
+    {{-- Sección de Variedades --}}
+    <section id="variedadesAguacate" class="py-5">
+        <h2 class="section-title text-center mb-4">Principales Variedades</h2>
+        <p class="section-subtitle text-center mb-5">Seleccione el cultivar según la altitud y clima de su predio.</p>
+
+        <div class="row g-4 mt-4">
+            {{-- Hass --}}
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow">
+                    <img src="https://www.reyesgutierrez.com/wp-content/uploads/2021/04/aguacate-hass.jpg" class="card-img-top card-image" alt="Hass">
+                    <div class="card-body">
+                        <h5 class="card-title">Hass (Premium)</h5>
+                        <p class="card-text">
+                            <strong class="text-cattle-accent">Mercado:</strong> Internacional (Exportación).
+                            <br><strong class="text-cattle-accent">Clima:</strong> Templado (1.600 - 2.400 msnm).
+                            <br><strong class="text-cattle-accent">Nota:</strong> Alto contenido de aceite y sabor a nuez.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="data-card">
-                <i class="fas fa-tint"></i>
-                <h3>Riego</h3>
-                <p>Requiere riego constante, pero sin encharcamiento.</p>
+
+            {{-- Lorena --}}
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow">
+                    <img src="https://la-canasta.org/wp-content/uploads/2025/06/Aguacate_Lorena.jpg" class="card-img-top card-image" alt="Lorena">
+                    <div class="card-body">
+                        <h5 class="card-title">Lorena (Papelillo)</h5>
+                        <p class="card-text">
+                            <strong class="text-cattle-accent">Mercado:</strong> Nacional / Fresco.
+                            <br><strong class="text-cattle-accent">Clima:</strong> Cálido (Trópico bajo y medio).
+                            <br><strong class="text-cattle-accent">Nota:</strong> Frutos grandes, piel lisa y pulpa suave.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="data-card">
-                <i class="fas fa-tree"></i>
-                <h3>Suelo</h3>
-                <p>Bien drenado, franco-arenoso, pH 5.5 a 6.5.</p>
-            </div>
-            <div class="data-card">
-                <i class="fas fa-sun"></i>
-                <h3>Luz</h3>
-                <p>Necesita pleno sol para una buena producción.</p>
+
+            {{-- Fuerte --}}
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow">
+                    <img src="https://fertilizantesecoforce.es/wp-content/uploads/2022/06/Comprar-arbol-aguacate-fuerte.jpeg" class="card-img-top card-image" alt="Fuerte">
+                    <div class="card-body">
+                        <h5 class="card-title">Fuerte (Híbrido)</h5>
+                        <p class="card-text">
+                            <strong class="text-cattle-accent">Mercado:</strong> Polinizador y consumo local.
+                            <br><strong class="text-cattle-accent">Clima:</strong> Adaptable a climas fríos.
+                            <br><strong class="text-cattle-accent">Nota:</strong> Forma de pera y piel verde mate.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-</main>
+    <hr class="cattle-divider">
 
-<!-- Modal -->
-<div id="modalAguacate" class="modal" style="display:none;">
-    <div class="modal-content">
-        <span class="close" onclick="cerrarModal()">&times;</span>
-        <h2 id="modal-title">Título de Aguacate</h2>
-        <img id="modal-img" src="" alt="Aguacate">
-        <p id="modal-desc">Descripción extendida del aguacate...</p>
-    </div>
+    {{-- Ciclo de Manejo con Timeline --}}
+    <section id="procesoAguacate" class="py-5">
+        <h2 class="section-title text-center mb-5">Cronograma Técnico del Cultivo</h2>
+
+        <div class="row mt-4 align-items-center">
+            <div class="col-md-6 order-md-2">
+                <img src="https://i.ytimg.com/vi/Jx-rEIh3x-8/maxresdefault.jpg"
+                    class="img-fluid rounded shadow-lg process-image" alt="Poda de Aguacate">
+            </div>
+
+            <div class="col-md-6 order-md-1">
+                <div class="mb-5">
+                    <h3 class="sub-section-title text-cattle-accent">Línea de Tiempo del Cultivo</h3>
+                    <ul class="timeline">
+                        <li><span>Preparación de Suelo</span>: Análisis de pH y corrección con cales si es necesario.</li>
+                        <li><span>Siembra</span>: Ahoyado de 60x60x60 cm con abonamiento de fondo orgánico.</li>
+                        <li><span>Poda de Formación</span>: Definición de ejes principales en los primeros 2 años.</li>
+                        <li><span>Floración y Cuajado</span>: Monitoreo crítico de trips y nutrición con Boro y Zinc.</li>
+                        <li><span>Cosecha</span>: Determinación de materia seca (mínimo 21% para Hass).</li>
+                        <li><span>Poda Fitosanitaria</span>: Desinfección de herramientas para prevenir Phytophthora.</li>
+                    </ul>
+                </div>
+
+                <div class="mt-5">
+                    <h3 class="sub-section-title text-cattle-accent">Video Tutorial: Poda y Manejo</h3>
+                    <div class="ratio ratio-16x9 rounded shadow-lg video-container">
+                        <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/PisWYhRZvvI" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="cattle-divider">
+
+    {{-- Datos Rápidos y Noticias --}}
+    <section class="py-5">
+        <h2 class="section-title text-center mb-5">Fichas de Cuidado Rápido</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-tint fa-3x mb-3 text-cattle-accent"></i>
+                        <h5 class="card-title">Riego Controlado</h5>
+                        <p class="card-text">Evite el encharcamiento. El aguacate muere por exceso de agua más rápido que por sequía.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-bug fa-3x mb-3 text-cattle-accent"></i>
+                        <h5 class="card-title">Control de Plagas</h5>
+                        <p class="card-text">Vigile el "Pasador del Fruto" y la "Hormiga Arriera" en etapas tempranas.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card cattle-card h-100 shadow text-center p-4">
+                    <div class="card-body">
+                        <i class="fas fa-sun fa-3x mb-3 text-cattle-accent"></i>
+                        <h5 class="card-title">Luz Solar</h5>
+                        <p class="card-text">Requiere mínimo 6-8 horas de sol directo para una fotosíntesis óptima.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-<!-- Scripts -->
 <script>
-function abrirModal(titulo, imgSrc, desc) {
-    document.getElementById('modal-title').innerText = titulo;
-    document.getElementById('modal-img').src = imgSrc;
-    document.getElementById('modal-desc').innerText = desc;
-    document.getElementById('modalAguacate').style.display = 'flex';
-}
-
-function cerrarModal() {
-    document.getElementById('modalAguacate').style.display = 'none';
-}
-
-// Cerrar modal al hacer click fuera del contenido
-window.onclick = function(event) {
-    let modal = document.getElementById('modalAguacate');
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-}
+    document.querySelectorAll('.scroll-suave').forEach(link => {
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
 </script>
 @endsection

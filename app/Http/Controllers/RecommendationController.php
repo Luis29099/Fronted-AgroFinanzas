@@ -18,15 +18,17 @@ class RecommendationController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $user = session('user');
+{
+    $user = session('user');
 
-        Http::post('http://api.AgroFinanzas.test/api/recommendations', [
-            'text' => $request->text,
-            'category' => $request->category,   // FALTA EN TU CONTROLADOR
-            'id_user_app' => $user['id'] ?? null,
-        ]);
+    Http::post('http://api.AgroFinanzas.test/api/recommendations', [
+        'text' => $request->text,
+        'category' => $request->category,
+        'id_user_app' => $user['id'] ?? null,
+        'parent_id' => $request->parent_id // 👈 NUEVO
+    ]);
 
-        return redirect()->route('recommendations.index');
-    }
+    return redirect()->route('recommendations.index');
+}
+
 }

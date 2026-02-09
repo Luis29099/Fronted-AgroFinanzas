@@ -11,7 +11,7 @@
 
     {{-- Contenedor Principal: Ahora usa .register-card --}}
     <div class="register-card">
-        <img src="/img/image.png" alt="Logo-l" class="register-logo">
+        <img src="/img/LOGOYESLOGAN.jpeg" alt="Logo-l" class="register-logo">
         <h1 class="register-title">Regístrate</h1>
 
         {{-- Mensajes de Errores y Formulario... --}}

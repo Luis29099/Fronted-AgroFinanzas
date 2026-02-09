@@ -1,16 +1,15 @@
 /* ---------------------------------------------------- */
-/* 🌿 ESTILOS PRINCIPALES DE AGRONOMÍA (COLORES ORIGINALES) 🌿 */
+/* 🌿 AGRONOMÍA – ESTILO UNIFICADO CON PALETA GANADERÍA */
 /* ---------------------------------------------------- */
 
 main.Agronomia {
     flex: 1;
-    padding: 60px 20px; /* Padding uniforme */
+    padding: 60px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px; /* Espacio entre el encabezado y las tarjetas */
+    gap: 60px;
     width: 100%;
-    /* Asumiendo fondo principal oscuro */
 }
 
 /* -------------------- ENCABEZADO -------------------- */
@@ -22,87 +21,89 @@ main.Agronomia {
 }
 
 .titulo-principal {
-    /* Color principal de tu paleta */
-    font-size: 3.8rem; 
-    color: #18d92e; 
-    letter-spacing: 3px;
-    font-weight: 500;
-    /* Sombra con el color original */
-    text-shadow: 0 4px 15px rgba(24, 217, 46, 0.4); 
-    margin-bottom: 8px;
+    font-size: 3.6rem;
+    color: #8ac926; /* verde amarillento principal */
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    margin-bottom: 10px;
     line-height: 1.1;
+    text-shadow: 0 4px 18px rgba(138, 201, 38, 0.35);
 }
 
 .subtitulo-principal {
-    font-size: 1.4rem;
-    color: #a0a0a0; /* Gris claro/suave, tomado de tu CSS anterior */
-    font-style: normal;
+    font-size: 1.35rem;
+    color: #b7e4c7; /* verde claro suave */
     font-weight: 300;
 }
 
-/* -------------------- CONTENEDOR DE TARJETAS (USANDO GRID) -------------------- */
+/* -------------------- CONTENEDOR DE TARJETAS -------------------- */
 
 .Agronomia-container {
-    display: grid; 
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px; 
+    gap: 30px;
     width: 95%;
     max-width: 1300px;
 }
 
-/* Enlace/Contenedor de tarjeta */
 a.card-link {
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 /* -------------------- TARJETA INDIVIDUAL -------------------- */
 
 .Agronomia-card {
-    background: rgba(17, 17, 17, 0.8); /* Fondo oscuro original */
-    border: 1px solid rgba(255, 255, 255, 0.08); 
-    border-radius: 12px; 
+    background: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+    transition: 
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
     cursor: pointer;
 }
 
-/* EFECTO HOVER: Elevación y Borde Luminoso con color original */
 .Agronomia-card:hover {
-    transform: translateY(-10px); 
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 
-                /* Resplandor usando tu color #18d92e */
-                0 0 25px rgba(24, 217, 46, 0.7); 
-    border: 1px solid #18d92e; /* Borde sólido de color temático */
+    transform: translateY(-10px);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.85),
+        0 0 25px rgba(138, 201, 38, 0.45);
+    border-color: #8ac926;
 }
 
 .img-card {
     width: 100%;
-    height: 240px; 
+    height: 240px;
     object-fit: cover;
     display: block;
 }
 
-/* -------------------- TEXTO DE TARJETA -------------------- */
+/* TEXTO DE TARJETA – AGRONOMÍA */
+.Agronomia .card-text {
+    background: linear-gradient(
+        135deg,
+        #8ac926,
+        #99d98c
+    ) !important;
 
-.card-text {
-    /* Degradado original de tus estilos anteriores */
-    background: linear-gradient(135deg, #38ef7d, #11998e); 
+    color: #0b1b14 !important; /* 🔑 clave */
     text-align: center;
-    padding: 18px 0; 
-    font-weight: 700; /* Negrita fuerte */
-    color: #0b0f0c; /* Texto oscuro para contraste sobre el degradado */
-    font-size: 1.15rem; 
+    padding: 18px 12px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 
-/* -------------------- RESPONSIVIDAD MÓVIL -------------------- */
+
+/* -------------------- RESPONSIVE -------------------- */
 
 @media (max-width: 768px) {
     .titulo-principal {
-        font-size: 2.5rem;
+        font-size: 2.4rem;
         letter-spacing: 2px;
     }
 

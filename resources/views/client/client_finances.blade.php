@@ -443,4 +443,161 @@ document.getElementById("closeModal").onclick = () => {
 </script>
 
 
+<!-- WIDGET CALCULATOR -->
+<div id="calc-widget" class="calculator-widget">
+    <div class="widget-icon">
+        <img src="/img/icono-calculadora.png" width="28" alt="calculadora">
+    </div>
+</div>
+
+<!-- 🧮 CALCULADORA FLOTANTE -->
+<div id="calc-modal" class="calc-modal hidden">
+    <div class="calc-container" id="calc-drag">
+        
+        <div class="calc-header" id="calc-header">
+            <span>Calculadora</span>
+            <button class="calc-close">×</button>
+        </div>
+
+        <input type="text" id="calc-screen" class="calc-screen" disabled>
+
+        <div class="calc-grid">
+            <button>7</button><button>8</button><button>9</button><button class="op">/</button>
+            <button>4</button><button>5</button><button>6</button><button class="op">*</button>
+            <button>1</button><button>2</button><button>3</button><button class="op">-</button>
+            <button>0</button><button>.</button><button class="op">+</button>
+            <button class="equal">=</button>
+        </div>
+    </div>
+</div>
+<script>
+/* ========================
+   🔓 ABRIR CALCULADORA
+   ======================== */
+document.getElementById("calc-widget").addEventListener("click", () => {
+    const modal = document.getElementById("calc-modal");
+    modal.classList.remove("hidden");
+
+    // Permitir clics SOLO dentro de la calculadora
+    modal.style.pointerEvents = "none";
+    document.getElementById("calc-drag").style.pointerEvents = "auto";
+});
+
+/* ========================
+   ❌ CERRAR CALCULADORA
+   ======================== */
+document.querySelector(".calc-close").addEventListener("click", () => {
+    document.getElementById("calc-modal").classList.add("hidden");
+});
+
+/* ========================
+   🔢 LÓGICA DE CALCULADORA
+   ======================== */
+const screen = document.getElementById("calc-screen");
+const buttons = document.querySelectorAll(".calc-grid button");
+
+buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        if (btn.classList.contains("equal")) {
+            try { screen.value = eval(screen.value); }
+            catch { screen.value = "Error"; }
+        } else {
+            screen.value += btn.textContent;
+        }
+    });
+});
+
+/* ========================
+   🖱️ ARRASTRAR CALCULADORA
+   ======================== */
+const calc = document.getElementById("calc-drag");
+const header = document.getElementById("calc-header");
+
+let offsetX = 0, offsetY = 0, isDown = false;
+
+header.addEventListener("mousedown", (e) => {
+    isDown = true;
+    offsetX = e.clientX - calc.offsetLeft;
+    offsetY = e.clientY - calc.offsetTop;
+    calc.style.transition = "none";  // mover suave sin animación
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (isDown) {
+        calc.style.left = (e.clientX - offsetX) + "px";
+        calc.style.top  = (e.clientY - offsetY) + "px";
+        calc.style.position = "fixed"; // clave para que flote
+    }
+});
+
+document.addEventListener("mouseup", () => {
+    isDown = false;
+});
+
+/* =====================================================
+   🔥 MEJORAS AÑADIDAS (NO modifican tu código original)
+   ===================================================== */
+
+/* Reseteo seguro para evitar romper la calculadora */
+function safeReset() {
+    if (screen.value === "Error" || screen.value === "Infinity" || screen.value === "NaN") {
+        screen.value = "";
+    }
+}
+
+/* ============================
+   ⌨️ SOPORTE COMPLETO DE TECLADO
+   ============================ */
+document.addEventListener("keydown", (e) => {
+
+    // No escribir si está oculta
+    if (document.getElementById("calc-modal").classList.contains("hidden")) {
+        return;
+    }
+
+    safeReset();
+
+    // Números
+    if (!isNaN(e.key)) {
+        screen.value += e.key;
+    }
+
+    // Operadores permitidos
+    if (["+", "-", "*", "/"].includes(e.key)) {
+        screen.value += e.key;
+    }
+
+    // Punto decimal
+    if (e.key === ".") {
+        screen.value += ".";
+    }
+
+    // ENTER o "=" para calcular
+    if (e.key === "Enter" || e.key === "=") {
+        try {
+            let result = eval(screen.value);
+
+            if (result === Infinity || isNaN(result)) {
+                screen.value = "Error";
+            } else {
+                screen.value = result;
+            }
+
+        } catch {
+            screen.value = "Error";
+        }
+    }
+
+    // ⌫ Backspace → borrar último caracter
+    if (e.key === "Backspace") {
+        screen.value = screen.value.slice(0, -1);
+    }
+
+    // Esc → limpiar pantalla
+    if (e.key === "Escape") {
+        screen.value = "";
+    }
+});
+</script>
+
 @endsection

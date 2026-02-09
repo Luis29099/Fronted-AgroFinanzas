@@ -329,9 +329,117 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+</scrip>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<!-- TÍTULO PRINCIPAL -->
+<div class="w-full text-center py-6">
+    <h1 class="text-3xl font-bold text-green-400 drop-shadow-neon">
+        Observatorio de Precios Agropecuarios
+    </h1>
+    <p class="text-gray-300 mt-2 text-lg">
+        Selecciona un producto para ver su precio, variación y tendencia
+    </p>
+</div>
 
+<!-- CONTENEDOR DE CARDS -->
+<div id="productCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+    <!-- Cards se generan dinámicamente -->
+</div>
 
+<!-- CHART -->
+<div class="p-6">
+    <canvas id="pricesChart" height="120"></canvas>
+</div>
+
+<script>
+// =============================
+// PRODUCTOS DISPONIBLES
+// =============================
+const products = [
+  { key: 'maiz', label: 'Maíz', color: '#facc15' },
+  { key: 'cafe', label: 'Café', color: '#8B4513' },
+  { key: 'leche', label: 'Leche', color: '#60a5fa' },
+  { key: 'pollo', label: 'Pollo', color: '#f87171' }
+];
+
+const container = document.getElementById('productCards');
+
+// =============================
+// CREAR CARDS DINÁMICAMENTE
+// =============================
+products.forEach(prod => {
+  const card = document.createElement('div');
+  card.className = "agro-card";
+  card.innerHTML = `
+      <h3>${prod.label}</h3>
+      <p id="price-${prod.key}">Precio: ---</p>
+      <p id="unit-${prod.key}">Unidad: ---</p>
+      <p id="change-${prod.key}">Variación: ---</p>
+  `;
+  card.addEventListener('click', () => loadProduct(prod));
+  container.appendChild(card);
+});
+
+let chartInstance = null;
+
+// =============================
+// FUNCIÓN PARA OBTENER DATOS
+// =============================
+async function loadProduct(prod) {
+  try {
+    const res = await fetch(`/agro/data?product=${prod.key}&indicator=prices`);
+    const json = await res.json();
+
+    if (json.error) {
+      alert('Error: ' + (json.message ?? 'Error desconocido'));
+      return;
+    }
+
+    const payload = json.data.payload ?? json.data.values ?? json.data;
+
+    document.getElementById(`price-${prod.key}`).textContent =
+      `Precio: ${payload.price_usd_per_ton ?? 'N/A'} USD`;
+
+    document.getElementById(`unit-${prod.key}`).textContent =
+      `Unidad: ${payload.unit ?? 'Ton'}`;
+
+    document.getElementById(`change-${prod.key}`).textContent =
+      `Variación: ${(payload.monthly_variation ?? 0)} %`;
+
+    const labels = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const values = labels.map(() =>
+      Math.round((payload.price_usd_per_ton ?? 200) * (0.8 + Math.random()*0.6))
+    );
+
+    const ctx = document.getElementById('pricesChart').getContext('2d');
+    if (chartInstance) chartInstance.destroy();
+
+    chartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: `${prod.label} - Precio USD/ton`,
+          data: values,
+          borderColor: prod.color,
+          backgroundColor: prod.color + '33',
+          fill: true,
+          tension: 0.35
+        }]
+      }
+    });
+
+  } catch (err) {
+    console.error(err);
+    alert('No se pudo obtener datos. Revisa consola.');
+  }
+}
+
+// Cargar primero automáticamente
+loadProduct(products[0]);
+</script>
 </body>
 </html>
 @endsection

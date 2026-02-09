@@ -582,3 +582,71 @@ body {
     content: "☀";
     font-style: normal;
 }
+
+/* =========================================
+   🎯 VARIABLES NEÓN
+   ========================================= */
+:root {
+    --neon-main: #39ff14;
+    --neon-glow: rgba(57, 255, 20, 0.55);
+}
+
+/* =========================================
+   🎯 CARDS AGRO CON EFECTO NEÓN
+   ========================================= */
+.agro-card {
+    background: #0f0f0f;
+    border: 1px solid var(--neon-main);
+    border-radius: 14px;
+    padding: 18px;
+    cursor: pointer;
+    box-shadow:
+        0 0 6px var(--neon-main),
+        0 0 14px var(--neon-glow),
+        inset 0 0 6px rgba(0,255,120,0.15);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.agro-card:hover {
+    transform: scale(1.07);
+    box-shadow:
+        0 0 10px var(--neon-main),
+        0 0 22px var(--neon-glow),
+        inset 0 0 10px rgba(0,255,120,0.35);
+}
+
+/* TEXTOS EN CARDS */
+.agro-card h3 {
+   
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.agro-card p {
+    color: #d1ffd8;
+    font-size: 1rem;
+}
+
+/* =========================================
+   🎯 TÍTULO PRINCIPAL NEÓN
+   ========================================= */
+
+/* =========================================
+   🎯 GRID GENERAL DE CARDS
+   ========================================= */
+#productCards {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 20px;
+}
+
+/* =========================================
+   🎯 CHART WRAPPER
+   ========================================= */
+#pricesChart {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 25px;
+}

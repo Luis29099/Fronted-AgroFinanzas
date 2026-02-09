@@ -1,5 +1,21 @@
 
+/* Logo flotante solo en HOME */
+.home-floating-logo {
+    position: absolute;
+    top: 90px;       /* Ajusta según necesites */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+}
 
+.home-floating-logo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 18px #8ac926;;
+    border: 2px solid #00ff9d;
+    background: #000;
+}
 .presentacion {
   background: #000; /* Fondo negro puro */
   border-radius: 20px;
@@ -48,4 +64,73 @@
 }
 .remarcado{
 color:#8ac926 ;
+}
+/* Estilo del contenedor desarrolladores */
+.containerdevelops {
+  background: #000;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 50px;
+  margin-top: 40px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.containerdevelops:hover {
+  transform: translateY(-5px);
+  background: #0d0d0d;
+}
+
+.containerdevelops h2 {
+  color: #8ac926;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* GRID de tarjetas */
+.developsclass {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+/* CARD individual */
+.developer-card {
+  background: #111;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.developer-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px rgba(138, 201, 38, 0.4);
+}
+
+/* Imagen del desarrollador */
+.dev-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: fill;
+  margin-bottom: 15px;
+  border: 3px solid #8ac926;
+  box-shadow: 0 0 10px rgba(138, 201, 38, 0.4);
+}
+
+/* Nombre */
+.dev-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #8ac926;
+}
+
+/* Texto de detalles */
+.dev-age,
+.dev-role {
+  font-size: 0.9rem;
+  color: #ccc;
 }

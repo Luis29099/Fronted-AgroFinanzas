@@ -1,142 +1,366 @@
-/* ===========================================
-    3. ESTILOS TEMA GANADERÍA (Cattle Theme)
-=========================================== */
+/* ===============================
+   RESET SUAVE Y BASE
+================================ */
+* {
+  box-sizing: border-box;
+}
+
 body.cattle-theme {
-    background-color: var(--color-coffee-bg) !important; /* Mantiene el fondo oscuro */
-    color: var(--color-text-light) !important;
-    font-family: 'Inter', sans-serif;
+  background-color: #0b1b14;
+  color: #e5e5e5;
 }
 
-.cattle-main {
-    max-width: 1200px;
-    margin: 120px auto 50px;
-    padding: 0 20px;
+/* ===============================
+   PALETA Y JERARQUÍA
+================================ */
+:root {
+  --green-main: #8ac926;
+  --green-soft: #99d98c;
+  --green-light: #b7e4c7;
+  --title-main: #e9f5db;
+  --bg-card: #121212;
 }
 
-/* Título principal */
-.main-title {
-    color: var(--color-text-light);
-    font-size: 2.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 2px solid var(--color-accent-green);
-    padding-bottom: 15px;
+/* ===============================
+   HERO
+================================ */
+.hero-ganaderia {
+  min-height: 70vh;
+  background: radial-gradient(circle at top left, #8ac926, #0b1b14 50%, #050a08);
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
 }
 
-/* Tarjetas del tema ganado */
-/* ===========================================
-    ESTILOS CARD LIMPIA (CORRECCIÓN FINAL)
-=========================================== */
-
-.cattle-card {
-    border: none !important;
-    background-color: var(--color-coffee-darker) !important; /* El único fondo oscuro */
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
+.hero-content {
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3rem;
+  align-items: center;
 }
 
-/* Forzamos que el cuerpo y cualquier párrafo interno NO tengan fondo */
-.cattle-card .card-body, 
-.cattle-card .card-text,
-.cattle-card p {
-    background: none !important; /* Elimina degradados verdes */
-    background-color: transparent !important; 
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0;
-    color: var(--color-text-subtle);
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--title-main);
 }
 
-.cattle-card .card-body {
-    padding: 1.5rem !important; /* Espaciado interno del texto */
+.hero-text h1 span {
+  color: var(--green-main);
 }
 
-/* Títulos de las razas */
-.cattle-card .card-title {
-    background: none !important;
-    color: var(--color-accent-green) !important;
-    font-weight: 700;
-    margin-bottom: 15px;
+.hero-line {
+  width: 60px;
+  height: 4px;
+  background: var(--green-main);
+  margin: 1rem 0;
 }
 
-/* Imagen con separador sutil */
-.card-image {
-    object-fit: cover;
-    height: 220px;
-    border-bottom: 2px solid rgba(56, 239, 125, 0.2); 
-}
-/* Textos y títulos */
-
-
-/* Botones tema ganado */
-.btn-cattle-primary {
-    background-color: var(--color-accent-green);
-    color: #000;
-    font-weight: 600;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    transition: background-color 0.3s, transform 0.2s;
-    text-decoration: none;
-    display: inline-block;
+.hero-text p {
+  color: #dcdcdc;
+  max-width: 520px;
+  margin-bottom: 2rem;
 }
 
-.btn-cattle-primary:hover {
-    background-color: #11998e;
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4);
+/* ===============================
+   TÍTULOS GENERALES
+================================ */
+.section-title {
+  color: var(--title-main);
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
-.btn-cattle-secondary {
-    background-color: #bbbbbb;
-    color: var(--color-primary-green);
-    border: 1px solid var(--color-primary-green);
-    border-radius: 6px;
-    text-decoration: none;
-    padding: 5px 15px;
-    display: inline-block;
+.section-subtitle {
+  color: var(--green-main);
+  font-weight: 600;
 }
 
-.btn-cattle-secondary:hover {
-    background-color: var(--color-primary-green);
-    color: #000;
+h4,
+.text-success {
+  color: var(--green-main) !important;
 }
 
-/* Línea de tiempo */
-.timeline {
-    list-style: none;
-    padding-left: 0;
-    border-left: 2px solid var(--color-accent-green);
-    margin-left: 10px;
+.text_muted {
+  color: var(--green-soft);
 }
 
-.timeline li {
-    padding: 10px 0 10px 20px;
-    position: relative;
-    color: var(--color-text-light);
-}
-
-.timeline li span {
-    font-weight: bold;
-    color: var(--color-accent-green);
-}
-
-.timeline li::before {
-    content: '•';
-    position: absolute;
-    left: -11px;
-    color: var(--color-accent-green);
-    font-size: 1.5rem;
-    line-height: 1;
-}
-
-/* Separadores */
+/* ===============================
+   DIVISORES
+================================ */
 .cattle-divider {
-    border: none;
-    height: 1px;
-    background-color: #333;
-    margin: 50px 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--green-main), transparent);
+  margin: 4rem 0;
+}
+
+/* ===============================
+   CARDS
+================================ */
+.card {
+  background: var(--bg-card) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  background: transparent !important;
+  padding: 1.5rem;
+}
+
+.card-title {
+  color: var(--green-main);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+/* ===============================
+   TEXTO EN CARDS – ORTOGRAFÍA REAL
+================================ */
+.card-text,
+.card-body p,
+.practice-card p,
+.breed-extra li {
+  text-transform: none !important;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+}
+
+.card-text::first-letter,
+.practice-card p::first-letter,
+.breed-extra li::first-letter {
+  text-transform: uppercase;
+}
+
+/* ===============================
+   RAZAS – EFECTOS
+================================ */
+.breed-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.breed-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+}
+
+.breed-extra {
+  display: none;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.breed-extra.active {
+  display: block;
+}
+
+.breed-extra ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.breed-extra li {
+  font-size: 0.85rem;
+  color: #dcdcdc;
+  margin-bottom: 0.4rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.breed-extra li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--green-main);
+}
+
+/* ===============================
+   PRACTICE CARDS
+================================ */
+.practice-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 2rem;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.practice-card:hover {
+  transform: translateY(-6px);
+}
+
+.practice-card h5 {
+  color: var(--green-light);
+  font-weight: 600;
+}
+
+/* ===============================
+   BADGES
+================================ */
+.badge.bg-success,
+.badge.bg-danger,
+.badge.bg-primary {
+  background: transparent !important;
+}
+
+.badge.bg-success {
+  color: var(--green-main);
+  border: 1px solid var(--green-main);
+}
+
+.badge.bg-danger {
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+.badge.bg-primary {
+  color: #4dabf7;
+  border: 1px solid #4dabf7;
+}
+
+/* ===============================
+   BOTONES
+================================ */
+.btn-outline-success {
+  color: var(--green-main) !important;
+  border-color: var(--green-soft) !important;
+}
+
+.btn-outline-success:hover {
+  background-color: var(--green-soft) !important;
+  color: #0b1b14 !important;
+}
+
+/* ===============================
+   SECCIONES
+================================ */
+.gan-section {
+  padding: 4rem 2rem;
+  border-radius: 20px;
+  margin-top: 3rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 992px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
+}
+/* ===============================
+   ELIMINAR FONDOS VERDES INTERNOS
+================================ */
+
+/* fuerza fondo oscuro en todo el cuerpo de la card */
+.card,
+.card-body,
+.card-text {
+  background: #121212 !important;
+}
+
+/* evita que badges contaminen el fondo */
+.card-body .badge {
+  background-color: inherit;
+}
+
+/* badges con color, SIN fondo */
+.badge.bg-success {
+  background: transparent !important;
+  color: #2ecc71 !important;
+  border: 1px solid #2ecc71;
+}
+
+.badge.bg-danger {
+  background: transparent !important;
+  color: #ff6b6b !important;
+  border: 1px solid #ff6b6b;
+}
+
+.badge.bg-primary {
+  background: transparent !important;
+  color: #4dabf7 !important;
+  border: 1px solid #4dabf7;
+}
+/* CONTENCIÓN Y BORDES CORRECTOS */
+.card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  overflow: hidden; /* 🔒 CLAVE */
+}
+
+.card-img-top {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.row{
+padding: 4rem;
+}
+.razabovina1 {
+  /* Layout flexible */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  /* Tamaño automático según texto */
+  padding: 0.55rem 1.4rem;
+  min-height: 42px;
+
+  /* Estilo visual */
+  background-color: #8ac926;
+  color: #0b1b14;
+  border-radius: 999px; /* píldora elegante */
+  border: none;
+
+  /* Tipografía */
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  text-transform: none;
+
+  /* Sombra profesional */
+  box-shadow: 0 6px 18px rgba(138, 201, 38, 0.25);
+
+  /* Interacción */
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+  cursor: pointer;
+}
+
+/* HOVER */
+.razabovina1:hover {
+  background-color: #99d98c; /* verde más suave */
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(138, 201, 38, 0.35);
+  color: #0b1b14;
+}
+
+/* ACTIVE */
+.razabovina1:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(138, 201, 38, 0.2);
+}
+.titulocard{
+  color: var(--green-main);
 }

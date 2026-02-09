@@ -10,7 +10,7 @@
 
             {{-- Contenedor Principal: Se adapta la lógica del formulario de Laravel --}}
     <div class="apartado">
-        <img src="/img/image.png" alt="Logo-l" class="Logo-l">
+        <img src="/img/LOGOYESLOGAN.jpeg" alt="Logo-l" class="Logo-l">
         <h1 class="titulo-inicio">Iniciar Sesión</h1>
 
         {{-- Mensajes de Errores y Éxito --}}

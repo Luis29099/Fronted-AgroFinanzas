@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -23,6 +22,9 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    /* =======================
+        LOGIN
+    ======================= */
     public function login(Request $request)
     {
         $response = Http::post('http://api.AgroFinanzas.test/api/login', [
@@ -30,23 +32,21 @@ class AuthController extends Controller
             'password' => $request->password,
         ]);
 
-        if ($response->successful()) {
-        $data = $response->json();
-        $user = $data['user'];
-
-        // 🚨 CAMBIO AQUÍ: Si el Accessor de la API no funciona, lo construimos en el Front
-        if (!empty($user['profile_photo']) && !str_starts_with($user['profile_photo'], 'http')) {
-             $user['profile_photo'] = 'http://api.AgroFinanzas.test/storage/' . $user['profile_photo'];
+        if (!$response->successful()) {
+            return back()->withErrors(['login_error' => 'Credenciales inválidas']);
         }
-        
-        session(['user' => $user]);
+
+        $data = $response->json();
+
+        session(['user' => $data['user']]);
         $request->session()->regenerate();
+
         return redirect()->route('inicio.index');
     }
 
-        return back()->withErrors(['login_error' => 'Credenciales inválidas']);
-    }
-
+    /* =======================
+        REGISTER
+    ======================= */
     public function register(Request $request)
     {
         $response = Http::post('http://api.AgroFinanzas.test/api/register', [
@@ -56,30 +56,33 @@ class AuthController extends Controller
             'birth_date' => $request->birth_date,
         ]);
 
-        if ($response->successful()) {
-            return redirect()->route('login')->with('success', 'Registro exitoso. Inicia sesión.');
+        if (!$response->successful()) {
+            return back()->withErrors(['register_error' => 'No se pudo registrar']);
         }
 
-        return back()->withErrors(['register_error' => 'No se pudo registrar']);
+        return redirect()->route('login')
+            ->with('success', 'Registro exitoso. Inicia sesión.');
     }
 
-    // MÉTODO LOGOUT CORREGIDO
+    /* =======================
+        LOGOUT
+    ======================= */
     public function logout(Request $request)
     {
-        // 1. Olvida la variable de sesión 'user' que usas para el control.
         $request->session()->forget('user');
-        // 2. Invalida la sesión (destruye todos los datos de sesión)
         $request->session()->invalidate();
-        // 3. Regenera el token CSRF por seguridad
         $request->session()->regenerateToken();
-        
+
         return redirect()->route('login');
     }
 
+    /* =======================
+        EDIT PROFILE
+    ======================= */
     public function showEditProfile()
     {
         $user = session('user');
-        
+
         if (!$user) {
             return redirect()->route('login');
         }
@@ -90,16 +93,17 @@ class AuthController extends Controller
     public function updateProfile(Request $request)
     {
         $user = session('user');
-        
+
         if (!$user) {
             return redirect()->route('login');
         }
 
         $http = Http::asMultipart();
 
-        // Solo adjuntar foto si el usuario subió una
+        // Adjuntar imagen si viene
         if ($request->hasFile('profile_photo')) {
             $file = $request->file('profile_photo');
+
             $http = $http->attach(
                 'profile_photo',
                 fopen($file->getRealPath(), 'r'),
@@ -107,38 +111,30 @@ class AuthController extends Controller
             );
         }
 
-        // Enviar datos del formulario
-        $response = $http->post("http://api.AgroFinanzas.test/api/user_apps/{$user['id']}/update-profile", [
-            ['name' => 'name', 'contents' => $request->name],
-            ['name' => 'email', 'contents' => $request->email],
-            ['name' => 'birth_date', 'contents' => $request->birth_date],
-        ]);
+        $response = $http->post(
+            "http://api.AgroFinanzas.test/api/user_apps/{$user['id']}/update-profile",
+            [
+                ['name' => 'name', 'contents' => $request->name],
+                ['name' => 'email', 'contents' => $request->email],
+                ['name' => 'birth_date', 'contents' => $request->birth_date],
+            ]
+        );
 
-        // ... código anterior (Línea 108 - 112) ...
-        
-
-        if ($response->successful()) {
-        $responseData = $response->json(); 
-        
-        if (isset($responseData['user'])) { 
-            $updatedUser = $responseData['user'];
-            
-            // 🚨 CAMBIO AQUÍ: Si la API no devuelve la URL absoluta (usando el accessor)
-            // la construimos manualmente para la sesión del frontend.
-            if (!empty($updatedUser['profile_photo']) && !str_starts_with($updatedUser['profile_photo'], 'http')) {
-                $updatedUser['profile_photo'] = 'http://api.AgroFinanzas.test/storage/' . $updatedUser['profile_photo'];
-            }
-            // ------------------------------------
-
-            session(['user' => $updatedUser]);
-            return back()->with('success', 'Perfil actualizado correctamente.');
-        }
-            
-            // Si la respuesta fue exitosa pero falta la clave 'user', puedes manejarlo aquí
-            return back()->withErrors(['update_error' => 'Error: El API no devolvió los datos de usuario actualizados.']);
+        if (!$response->successful()) {
+            return back()->withErrors(['update_error' => 'Error al actualizar el perfil']);
         }
 
-        return back()->withErrors(['update_error' => 'Error al actualizar el perfil']);
-    
+        $data = $response->json();
+
+        if (!isset($data['user'])) {
+            return back()->withErrors([
+                'update_error' => 'El API no devolvió los datos del usuario'
+            ]);
+        }
+
+        // 🔥 CLAVE: actualizar sesión con el usuario nuevo
+        session(['user' => $data['user']]);
+
+        return back()->with('success', 'Perfil actualizado correctamente.');
     }
 }

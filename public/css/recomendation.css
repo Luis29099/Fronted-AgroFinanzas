@@ -51,8 +51,8 @@
 /* ===== TÍTULO (Verde Menta Suave) ===== */
 .title {
     text-align: center;
-    color: #42b883; /* Verde Menta */
-    text-shadow: 0 0 6px rgba(66, 184, 131, 0.5);
+    color: #8ac926; /* Verde Menta */
+    text-shadow: 0 0 6px #99d98c;
     margin-bottom: 30px;
     font-size: 30px;
     font-weight: 700;
@@ -163,12 +163,69 @@ textarea.form-input {
 /* ===== TEXTO ===== */
 .comment-text {
     margin: 8px 0;
-    color: #d3ffd9;
+    color: #edf2f4;
     line-height: 1.6;
 }
 
 /* ===== USUARIO ===== */
 .comment-user small {
-    color: #42b883; /* Nuevo verde menta */
+    color: #edf2f4; /* Nuevo verde menta */
     font-weight: bold;
+    font-size: 18px;
+}
+/* ===== RESPUESTAS ===== */
+.replies {
+    margin-top: 15px;
+    margin-left: 35px;
+    padding-left: 15px;
+    border-left: 2px dashed rgba(255, 255, 255, 0.548);
+}
+
+/* Tarjeta de respuesta */
+.reply-card {
+    background: rgba(26, 26, 26, 0.9);
+    border-left: 4px solid #80b918; /* Verde menta */
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón responder */
+.reply-btn {
+    margin-top: 10px;
+    background: transparent;
+    border: none;
+    color: #8ac926;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.reply-btn:hover {
+    color: #99d98c;
+    text-shadow: 0 0 6px rgba(66, 184, 131, 0.6);
+}
+
+/* Formulario de respuesta */
+.reply-form {
+    margin-top: 12px;
+    margin-left: 30px;
+}
+
+/* Botón pequeño */
+.btn-submit.small {
+    padding: 8px 14px;
+    font-size: 0.75rem;
+    margin-top: 5px;
+}
+.avatar_foto{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #8ac926;
+    box-shadow: 0 0 8px rgba(24, 217, 46, .4);
+    transition: .2s;
 }

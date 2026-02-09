@@ -14,6 +14,15 @@ use App\Http\Controllers\UserAppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClimaController;
 use App\Http\Controllers\FinanceClienteController;
+use App\Http\Controllers\AgricultureController;
+
+//PRECIOS API-RUTAS
+Route::prefix('agro')->group(function () {
+    Route::get('products', [AgricultureController::class, 'products']);
+    Route::get('data', [AgricultureController::class, 'data']);
+    Route::get('summary', [AgricultureController::class, 'summary']);
+    Route::get('ranking', [AgricultureController::class, 'ranking']);
+});
 
 // En routes/web.php
 Route::get('user_apps', [UserAppController::class, 'index'])

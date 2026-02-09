@@ -1,303 +1,129 @@
-/* =========================
-   Estilos Avocado Mejorados
-========================= */
-
-
-/* -------------------- Títulos de Sección -------------------- */
-.varieties-section h2,
-.care-recommendations h2,
-.quick-data-section h2 {
-    text-align: center;
-    color: #42f5b6;
-    font-size: 2rem;
-    margin-bottom: 40px;
-    letter-spacing: 1px;
+/* ===========================================
+    ESTILOS TEMA AGRO-OSCURO (Aguacate/Ganado)
+=========================================== */
+:root {
+    --color-coffee-bg: #0b0e11;
+    --color-coffee-darker: #15191d;
+    --color-text-light: #f0f6fc;
+    --color-text-subtle: #8b949e;
+    --color-accent-green: #4ade80; /* Verde Aguacate/Ganado */
+    --color-primary-green: #2ecc71;
 }
 
-/* -------------------- Galería de Variedades -------------------- */
-.contenedor-tarjetas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+body.cattle-theme {
+    background-color: var(--color-coffee-bg) !important;
+    color: var(--color-text-light) !important;
+    font-family: 'Inter', sans-serif;
+}
+
+.cattle-main {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 100px auto 50px;
 }
 
-.tarjeta {
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid rgba(66, 245, 182, 0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.tarjeta:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(66, 245, 182, 0.3);
-}
-
-.tarjeta img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.tarjeta img:hover {
-    transform: scale(1.05);
-}
-
-.tarjeta h2 {
-    font-size: 1.4rem;
-    color: #18d92e;
-    margin: 10px;
-    text-align: center;
-}
-
-.tarjeta p {
-    font-size: 0.95rem;
-    color: #ccc;
-    padding: 0 15px 15px;
-    text-align: justify;
-    line-height: 1.5;
-}
-
-/* -------------------- Sección Recomendaciones -------------------- */
-.recommendation-list {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-.recommendation-item {
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-    background: rgba(0,0,0,0.3);
-    border-radius: 12px;
-    padding: 20px;
-    border-left: 5px solid #42f5b6;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.recommendation-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(66,245,182,0.3);
-}
-
-.icon-number {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #42f5b6;
-    background: #0a0a0a;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    box-shadow: 0 0 8px #42f5b6;
-}
-
-.recommendation-item h3 {
-    color: #18d92e;
-    margin-top: 0;
-    font-size: 1.2rem;
-}
-
-.recommendation-item p {
-    color: #ccc;
-    margin: 5px 0 0 0;
-}
-
-/* -------------------- Sección Datos Rápidos -------------------- */
-.data-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.data-card {
-    background: rgba(24, 217, 46, 0.1);
-    backdrop-filter: blur(8px);
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid rgba(24, 217, 46, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.data-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(24,217,46,0.25);
-}
-
-.data-card i {
+/* Título principal */
+.main-title {
+    color: var(--color-text-light);
     font-size: 2.5rem;
-    color: #18d92e;
-    margin-bottom: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--color-accent-green);
+    padding-bottom: 15px;
 }
 
-.data-card h3 {
-    font-size: 1.2rem;
-    color: #18d92e;
-}
-
-.data-card p {
-    color: #fff;
-    font-weight: 300;
-}
-
-/* -------------------- Responsive -------------------- */
-@media (max-width: 768px) {
-    .tarjeta img {
-        height: 180px;
-    }
-    .recommendation-list {
-        grid-template-columns: 1fr;
-    }
-    .data-grid {
-        grid-template-columns: 1fr;
-    }
-    .icon-number {
-        margin: 0 auto 10px;
-    }
-    .tarjeta h2 {
-        font-size: 1.2rem;
-    }
-}
-.tarjeta {
-    position: relative;
+/* Tarjetas Limpias */
+.cattle-card {
+    border: none !important;
+    background-color: var(--color-coffee-darker) !important;
+    border-radius: 12px;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.tarjeta::after {
-    content: "Ver más";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    background: rgba(24, 217, 46, 0.95); /* más opaco */
-    color: #0a0a0a;
-    font-weight: bold;
-    padding: 15px 0;
-    font-size: 1.1rem;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none; /* el overlay no bloquea el click */
+.cattle-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
-.tarjeta:hover::after {
-    opacity: 1;
-    transform: translateY(-5px);
+.cattle-card .card-body {
+    background: transparent !important;
+    padding: 1.5rem !important;
 }
 
-.tarjeta:hover img {
-    transform: scale(1.08) rotate(1deg);
+.cattle-card .card-title {
+    color: var(--color-accent-green) !important;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
-
-
-
-.recommendation-item:nth-child(odd) {
-    justify-self: start;
-}
-.recommendation-item:nth-child(even) {
-    justify-self: end;
+.cattle-card .card-text {
+    color: var(--color-text-subtle) !important;
+    line-height: 1.6;
 }
 
-@keyframes slideIn {
-    0% { opacity: 0; transform: translateY(20px);}
-    100% { opacity: 1; transform: translateY(0);}
+.card-image {
+    object-fit: cover;
+    height: 220px;
+    border-bottom: 2px solid rgba(74, 222, 128, 0.2); 
 }
 
-.recommendation-item {
-    animation: slideIn 0.8s ease forwards;
-}
-
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: #0f111a;
-    padding: 20px;
-    border-radius: 15px;
-    max-width: 600px;
-    width: 90%;
-    text-align: center;
-    color: #fff;
-    position: relative;
-}
-
-.modal-content img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.modal-content .close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: #42f5b6;
-}
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    background-color: #0f111a;
-    color: #42f5b6;
-    border-bottom: 2px solid #18d92e;
-}
-
-.main-header .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.main-header .logo img {
-    height: 40px;
-}
-
-.main-nav ul {
-    display: flex;
-    gap: 25px;
+/* Línea de tiempo */
+.timeline {
     list-style: none;
-    margin: 0;
-    padding: 0;
+    padding-left: 0;
+    border-left: 2px solid var(--color-accent-green);
+    margin-left: 10px;
 }
 
-.main-nav ul li a {
-    color: #42f5b6;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
+.timeline li {
+    padding: 15px 0 15px 25px;
+    position: relative;
+    color: var(--color-text-subtle);
 }
 
-.main-nav ul li a:hover {
-    color: #18d92e;
+.timeline li span {
+    font-weight: bold;
+    color: var(--color-accent-green);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.timeline li::before {
+    content: '•';
+    position: absolute;
+    left: -11px;
+    color: var(--color-accent-green);
+    font-size: 2rem;
+    line-height: 1;
+    top: 10px;
+}
+
+/* Botones */
+.btn-cattle-primary {
+    background-color: var(--color-accent-green);
+    color: #000;
+    font-weight: 700;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.btn-cattle-primary:hover {
+    background-color: #38c172;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
+}
+
+/* Separadores */
+.cattle-divider {
+    border: none;
+    height: 1px;
+    background-color: #30363d;
+    margin: 60px 0;
+}
+
+.text-cattle-accent {
+    color: var(--color-accent-green);
 }

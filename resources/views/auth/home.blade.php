@@ -7,6 +7,17 @@
 <div class="container-fluid p-0">
 
 
+<!-- LOGO SOLO PARA LA VISTA HOME -->
+<div class="home-floating-logo">
+    <img src="/img/LOGOYESLOGAN.jpeg" alt="Logo AgroFinanzas">
+</div>
+
+@if(Route::currentRouteName() === 'home')
+    <div class="home-floating-logo">
+        <img src="/img/LOGOYESLOGAN.jpeg" alt="Logo AgroFinanzas">
+    </div>
+@endif
+
 
   {{-- HERO --}}
 
@@ -68,10 +79,46 @@
 
 </section>
 
+</div>
 
+<div class="containerdevelops container my-5">
+    <h2 class="Titulo">Desarrolladores</h2>
 
+    <div class="developsclass">
 
+        <!-- CARD 1 -->
+        <div class="developer-card">
+            <img src="/img/FOTODEDANIEL.jpeg" alt="Foto desarrollador" class="dev-photo">
+            <p class="dev-name">Daniel Esteban</p>
+            <p class="dev-age">Edad: 19 años</p>
+            <p class="dev-role">Rol: Frontend Developer</p>
+        </div>
 
+        <!-- CARD 2 -->
+        <div class="developer-card">
+            <img src="/img/FOTODELUISSSJ4.jpeg" alt="Foto desarrollador" class="dev-photo">
+            <p class="dev-name">Luis Esteban </p>
+            <p class="dev-age">Edad: 21 años</p>
+            <p class="dev-role">Rol: Scrum Master</p>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="developer-card">
+            <img src="/img/BLACK.jpeg" alt="Foto desarrollador" class="dev-photo">
+            <p class="dev-name">Julian David</p>
+            <p class="dev-age">Edad: 23 años</p>
+            <p class="dev-role">Rol: UI/UX Designer</p>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="developer-card">
+            <img src="/img/FOTODEMAICOL.jpeg" alt="Foto desarrollador" class="dev-photo">
+            <p class="dev-name">Maicol Antonio</p>
+            <p class="dev-age">Edad: 19 años</p>
+            <p class="dev-role">Rol: Mobile Developer</p>
+        </div>
+
+    </div>
 </div>
 
 @endsection

@@ -12,7 +12,7 @@
     {{-- 🔸 Lado Izquierdo: Logo con Enlace Dinámico --}}
     <div class="af-logo-brand-group">
         <a href="{{ $logoRoute }}" class="af-logo-link"> 
-            <img src="/img/image.png" alt="Logo" class="af-brand-logo">
+            <img src="/img/LogoAgrofinanzas.jpeg" alt="Logo" class="af-brand-logo">
             <span class="af-brand-name">AgroFinanzas</span>
         </a>
     </div>

@@ -431,4 +431,137 @@ canvas {
     color: white;
     box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
 }
+/* ================================
+   🌟 WIDGET CALCULADORA FLOTANTE
+   ================================ */
+#calc-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 95px;
+    width: 90px;
+    height: 90px;
+    background: #0a0f1a;
+    border: 2px solid #8ac926;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 14px #8ac926, inset 0 0 6px #8ac926;
+    transition: 0.25s ease;
+    z-index: 9999;
+}
+
+
+#calc-widget:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 22px #8ac926, inset 0 0 10px #8ac926;
+}
+
+#calc-widget .widget-icon img {
+    max-width: 60px;   /* Tamaño de la imagen */
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 6px #8ac926);
+}
+
+/* ================================
+   🎯 MODAL SIN FONDO
+   ================================ */
+.calc-modal.hidden {
+    display: none;
+}
+
+.calc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999999;
+}
+
+/* ================================
+   🎯 CALCULADORA
+   ================================ */
+.calc-container {
+    width: 260px;
+    background: #0f1b2c;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px gray;
+    position: absolute;
+    top: 120px;
+    left: 120px;
+}
+
+/* HEADER */
+.calc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #8ac926;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: grab;
+}
+
+.calc-close {
+    background: none;
+    border: none;
+    color: #8ac926;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.calc-close:hover {
+    color: #ff4444;
+    text-shadow: 0 0 8px red;
+}
+
+/* SCREEN */
+.calc-screen {
+    width: 100%;
+    padding: 12px;
+    font-size: 22px;
+    background: #07111e;
+    border: 1px solid black;
+    color: black;
+    border-radius: 8px;
+    text-align: right;
+    margin-bottom: 12px;
+}
+
+/* BUTTONS */
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.calc-grid button {
+    padding: 12px;
+    font-size: 18px;
+    background: #0d1624;
+    border: 1px solid #8ac926;
+    color: #8ac926;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.calc-grid button:hover {
+    background: #8ac926;
+    color: #07111e;
+    box-shadow: 0 0 12px #8ac926;
+}
+
+.equal {
+    background: #8ac926 !important;
+    color: #07111e !important;
+    font-weight: bold;
+}
 
