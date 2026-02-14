@@ -32,7 +32,7 @@
                                 Conoce las principales variedades como **Arábica** (suave) y **Robusta** (fuerte).
                                 Cada una aporta perfiles de sabor únicos e irrepetibles para tu taza perfecta.
                             </p>
-                            <a href="#tiposCafe" class="btn btn-coffee-primary scroll-suave">Descubre Más</a>
+                            <a href="#tiposCafe" class="cafeboton">Descubre Más</a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                                 Desde su cultivo en la planta hasta el tostado final, cada paso
                                 transforma el grano y define su calidad. ¡Un proceso artesanal!
                             </p>
-                            <a href="#procesoCafe" class="btn btn-coffee-primary scroll-suave">Ver Proceso</a>
+                            <a href="#procesoCafe" class="cafeboton">Ver Proceso</a>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                                 Existen diversas técnicas, desde la **selectiva** (manual) hasta la **mecánica**.
                                 El método de recolección afecta directamente la calidad del sabor final.
                             </p>
-                            <a href="#metodosCosecha" class="btn btn-coffee-primary scroll-suave">Conocer Métodos</a>
+                            <a href="#metodosCosecha" class="cafeboton">Conocer Métodos</a>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                                 Mantente actualizado con las últimas novedades del mundo del café.
                                 Descubre nuevas fincas, récords de cata y mucho más.
                             </p>
-                            <a href="#noticiasCafe" class="btn btn-coffee-primary scroll-suave">Ir a Noticias</a>
+                            <a href="#noticiasCafe" class="cafeboton">Ir a Noticias</a>
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@
 
     <div class="comments-container">
 
-        <h2 class="title">Comentarios y Recomendaciones</h2>
+        <h2 class="title">Comunidad y Recomendaciones</h2>
 
         <form action="{{ route('recommendations.store') }}" method="POST" class="comment-form">
             @csrf

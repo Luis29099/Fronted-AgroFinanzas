@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="carrusel-slide">
-                <img src="https://fpsuperiorufv.es/blog/wp-content/uploads/2023/02/19962385_6206720-scaled.jpg" alt="Noticia 1: Mercados Internacionales" onerror="this.onerror=null;this.src='https://placehold.co/1920x400/0e3a15/ffffff?text=Noticia+1';">
+                <img src="https://www.analdex.org/wp-content/uploads/2023/03/Exportaciones-Enero-2023-Primera.png" alt="Noticia 1: Mercados Internacionales" onerror="this.onerror=null;this.src='https://placehold.co/1920x400/0e3a15/ffffff?text=Noticia+1';">
                 <div class="carrusel-caption">
                     <h3>El impacto de las tasas de interés en los precios de exportación agrícola.</h3>
                 </div>

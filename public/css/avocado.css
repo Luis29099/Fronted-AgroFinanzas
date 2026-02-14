@@ -1,129 +1,888 @@
-/* ===========================================
-    ESTILOS TEMA AGRO-OSCURO (Aguacate/Ganado)
-=========================================== */
-:root {
-    --color-coffee-bg: #0b0e11;
-    --color-coffee-darker: #15191d;
-    --color-text-light: #f0f6fc;
-    --color-text-subtle: #8b949e;
-    --color-accent-green: #4ade80; /* Verde Aguacate/Ganado */
-    --color-primary-green: #2ecc71;
+/* ===== BASE ===== */
+.avocado-page {
+    background: #0f1412;
+}
+.avocado-main {
+    font-family: 'Segoe UI', sans-serif;
+    color: #e5efe9;
 }
 
-body.cattle-theme {
-    background-color: var(--color-coffee-bg) !important;
-    color: var(--color-text-light) !important;
-    font-family: 'Inter', sans-serif;
-}
-
-.cattle-main {
-    max-width: 1200px;
-    margin: 100px auto 50px;
-}
-
-/* Título principal */
-.main-title {
-    color: var(--color-text-light);
-    font-size: 2.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 2px solid var(--color-accent-green);
-    padding-bottom: 15px;
-}
-
-/* Tarjetas Limpias */
-.cattle-card {
-    border: none !important;
-    background-color: var(--color-coffee-darker) !important;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cattle-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-
-.cattle-card .card-body {
-    background: transparent !important;
-    padding: 1.5rem !important;
-}
-
-.cattle-card .card-title {
-    color: var(--color-accent-green) !important;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.cattle-card .card-text {
-    color: var(--color-text-subtle) !important;
-    line-height: 1.6;
-}
-
-.card-image {
-    object-fit: cover;
-    height: 220px;
-    border-bottom: 2px solid rgba(74, 222, 128, 0.2); 
-}
-
-/* Línea de tiempo */
-.timeline {
-    list-style: none;
-    padding-left: 0;
-    border-left: 2px solid var(--color-accent-green);
-    margin-left: 10px;
-}
-
-.timeline li {
-    padding: 15px 0 15px 25px;
+/* ===== HERO MEJORADO ===== */
+.hero-avocado {
+    background: linear-gradient(
+        135deg,
+        rgba(15,20,18,0.85),
+        rgba(76,175,80,0.15)
+    ),
+    url('https://images.unsplash.com/photo-1592928302636-92e4c5c1a1d4') center/cover;
+    padding: 160px 10%;
     position: relative;
-    color: var(--color-text-subtle);
+    overflow: hidden;
 }
 
-.timeline li span {
-    font-weight: bold;
-    color: var(--color-accent-green);
+.hero-avocado::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(76,175,80,0.15), transparent 60%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.hero-content {
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-avocado h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #e9f5ee 0%, #a5d6a7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+.hero-avocado p {
+    font-size: 1.25rem;
+    color: #d8f3e5;
+    line-height: 1.8;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ===== SECCIONES ===== */
+.avocado-page section h2 {
+    font-size: 2rem;
+    margin-bottom: 50px;
+    color: #d8f3e5;
+    border-left: 4px solid #4caf50;
+    padding-left: 15px;
+}
+
+/* ===== VARIEDADES / CARDS ===== */
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 80px 10%;
+}
+
+.avocado-card {
+    background: #161d1a;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+.avocado-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+}
+
+.avocado-img img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.avocado-body {
+    padding: 20px 22px 25px;
+}
+
+.avocado-body h3 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    color: #eaf6ef;
+}
+
+.avocado-body span {
+    font-size: 0.85rem;
+    color: #a7bdb2;
     display: block;
+    margin-bottom: 18px;
+}
+
+.avocado-body button {
+    background: transparent;
+    border: 1px solid #4caf50;
+    color: #a5d6a7;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.avocado-card:hover button {
+    background: #4caf50;
+    color: #0f1412;
+}
+
+/* ===== CARDS PRINCIPALES MEJORADAS (LAS 3 PRIMERAS) ===== */
+.contenedor-principal {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    padding: 80px 6%;
+    margin-top: -70px;
+}
+
+.contenedor-principal .avocado-card {
+    background: rgba(22, 29, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    transform: scale(1.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.contenedor-principal .avocado-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(76,175,80,0.1), transparent);
+    transition: left 0.6s;
+}
+
+.contenedor-principal .avocado-card:hover::before {
+    left: 100%;
+}
+
+.contenedor-principal .avocado-card:hover {
+    transform: translateY(-12px) scale(1.08);
+    box-shadow: 0 25px 60px rgba(76,175,80,0.3);
+    border-color: rgba(76, 175, 80, 0.5);
+}
+
+.contenedor-principal .avocado-img img {
+    height: 270px;
+}
+
+.contenedor-principal .avocado-body h3 {
+    font-size: 1.6rem;
+}
+
+.contenedor-principal .avocado-body span {
+    font-size: 0.95rem;
+}
+
+/* ===== BLOQUE INFORMATIVO MEJORADO ===== */
+.avocado-info-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding: 120px 10%;
+    background: linear-gradient(135deg, #0f1412 0%, #16211b 50%, #0f1412 100%);
+    position: relative;
+}
+
+.avocado-info-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #4caf50, transparent);
+    opacity: 0.3;
+}
+
+.avocado-info .info-container {
+    background: rgba(22, 29, 26, 0.5);
+    padding: 45px;
+    border-radius: 20px;
+    border: 1px solid rgba(76, 175, 80, 0.15);
+    transition: all 0.4s ease;
+    max-width: 100%;
+    text-align: left;
+}
+
+.avocado-info .info-container:hover {
+    background: rgba(22, 29, 26, 0.8);
+    border-color: rgba(76, 175, 80, 0.4);
+    transform: translateY(-8px);
+}
+
+.avocado-info h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #a5d6a7 0%, #4caf50 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    padding-bottom: 15px;
+    border-left: none;
+    padding-left: 0;
+}
+
+.avocado-info h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #4caf50, transparent);
+    border-radius: 2px;
+}
+
+.avocado-info p {
+    color: #c9d8cf;
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+/* ===== RECOMENDACIONES ===== */
+.recommendation-list {
+    display: grid;
+    gap: 20px;
+    max-width: 900px;
+    padding: 0 10%;
+}
+
+.recommendation-item {
+    background: #171e1b;
+    padding: 22px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 15px;
+}
+
+.icon-number {
+    background: #4caf50;
+    color: #0f1412;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* ===== DATOS RAPIDOS ===== */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 0 10%;
+}
+
+.data-card {
+    background: #171e1b;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.data-card h3 {
+    color: #a5d6a7;
+    margin-bottom: 10px;
+}
+
+/* ===== CARRUSEL PREMIUM MEJORADO ===== */
+.avocado-carousel-section {
+    padding: 90px 6%;
+    background: #0f1412;
+}
+
+.avocado-carousel-section h2 {
+    margin-bottom: 35px;
+}
+
+.avocado-carousel-pro {
+    padding: 120px 2%;
+    background: radial-gradient(circle at top, #16211b, #0f1412);
+}
+
+.carousel-header {
+    max-width: 700px;
+    margin-bottom: 70px;
+}
+
+.carousel-header h2 {
+    font-size: 2.2rem;
+    color: #d8f3e5;
+    margin-bottom: 15px;
+    border-left: 4px solid #4caf50;
+    padding-left: 15px;
+}
+
+.carousel-header p {
+    color: #b7ccc1;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.carousel-pro-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-pro-viewport {
+    overflow: hidden;
+    width: calc((300px * 3) + (35px * 2));
+    margin: 0 auto;
+}
+
+.carousel-pro-track {
+    display: flex;
+    gap: 35px;
+    transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+}
+
+.carousel-pro-card {
+    min-width: 300px;
+    height: 360px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.carousel-pro-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    transition: border-color 0.4s ease;
+}
+
+.carousel-pro-card:hover::after {
+    border-color: rgba(76, 175, 80, 0.6);
+}
+
+.carousel-pro-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 40px 90px rgba(76,175,80,0.4);
+}
+
+.carousel-pro-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.carousel-pro-card:hover img {
+    transform: scale(1.08);
+}
+
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 35px;
+    transition: background 0.4s ease;
+}
+
+.carousel-pro-card:hover .card-overlay {
+    background: linear-gradient(to top, rgba(76,175,80,0.7), rgba(0,0,0,0.3));
+}
+
+.card-overlay h4 {
+    font-size: 1.6rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.card-overlay span {
+    font-size: 0.95rem;
+    color: #e9f5ee;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* Botones del carrusel mejorados */
+.carousel-pro-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(76,175,80,0.9);
+    backdrop-filter: blur(10px);
+    color: #0f1412;
+    border: 2px solid rgba(255,255,255,0.1);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(76,175,80,0.4);
+}
+
+.carousel-pro-btn:hover {
+    transform: translateY(-50%) scale(1.15);
+    background: #4caf50;
+    box-shadow: 0 12px 35px rgba(76,175,80,0.6);
+    border-color: rgba(255,255,255,0.3);
+}
+
+.carousel-pro-btn.left {
+    left: -00px;
+}
+
+.carousel-pro-btn.right {
+    right: -00px;
+}
+
+/* ===== SECCIÓN DE CUIDADOS MEJORADA ===== */
+.care-pro {
+    padding: 140px 10%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(76,175,80,0.08), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(76,175,80,0.05), transparent 50%),
+        linear-gradient(180deg, #141c17, #0f1412);
+    position: relative;
+}
+
+.care-pro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(76,175,80,0.5), transparent);
+}
+
+.care-pro-header {
+    max-width: 800px;
+    margin-bottom: 70px;
+}
+
+.care-pro-header h2 {
+    font-size: 2.3rem;
+    border-left: 4px solid #4caf50;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.care-pro-header p {
+    color: #b7ccc1;
+    line-height: 1.6;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #cfe3d8;
+    max-width: 760px;
+    margin-top: 25px;
+    padding-left: 18px;
+    border-left: 3px solid rgba(76, 175, 80, 0.6);
+    letter-spacing: 0.3px;
+}
+
+.care-pro-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 80px;
+}
+
+.care-pro-text {
+    max-width: 1200px;
+    padding-right: 60px;
+}
+
+.care-pro-text h3 {
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    color: #d8f3e5;
+}
+
+.care-pro-text ul {
+    padding-left: 40px;
+    margin-top: 25px;
+}
+
+.care-pro-text li {
+    margin-bottom: 35px;
+    color: #d4e8db;
+    font-size: 1.08rem;
+    line-height: 2;
+    letter-spacing: 0.3px;
+    position: relative;
+    padding-left: 25px;
+    max-width: 100%;
+}
+
+.care-pro-text li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #4caf50;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.care-pro-video {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+}
+
+.care-pro-video::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+.care-pro-video iframe {
+    width: 100%;
+    height: 520px;
+    border-radius: 14px;
+}
+
+.wide-text {
+    max-width: 3000px;
+    padding: 0 6%;
+}
+
+.wide-text p {
+    font-size: 1.45rem;
+    line-height: 1.9;
+    color: #cfe3d8;
+    text-align: justify;
+}
+
+/* ===== MÉTRICAS AGRONÓMICAS MEJORADAS ===== */
+.agro-metrics {
+    padding: 140px 10%;
+    background: linear-gradient(180deg, #0f1412, #121815);
+    border-top: 1px solid rgba(76, 175, 80, 0.15);
+    position: relative;
+}
+
+.agro-metrics::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #0d120f, transparent);
+    border-radius: 4px;
+}
+
+.agro-metrics-header {
+    max-width: 850px;
+    margin-bottom: 80px;
+}
+
+.agro-metrics-header h2 {
+    font-size: 2.4rem;
+    color: #d8f3e5;
+    border-left: 4px solid #4caf50;
+    padding-left: 15px;
+    margin-bottom: 18px;
+}
+
+.agro-metrics-header p {
+    font-size: 1.1rem;
+    color: #cfe3d8;
+    line-height: 1.8;
+}
+
+.agro-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+}
+
+.metric-card {
+    background: linear-gradient(135deg, rgba(22, 29, 26, 0.9), rgba(22, 29, 26, 0.6));
+    padding: 45px 40px 50px;
+    border-radius: 20px;
+    border: 1px solid rgba(76, 175, 80, 0.15);
+    box-shadow: 0 25px 55px rgba(0,0,0,0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #4caf50, transparent);
+    transform: scaleX(0);
+    transition: transform 0.6s ease;
+}
+
+.metric-card:hover::before {
+    transform: scaleX(1);
+}
+
+.metric-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 40px 80px rgba(76,175,80,0.3);
+    border-color: rgba(76, 175, 80, 0.4);
+    background: linear-gradient(135deg, rgba(22, 29, 26, 1), rgba(76, 175, 80, 0.1));
+}
+
+.metric-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #4caf50;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+.metric-card h3 {
+    font-size: 2rem;
+    color: #eaf6ef;
+    margin-bottom: 18px;
+    font-weight: 700;
+}
+
+.metric-card p {
+    font-size: 1rem;
+    color: #c3d6cc;
+    line-height: 1.75;
+}
+
+/* ===== VER TODAS BUTTON ===== */
+.ver-todas {
+    background: linear-gradient(135deg, #2f5d3a, #3e7c4f);
+    color: #ffffff;
+    padding: 14px 38px;
+    border-radius: 30px;
+    font-size: 1rem; 
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease; 
+}
+
+.ver-todas:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== MEGA MODAL DETALLE ===== */
+.avocado-detail-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+.avocado-detail-content {
+    background: #121815;
+    width: 95%;
+    max-width: 1200px;
+    border-radius: 18px;
+    padding: 40px;
+    position: relative;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.detail-close {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #a5d6a7;
+    transition: color 0.2s ease;
+}
+
+.detail-close:hover {
+    color: #4caf50;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.detail-gallery img {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 15px;
+}
+
+.detail-thumbs {
+    display: flex;
+    gap: 10px;
+}
+
+.detail-thumbs img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.detail-thumbs img:hover {
+    transform: scale(1.1);
+}
+
+.detail-info h2 {
+    color: #a5d6a7;
+    margin-bottom: 20px;
+}
+
+.detail-info p {
+    color: #c9d8cf;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.detail-data {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #161d1a;
+    border-radius: 12px;
+}
+
+.detail-data div {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: #cfe3d8;
+    border-left: 3px solid #4caf50;
+    padding-left: 10px;
+}
+
+.detail-video {
+    margin-top: 25px;
+}
+
+.detail-video iframe {
+    border-radius: 12px;
+}
+
+/* ===== BOTÓN CARD LINK ===== */
+.btn-card-link {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid #4caf50;
+    color: #a5d6a7;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.avocado-card:hover .btn-card-link {
+    background: #4caf50;
+    color: #0f1412;
+}
+
+/* ===== INFO BOX ===== */
+.info-box {
+    background: #ffffff;
+    padding: 25px 15px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.info-box h3 {
+    font-weight: 700;
+    color: #198754;
     margin-bottom: 5px;
 }
 
-.timeline li::before {
-    content: '•';
-    position: absolute;
-    left: -11px;
-    color: var(--color-accent-green);
-    font-size: 2rem;
-    line-height: 1;
-    top: 10px;
+.info-box p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.9rem;
 }
 
-/* Botones */
-.btn-cattle-primary {
-    background-color: var(--color-accent-green);
-    color: #000;
-    font-weight: 700;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 50px;
-    transition: all 0.3s;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .hero-avocado h1 {
+        font-size: 2.5rem;
+    }
+    
+    .avocado-info-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .avocado-info-wrapper::before {
+        display: none;
+    }
+    
+    .contenedor-principal {
+        grid-template-columns: 1fr;
+    }
+
+    .contenedor-principal .avocado-card {
+        transform: scale(1);
+    }
+    
+    .care-pro-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .care-pro {
+        padding: 80px 8%;
+    }
+    
+    .agro-metrics {
+        padding: 90px 8%;
+    }
+    
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .carousel-pro-card {
+        min-width: 260px;
+        height: 360px;
+    }
 }
 
-.btn-cattle-primary:hover {
-    background-color: #38c172;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
-}
-
-/* Separadores */
-.cattle-divider {
-    border: none;
-    height: 1px;
-    background-color: #30363d;
-    margin: 60px 0;
-}
-
-.text-cattle-accent {
-    color: var(--color-accent-green);
+@media (max-width: 576px) {
+    .hero-avocado {
+        padding: 100px 8%;
+    }
+    
+    .hero-avocado h1 {
+        font-size: 2rem;
+    }
+    
+    .carousel-pro-viewport {
+        width: 100%;
+    }
 }

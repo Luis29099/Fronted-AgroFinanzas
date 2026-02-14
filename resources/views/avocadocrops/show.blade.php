@@ -1,27 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-5">
-    <h2 class="mb-4 text-success">Detalles de los cultivos de aguacate</h2>
+<main class="avocado-main">
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead class="table-success">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Variedad</th>
-                    <th scope="col">Producción Estimada</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ $avocadocrop['id'] }}</td>
-                    <td>{{ $avocadocrop['variety'] }}</td>
-                    <td>{{ $avocadocrop['estimated_production'] }}</td>
+    <section class="avocado-detail-section">
+        <div class="avocado-detail-card">
 
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+            <h1 class="avocado-title">
+             {{ $avocadocrop['variety'] }}
+            </h1>
+
+            <p class="avocado-subtitle">
+                Información detallada del cultivo
+            </p>
+
+            <div class="avocado-info-grid">
+                <div class="info-box">
+                    <span>ID</span>
+                    <strong>{{ $avocadocrop['id'] }}</strong>
+                </div>
+
+                <div class="info-box">
+                    <span>Variedad</span>
+                    <strong>{{ $avocadocrop['variety'] }}</strong>
+                </div>
+
+                <div class="info-box">
+                    <span>Producción estimada</span>
+                    <strong>{{ $avocadocrop['estimated_production'] }}</strong>
+                </div>
+            </div>
+
+            <div class="detail-actions">
+                <a href="{{ route('avocadocrops.index') }}" class="btn-back">
+                    ← Volver a variedades
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+</main>
 @endsection

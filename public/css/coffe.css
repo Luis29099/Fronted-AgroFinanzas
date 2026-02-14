@@ -5,8 +5,8 @@
     /* Variables de Color (Para mejor mantenimiento) */
     --color-dark-bg: #1a1a1a;
     --color-dark-bg-card: #1f1f1f;
-    --color-primary-green: #18d92e;
-    --color-accent-green: #38ef7d;
+    --color-primary-green: #8ac926;
+    --color-accent-green: #96eb0d;
     --color-danger-red: #ff6b6b;
     --color-text-light: #efebe9;
     --color-text-muted: #999;
@@ -232,7 +232,7 @@ canvas {
     background-color: var(--color-dark-bg-card);
 }
 
-.row-income td { color: #a0ffc0; }
+.row-income td { color: #d5f99c; }
 .row-expense td { color: #ffadad; }
 
 .badge {
@@ -633,4 +633,52 @@ body.coffee-theme {
         text-align: center;
         padding-top: 20px;
     }
+}
+.cafeboton {
+  /* Layout flexible */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  /* Tamaño automático según texto */
+  padding: 0.55rem 1.4rem;
+  min-height: 42px;
+
+  /* Estilo visual */
+  background-color: #8ac926;
+  color: #0b1b14;
+  border-radius: 999px; /* píldora elegante */
+  border: none;
+
+  /* Tipografía */
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  text-transform: none;
+
+  /* Sombra profesional */
+  box-shadow: 0 6px 18px rgba(138, 201, 38, 0.25);
+
+  /* Interacción */
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+  cursor: pointer;
+}
+
+/* HOVER */
+.cafeboton:hover {
+  background-color: #99d98c; /* verde más suave */
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(138, 201, 38, 0.35);
+  color: #0b1b14;
+}
+
+/* ACTIVE */
+.cafeboton:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(138, 201, 38, 0.2);
 }
