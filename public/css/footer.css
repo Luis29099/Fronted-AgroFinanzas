@@ -118,3 +118,73 @@ footer.footer {
     min-width: 100%;
   }
 }
+CSS FOOTER /* =====================================================================
+   SCROLL-UP BUTTON
+   Agrega este bloque al final de public/css/navbar.css
+   (o al CSS global que prefieras — solo debe cargarse en el layout)
+   ===================================================================== */
+
+.scroll-top-btn {
+    /* Posición fija — siempre visible sobre todo el contenido */
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+
+    /* Tamaño y forma circular */
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+
+    /* Colores: verde característico del proyecto */
+    background: #18d92e;
+    color: #070e09;
+
+    /* Tipografía e icono */
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+
+    /* Centrar el icono dentro del círculo */
+    display: none;           /* oculto por defecto, JS lo muestra */
+    align-items: center;
+    justify-content: center;
+
+    /* Sombra verde neón */
+    box-shadow: 0 0 22px rgba(24, 217, 46, 0.45);
+
+    /* Transición suave para hover */
+    transition: background 0.25s ease,
+                transform  0.25s ease,
+                box-shadow 0.25s ease,
+                opacity    0.25s ease;
+}
+
+/* El JS agrega esta clase cuando el usuario baja > 300 px */
+.scroll-top-btn.visible {
+    display: flex;
+}
+
+/* Efecto hover */
+.scroll-top-btn:hover {
+    background: #2aff45;
+    transform: scale(1.12) translateY(-3px);
+    box-shadow: 0 0 36px rgba(24, 217, 46, 0.65);
+}
+
+/* Efecto al pulsar */
+.scroll-top-btn:active {
+    transform: scale(0.96) translateY(0);
+    box-shadow: 0 0 14px rgba(24, 217, 46, 0.35);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .scroll-top-btn {
+        bottom: 16px;
+        right: 16px;
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+}
