@@ -1,88 +1,117 @@
 @extends('layouts.app')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endpush
+
 @section('content')
 <main class="contenido_login">
-    <div class="login-wrapper"> 
-        
-        {{-- Fondo (ajusta la ruta de la imagen si es necesario) --}}
-        <img src="{{ asset('/img/paramo.jpg') }}" class="fondo" alt="fondo"> {{-- https://www.utb.edu.co/wp-content/uploads/2023/05/Nevado_del_Ruiz.jpg--}}
-        {{-- Contenedor Principal: El formulario en sí --}}
+    <img src="{{ asset('/img/paramo.jpg') }}" class="fondo" alt="fondo">
 
-            {{-- Contenedor Principal: Se adapta la lógica del formulario de Laravel --}}
-    <div class="apartado">
-        <img src="/img/LOGOYESLOGAN.jpeg" alt="Logo-l" class="Logo-l">
-        <h1 class="titulo-inicio">Iniciar Sesión</h1>
+    <div class="login-card">
+        <img src="/img/LOGOYESLOGAN.jpeg" alt="Logo" class="login-logo">
+        <h1 class="login-title">Iniciar Sesión</h1>
+        <p class="login-subtitle">Bienvenido de vuelta</p>
 
-        {{-- Mensajes de Errores y Éxito --}}
-        @if ($errors->any())
-            <div class="alert alert-danger" style="color: #ff4d4d; margin-bottom: 15px; width: 100%; text-align: center; font-size: 0.9em;">
-                {{ $errors->first() }}
+        {{-- Error de credenciales --}}
+        @if ($errors->has('login_error'))
+            <div class="alert-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                {{ $errors->first('login_error') }}
             </div>
         @endif
 
+        {{-- Éxito (ej: después de registrarse) --}}
         @if (session('success'))
-            <div class="alert alert-success" style="color: #38ef7d; margin-bottom: 15px; width: 100%; text-align: center; font-size: 0.9em;">
+            <div class="alert-success">
+                <i class="fa-solid fa-circle-check"></i>
                 {{ session('success') }}
             </div>
         @endif
 
-        {{-- Formulario de Laravel --}}
-        <form action="{{ route('login.submit') }}" method="POST" class="login-form-agro">
+        <form action="{{ route('login.submit') }}" method="POST" class="login-form" id="loginForm">
             @csrf
 
-            {{-- Campo Correo Electrónico --}}
-            <p class="texto">Correo</p>
-            <input type="email" placeholder="juanito@gmail.com" name="email" id="email" class="Correo" required value="{{ old('email') }}">
+            {{-- Email --}}
+            <div class="field-group">
+                <label for="email">
+                    <i class="fa-solid fa-envelope"></i> Correo electrónico
+                </label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="correo@ejemplo.com"
+                    value="{{ old('email') }}"
+                    class="{{ $errors->has('email') ? 'input-error' : '' }}"
+                    required
+                    autofocus
+                >
+                @error('email')
+                    <span class="field-error">{{ $message }}</span>
+                @enderror
+            </div>
 
-            {{-- Campo Contraseña --}}
-            <p class="Contraseña">Contraseña</p>
-            <div class="password-container">
-                <input type="password" placeholder="********" name="password" id="password" class="contraseña" required>
-                <span class="toggle-password" onclick="mostrarOcultar()">
+            {{-- Contraseña --}}
+            <div class="field-group">
+                <label for="password">
+                    <i class="fa-solid fa-lock"></i> Contraseña
+                </label>
+                <div class="password-container">
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Tu contraseña"
+                        class="{{ $errors->has('password') ? 'input-error' : '' }}"
+                        required
+                    >
+                    <span class="toggle-password" onclick="togglePass('password', this)">
                         <i class="fa-solid fa-eye"></i>
                     </span>
+                </div>
+                @error('password')
+                    <span class="field-error">{{ $message }}</span>
+                @enderror
             </div>
 
-            {{-- Recordar (opcional en Laravel, pero se mantiene el diseño) --}}
+            {{-- Recordar --}}
             <div class="recordar">
-                <input type="checkbox" id="recordar" name="remember"> {{-- Se añade el atributo name="remember" para Laravel --}}
-                <label for="recordar">Recordar</label>
+                <input type="checkbox" id="recordar" name="remember">
+                <label for="recordar">Recordar sesión</label>
             </div>
 
-            {{-- Botón Iniciar Sesión --}}
-            <div class="contenedor-boton">
-                <button type="submit" class="boton">
-                    Ingresar
+            <div class="login-button-wrapper">
+                <button type="submit" class="login-button" id="submitBtn">
+                    <span id="btnText"><i class="fa-solid fa-right-to-bracket"></i> Ingresar</span>
+                    <span id="btnSpinner" style="display:none">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Ingresando...
+                    </span>
                 </button>
             </div>
         </form>
 
-        {{-- Link de Registro --}}
-        <p class="registro-link">¿No tienes cuenta?
-            <a href="{{ route('register') }}">Regístrate aquí</a>
-        </p>
+        <p class="registro-link">¿No tienes cuenta? <a href="{{ route('register') }}">Regístrate aquí</a></p>
     </div>
-
-
-        </div>
-
-    {{-- Script para mostrar/ocultar contraseña (JS puro, lo pones en tu app.js o directo en la vista si no hay otra opción) --}}
-     {{-- Script para mostrar/ocultar contraseña (Ahora usa la clase 'fa-eye' o 'fa-eye-slash') --}}
-    <script>
-        function mostrarOcultar() {
-            const passwordField = document.getElementById('password');
-            const toggleIcon = document.querySelector('.toggle-password i'); // Selecciona el icono dentro del span
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash'); // Icono de ojo tachado (ocultar)
-            } else {
-                passwordField.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye'); // Icono de ojo (mostrar)
-            }
-        }
-    </script>
 </main>
 
+<script>
+    function togglePass(fieldId, btn) {
+        const field = document.getElementById(fieldId);
+        const icon  = btn.querySelector('i');
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            field.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function () {
+        document.getElementById('btnText').style.display    = 'none';
+        document.getElementById('btnSpinner').style.display = 'inline';
+        document.getElementById('submitBtn').disabled       = true;
+    });
+</script>
 @endsection

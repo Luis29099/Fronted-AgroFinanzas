@@ -1,112 +1,261 @@
+/* ================================================
+   REGISTER — CSS
+   ================================================ */
 
-/* Solución de scroll y centrado para la vista de registro */
 .contedido-register {
-    /* Sobrescribe el estilo de 'main' para centrar todo SOLO en esta página */
     display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal */
-    
-    padding: 20px 0; /* Agregamos padding para que la tarjeta no se pegue en el borde */
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
 }
 
 img.fondo {
-    position: fixed; /* 👈 Cambiar de 'absolute' a 'fixed' */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; /* Ahora 100% de la ventana, no del contenedor */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
     z-index: 0;
-    opacity: 0.25;
-    filter: blur(3px);
+    opacity: 0.2;
+    filter: blur(4px);
 }
 
-/* ---------------- TARJETA (register-card) ---------------- */
+/* ---- TARJETA ---- */
 .register-card {
     position: relative;
-    width: 420px;
-    /* La altura se ajusta para el contenido más largo */
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1;
+    width: 100%;
+    max-width: 560px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    padding: 36px 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
-    z-index: 1;
     transition: transform 0.3s ease;
-
-    /* SOLUCIÓN AL SCROLL: Limitar la altura de la tarjeta */
-    max-height: 120vh; /* La tarjeta no será más alta que el 90% de la ventana */
-    overflow-y: auto; /* Permite scroll SÓLO dentro de la tarjeta si es muy larga */
 }
 
-/* ---------------- ELEMENTOS ÚNICOS ---------------- */
+.register-card:hover { transform: translateY(-4px); }
 
-.register-card:hover {
-    transform: translateY(-5px);
-}
-
+/* ---- LOGO Y TÍTULOS ---- */
 .register-logo {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 10px;
+    width: 80px; height: 80px;
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
+    border: 2px solid #8ac926;
+    box-shadow: 0 0 12px rgba(138, 201, 38, 0.4);
+    margin-bottom: 12px;
 }
 
 .register-title {
     color: #8ac926;
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: 0.5px;
     text-align: center;
-    letter-spacing: 1px;
 }
 
-/* ---------------- BOTÓN ---------------- */
+.register-subtitle {
+    color: #aaa;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
 
+/* ---- ALERTA ---- */
+.alert-error {
+    width: 100%;
+    background: rgba(231, 76, 60, 0.15);
+    border: 1px solid rgba(231, 76, 60, 0.4);
+    color: #e74c3c;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ---- FORMULARIO ---- */
+.register-form-agro {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Fila de dos columnas (género + experiencia) */
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.field-group label {
+    color: #ccc;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;        /* ← permite wrap controlado */
+    white-space: normal;    /* ← permite que el texto fluya */
+    overflow: hidden;
+    min-height: 1.4rem;     /* ← altura mínima uniforme */
+}
+
+.field-group label i { color: #8ac926; font-size: 0.8rem; }
+
+.optional {
+    color: #666;
+    font-size: 0.75rem;
+    font-weight: 400;
+    white-space: nowrap;   /* ← el "(opcional)" sí se mantiene junto */
+}
+
+/* ---- INPUTS ---- */
+.field-group input,
+.field-select {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 9px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: border 0.25s, box-shadow 0.25s;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.field-group input:focus,
+.field-select:focus {
+    border-color: #8ac926;
+    box-shadow: 0 0 0 3px rgba(138, 201, 38, 0.2);
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.field-group input.input-error,
+.field-select.input-error {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+}
+
+/* Select: arreglar color de opciones */
+.field-select option {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+.field-error {
+    color: #e74c3c;
+    font-size: 0.78rem;
+    margin-top: 2px;
+    display: block;
+}
+
+/* ---- CONTRASEÑA ---- */
+.password-container { position: relative; width: 100%; }
+.password-container input { padding-right: 42px; }
+
+.toggle-password {
+    position: absolute;
+    right: 12px; top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #8ac926;
+    font-size: 15px;
+    user-select: none;
+    transition: color 0.2s;
+}
+.toggle-password:hover { color: #fff; }
+
+/* ---- BARRA FUERZA ---- */
+.strength-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+.strength-bar {
+    flex: 1;
+    height: 5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    overflow: hidden;
+}
+.strength-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 99px;
+    transition: width 0.4s ease, background 0.4s ease;
+}
+.strength-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-width: 70px;
+    text-align: right;
+}
+
+/* ---- BOTÓN ---- */
 .register-button-wrapper {
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: 8px;
 }
 
 .register-button {
-    width: 70%;
-    padding: 12px 0;
+    width: 100%;
+    padding: 13px;
     background: linear-gradient(135deg, #8ac926, #99d98c);
     border: none;
-    border-radius: 12px;
-    font-size: 17px;
-    font-weight: 600;
-    color: black;
-    text-align: center;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 10px rgba(24, 217, 46, 0.3);
-    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(138, 201, 38, 0.3);
+    font-family: 'Poppins', sans-serif;
 }
-.register-button:hover{
-    transform: scale(1.07);
-  background: linear-gradient(135deg, #7bb222, #7cb072);
-    box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
+.register-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #7bb222, #7cb072);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(138, 201, 38, 0.45);
 }
+.register-button:disabled { opacity: 0.7; cursor: not-allowed; }
 
-/* ---------------- LINK ---------------- */
-
+/* ---- LINK LOGIN ---- */
 .login-link {
     margin-top: 20px;
-    font-size: 14px;
-    color: #ccc;
+    font-size: 0.85rem;
+    color: #aaa;
+    text-align: center;
 }
-
 .login-link a {
-    color: #18d92e;
+    color: #8ac926;
     font-weight: 600;
     text-decoration: none;
+    transition: color 0.2s;
+}
+.login-link a:hover { color: #b5e254; text-decoration: underline; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 500px) {
+    .register-card { padding: 28px 20px; }
+    .field-row { grid-template-columns: 1fr; }
 }

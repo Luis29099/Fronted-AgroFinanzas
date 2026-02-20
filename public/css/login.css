@@ -1,192 +1,276 @@
-.contenido_login{
-      /* Sobrescribe el estilo de 'main' para centrar todo SOLO en esta página */
-    display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal */
-    
-    padding: 20px 0; /* Agregamos padding para que la tarjeta no se pegue en el borde */
-}
+/* ================================================
+   LOGIN — CSS
+   ================================================ */
+
 body {
-    /* Fondo que queremos en todas las vistas, si es que layouts.app no lo pone */
-    background-color: #0b0f0c; 
+    background-color: #0b0f0c;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
 }
 
-.apartado {
+.contenido_login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+img.fondo {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.22;
+    filter: blur(4px);
+}
+
+/* ---- TARJETA ---- */
+.login-card {
     position: relative;
-    width: 420px;
-    /* La altura se ajusta para el contenido más largo */
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    padding: 36px 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
-    z-index: 1;
     transition: transform 0.3s ease;
-
-    /* SOLUCIÓN AL SCROLL: Limitar la altura de la tarjeta */
-    max-height: 120vh; /* La tarjeta no será más alta que el 90% de la ventana */
-    overflow-y: auto; /* Permite scroll SÓLO dentro de la tarjeta si es muy larga */
 }
 
-/* Nuevo selector en public/css/login.css */
-.login-wrapper {
-    /* Toma la altura restante del main (gracias a body.min-vh-100 y main.flex-grow-1 de Bootstrap) */
-    display: flex;
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal */
-    width: 100%;
-    /* Aseguramos que la altura mínima sea lo que queda después de navbar/footer */
-    min-height: 100%; 
-    
-    /* Aplicamos el fondo degradado solo a esta vista */
-    background: radial-gradient(circle at top left, #0a0a0a 0%, #1b1b1b 100%); 
-    position: relative; /* Para que el fondo img.fondo sea relativo a este wrapper */
+.login-card:hover {
+    transform: translateY(-4px);
 }
 
-/* Ajuste importante: Si el fondo está dentro del wrapper, debe ser absoluto dentro de él */
-img.fondo {
-position: fixed; /* 👈 Cambiar de 'absolute' a 'fixed' */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; /* Ahora 100% de la ventana, no del contenedor */
+/* ---- LOGO Y TÍTULOS ---- */
+.login-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     object-fit: cover;
-    z-index: 0;
-    opacity: 0.25;
-    filter: blur(3px);
+    border: 2px solid #8ac926;
+    box-shadow: 0 0 12px rgba(138, 201, 38, 0.4);
+    margin-bottom: 12px;
 }
 
-/* Aseguramos que la tarjeta esté encima del fondo */
-.apartado {
-    /* ... (mantener estilos originales) ... */
-    z-index: 1; /* Esto es crucial */
-}
-.Logo-l {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 10px;
-  border-radius: 50%;
-  object-fit: contain;
-
-}
-/* ---------- CAMPOS DE ENTRADA ---------- */
-input {
-  width: 95%;
-  padding: 10px 70px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  transition: border 0.3s;
+.login-title {
+    color: #8ac926;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: 0.5px;
+    text-align: center;
 }
 
-input:focus {
-  border: 1px solid #18d92e;
-  outline: none;
+.login-subtitle {
+    color: #aaa;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    text-align: center;
 }
 
-/* ---------- CONTENEDOR CONTRASEÑA ---------- */
+/* ---- ALERTAS ---- */
+.alert-error {
+    width: 100%;
+    background: rgba(231, 76, 60, 0.15);
+    border: 1px solid rgba(231, 76, 60, 0.4);
+    color: #e74c3c;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alert-success {
+    width: 100%;
+    background: rgba(46, 204, 113, 0.12);
+    border: 1px solid rgba(46, 204, 113, 0.35);
+    color: #2ecc71;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ---- FORMULARIO ---- */
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.field-group label {
+    color: #ccc;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.field-group label i {
+    color: #8ac926;
+    font-size: 0.8rem;
+}
+
+/* ---- INPUTS ---- */
+.field-group input {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 9px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: border 0.25s, box-shadow 0.25s;
+    box-sizing: border-box;
+}
+
+.field-group input:focus {
+    border-color: #8ac926;
+    box-shadow: 0 0 0 3px rgba(138, 201, 38, 0.2);
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.field-group input.input-error {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+}
+
+.field-error {
+    color: #e74c3c;
+    font-size: 0.78rem;
+    margin-top: 2px;
+    display: block;
+}
+
+/* ---- CONTRASEÑA ---- */
 .password-container {
-  position: relative;
-  width: 95%;
+    position: relative;
+    width: 100%;
 }
 
 .password-container input {
-  width: 100%;
-  padding-right: 35px;
+    padding-right: 42px;
 }
 
 .toggle-password {
-  position: absolute;
-  right: 10px;
-  top: 8px;
-  cursor: pointer;
-  color: #18d92e;
-  font-size: 18px;
-  user-select: none;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #8ac926;
+    font-size: 15px;
+    user-select: none;
+    transition: color 0.2s;
 }
 
-/* ---------- RECORDAR CONTRASEÑA (CORREGIDO) ---------- */
+.toggle-password:hover {
+    color: #fff;
+}
+
+/* ---- RECORDAR ---- */
 .recordar {
-  display: flex;
-  
-  justify-content: flex-start;
-  gap: 8px;
-  width: 85%;
-  margin-top: 10px;
-  color: #ccc;
-  font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    color: #aaa;
+    font-size: 0.83rem;
 }
 
-/* Ajuste del checkbox */
 .recordar input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #8ac926; /* Cambia el color del check */
-  cursor: pointer;
-  transform: translateY(1px);
+    width: 15px;
+    height: 15px;
+    accent-color: #8ac926;
+    cursor: pointer;
 }
 
-
-/* ---------- BOTÓN PRINCIPAL (Iniciar sesión) ---------- */
-.contenedor-boton {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+.recordar label {
+    cursor: pointer;
 }
 
-.boton {
-  width: 70%;
-  padding: 12px 0;
-  background: linear-gradient(135deg, #8ac926, #99d98c);
-  border: none;
-  border-radius: 12px;
-  font-size: 17px;
-  font-weight: 600;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 10px rgba(24, 217, 46, 0.3);
-  margin-top: 15px;
+/* ---- BOTÓN ---- */
+.login-button-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
-.boton:hover {
-  transform: scale(1.07);
-  background: linear-gradient(135deg, #7bb222, #7cb072);
-    box-shadow: 0 0 15px rgba(24, 217, 46, 0.3);
+.login-button {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #8ac926, #99d98c);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(138, 201, 38, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
-/* ---------- LINK DE REGISTRO ---------- */
+.login-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #7bb222, #7cb072);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(138, 201, 38, 0.45);
+}
+
+.login-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ---- LINK REGISTRO ---- */
 .registro-link {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #ccc;
+    margin-top: 22px;
+    font-size: 0.85rem;
+    color: #aaa;
+    text-align: center;
 }
 
 .registro-link a {
-  color: #8ac926;
-  font-weight: 600;
-  text-decoration: none;
+    color: #8ac926;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
 .registro-link a:hover {
-  text-decoration: underline;
+    color: #b5e254;
+    text-decoration: underline;
 }
-.titulo-inicio{
-  color: #8ac926;
-    font-size: 28px;
-    margin-bottom: 20px;
-    text-align: center;
-    letter-spacing: 1px;
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 500px) {
+    .login-card {
+        padding: 28px 20px;
+    }
 }
