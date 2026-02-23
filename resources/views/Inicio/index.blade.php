@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="hero-brand">
-        <div class="hero-leaf">🌿</div>
+        <div class="hero-leaf"></div>
         <h1>AgroFinanzas</h1>
         <p>Decisiones inteligentes para el campo</p>
     </div>
@@ -51,7 +51,7 @@
         </div>
         <div class="ticker-wrap">
             <div class="ticker">
-                <span>📈 Café: +3.2% &nbsp;·&nbsp; 🌽 Maíz: -1.4% &nbsp;·&nbsp; 🥛 Leche: sin variación &nbsp;·&nbsp; 🐔 Pollo: +0.8% &nbsp;·&nbsp; 🌿 Nuevos subsidios FINAGRO &nbsp;·&nbsp; ☀️ Alerta seca: Boyacá y Cundinamarca &nbsp;·&nbsp; 📈 Café: +3.2% &nbsp;·&nbsp; 🌽 Maíz: -1.4% &nbsp;·&nbsp;</span>
+                <span> Café: +3.2% &nbsp;·&nbsp;  Maíz: -1.4% &nbsp;·&nbsp;  Leche: sin variación &nbsp;·&nbsp;  Pollo: +0.8% &nbsp;·&nbsp;  Nuevos subsidios FINAGRO &nbsp;·&nbsp;  Alerta seca: Boyacá y Cundinamarca &nbsp;·&nbsp;  Café: +3.2% &nbsp;·&nbsp;  Maíz: -1.4% &nbsp;·&nbsp;</span>
             </div>
         </div>
     </div>

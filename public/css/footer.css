@@ -2,7 +2,7 @@ footer.footer {
   background: linear-gradient(135deg, #0b0b0b, #111);
   color: #ccc;
   padding: 50px 20px;
-  border-top: 2px solid #8ac926;/*5390d9*/
+  border-top: 2px solid #8ac926;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.6);
   font-family: "Poppins", sans-serif;
 }
@@ -118,73 +118,65 @@ footer.footer {
     min-width: 100%;
   }
 }
-CSS FOOTER /* =====================================================================
-   SCROLL-UP BUTTON
-   Agrega este bloque al final de public/css/navbar.css
-   (o al CSS global que prefieras — solo debe cargarse en el layout)
-   ===================================================================== */
 
+/* =====================================================================
+   SCROLL-UP BUTTON
+   Esquina inferior IZQUIERDA — el chatbot Botpress va a la derecha
+   así no se superponen nunca.
+   ===================================================================== */
 .scroll-top-btn {
-    /* Posición fija — siempre visible sobre todo el contenido */
     position: fixed;
     bottom: 28px;
-    right: 28px;
+    left: 28px;            /* ← izquierda, el chatbot va a la derecha */
     z-index: 9999;
 
-    /* Tamaño y forma circular */
     width: 48px;
     height: 48px;
     border-radius: 50%;
 
-    /* Colores: verde característico del proyecto */
-    background: #18d92e;
-    color: #070e09;
+    /* Verde AgroFinanzas con borde para diferenciarlo del chatbot blanco */
+    background: linear-gradient(135deg, #8ac926, #a8e050);
+    color: #0a0f04;
+    border: 2px solid rgba(255,255,255,0.15);
 
-    /* Tipografía e icono */
-    font-size: 1.1rem;
-    border: none;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
 
-    /* Centrar el icono dentro del círculo */
-    display: none;           /* oculto por defecto, JS lo muestra */
+    display: none;
     align-items: center;
     justify-content: center;
 
-    /* Sombra verde neón */
-    box-shadow: 0 0 22px rgba(24, 217, 46, 0.45);
+    box-shadow: 0 4px 20px rgba(138, 201, 38, 0.5),
+                0 0 0 3px rgba(138, 201, 38, 0.15);
 
-    /* Transición suave para hover */
-    transition: background 0.25s ease,
-                transform  0.25s ease,
-                box-shadow 0.25s ease,
-                opacity    0.25s ease;
+    transition: background  0.25s ease,
+                transform   0.25s ease,
+                box-shadow  0.25s ease;
 }
 
-/* El JS agrega esta clase cuando el usuario baja > 300 px */
 .scroll-top-btn.visible {
     display: flex;
 }
 
-/* Efecto hover */
 .scroll-top-btn:hover {
-    background: #2aff45;
+    background: linear-gradient(135deg, #a8e050, #c5f075);
     transform: scale(1.12) translateY(-3px);
-    box-shadow: 0 0 36px rgba(24, 217, 46, 0.65);
+    box-shadow: 0 6px 28px rgba(138, 201, 38, 0.7),
+                0 0 0 4px rgba(138, 201, 38, 0.2);
 }
 
-/* Efecto al pulsar */
 .scroll-top-btn:active {
     transform: scale(0.96) translateY(0);
-    box-shadow: 0 0 14px rgba(24, 217, 46, 0.35);
+    box-shadow: 0 2px 12px rgba(138, 201, 38, 0.4);
 }
 
-/* ── Responsive ── */
 @media (max-width: 480px) {
     .scroll-top-btn {
         bottom: 16px;
-        right: 16px;
+        left: 16px;
         width: 42px;
         height: 42px;
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }

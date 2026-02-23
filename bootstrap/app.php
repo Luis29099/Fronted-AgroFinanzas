@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Registrar middleware personalizado
         $middleware->alias([
             'custom.auth' => \App\Http\Middleware\CheckCustomAuth::class,
+            'admin.auth'  => \App\Http\Middleware\AdminAuth::class,
         ]);
     })
 

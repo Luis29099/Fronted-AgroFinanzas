@@ -22,7 +22,20 @@
 
     <ul class="af-main-nav-links">
         @if (!session()->has('user'))
-            @if ($isLoginPage)
+            @if ($isLoginPage || $isRegisterPage)
+    <div class="af-auth-buttons">
+        <a href="{{ route('home') }}" class="af-nav-btn">
+            <i class="fas fa-home"></i> Inicio
+        </a>
+    </div>
+@else
+    <div class="af-auth-buttons">
+        <a href="{{ route('login') }}" class="af-nav-btn">Iniciar Sesión</a>
+        {{-- <a href="{{ route('register') }}" class="af-nav-btn">Registrarse</a> --}}
+    </div>
+@endif
+{{-- antiguo --}}
+{{-- @if ($isLoginPage)
                 <div class="af-auth-buttons">
                     <a href="{{ route('register') }}" class="af-nav-btn">Registrarse</a>
                     <a href="{{ route('home') }}" class="af-nav-btn">Inicio</a>
@@ -37,13 +50,13 @@
                     <a href="{{ route('login') }}" class="af-nav-btn">Iniciar Sesión</a>
                     <a href="{{ route('register') }}" class="af-nav-btn">Registrarse</a>
                 </div>
-            @endif
+            @endif --}}
 
         @else
             {{-- 🌿 DROPDOWN AGRONOMÍA --}}
             <li class="af-dropdown">
                 <a href="#"
-                    class="af-nav-link {{ str_contains($currentRoute, 'Agronomy') || str_contains($currentRoute, 'hens') || str_contains($currentRoute, 'cattles') || str_contains($currentRoute, 'avocado') || str_contains($currentRoute, 'coffe') ? 'active' : '' }}"
+                    class="af-nav-link {{ str_contains($currentRoute, 'Agronomy') || str_contains($currentRoute, 'hens') || str_contains($currentRoute, 'cattles') || $currentRoute === 'cattle.show' || str_contains($currentRoute, 'avocado') || str_contains($currentRoute, 'coffe') ? 'active' : '' }}"
                     onclick="event.preventDefault(); toggleAgronomyMenu()">
                     Agronomía <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:5px;"></i>
                 </a>
@@ -58,28 +71,43 @@
                 </div>
             </li>
 
+            
             {{-- 💰 DROPDOWN FINANZAS --}}
-            <li class="af-dropdown">
-                <a href="#"
-                    class="af-nav-link {{ str_contains($currentRoute, 'finance') || str_contains($currentRoute, 'income') || str_contains($currentRoute, 'expense') || str_contains($currentRoute, 'investment') || str_contains($currentRoute, 'debt') || str_contains($currentRoute, 'inventory') || str_contains($currentRoute, 'costs') ? 'active' : '' }}"
-                    onclick="event.preventDefault(); toggleFinanceMenu()">
-                    Finanzas <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:5px;"></i>
-                </a>
-                <div class="af-finance-submenu" id="afFinanceSubmenu">
-                    <div class="af-submenu-header"><i class="fas fa-chart-line"></i> Gestión Financiera</div>
-                    <div class="af-submenu-section">
-                        <div class="af-submenu-label">Registrar</div>
-                        <a href="{{ route('client.income.create') }}"     class="af-submenu-item"><i class="fas fa-plus-circle"  style="color:#8ac926;"></i> Ingreso</a>
-                        <a href="{{ route('client.expense.create') }}"    class="af-submenu-item"><i class="fas fa-minus-circle" style="color:#ff6b6b;"></i> Gasto</a>
-                        <a href="{{ route('client.investment.create') }}" class="af-submenu-item"><i class="fas fa-building"     style="color:#3b82f6;"></i> Inversión</a>
-                        <a href="{{ route('client.debt.create') }}"       class="af-submenu-item"><i class="fas fa-credit-card"  style="color:#f59e0b;"></i> Deuda</a>
-                        <a href="{{ route('client.inventory.create') }}"  class="af-submenu-item"><i class="fas fa-boxes"        style="color:#a855f7;"></i> Inventario</a>
-                        <a href="{{ route('client.costs.create') }}"      class="af-submenu-item"><i class="fas fa-seedling"     style="color:#14b8a6;"></i> Costos</a>
-                    </div>
-                    <div class="af-submenu-divider"></div>
-                    <a href="{{ route('client.finances.index') }}" class="af-submenu-item-highlight"><i class="fas fa-history"></i> Ver Historial Completo</a>
-                </div>
-            </li>
+<li class="af-dropdown">
+    <a href="#"
+        class="af-nav-link {{ str_contains($currentRoute, 'finance') || str_contains($currentRoute, 'income') || str_contains($currentRoute, 'expense') || str_contains($currentRoute, 'investment') || str_contains($currentRoute, 'debt') || str_contains($currentRoute, 'inventory') || str_contains($currentRoute, 'costs') || str_contains($currentRoute, 'client.cattle') ? 'active' : '' }}"
+        onclick="event.preventDefault(); toggleFinanceMenu()">
+        Finanzas <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:5px;"></i>
+    </a>
+    <div class="af-finance-submenu" id="afFinanceSubmenu">
+        <div class="af-submenu-header"><i class="fas fa-chart-line"></i> Gestión Financiera</div>
+        <div class="af-submenu-section">
+            <div class="af-submenu-label">Registrar</div>
+            <a href="{{ route('client.income.create') }}"     class="af-submenu-item"><i class="fas fa-plus-circle"  style="color:#8ac926;"></i> Ingreso</a>
+            <a href="{{ route('client.expense.create') }}"    class="af-submenu-item"><i class="fas fa-minus-circle" style="color:#ff6b6b;"></i> Gasto</a>
+            <a href="{{ route('client.investment.create') }}" class="af-submenu-item"><i class="fas fa-building"     style="color:#3b82f6;"></i> Inversión</a>
+            <a href="{{ route('client.debt.create') }}"       class="af-submenu-item"><i class="fas fa-credit-card"  style="color:#f59e0b;"></i> Deuda</a>
+            <a href="{{ route('client.inventory.create') }}"  class="af-submenu-item"><i class="fas fa-boxes"        style="color:#a855f7;"></i> Inventario</a>
+            <a href="{{ route('client.costs.create') }}"      class="af-submenu-item"><i class="fas fa-seedling"     style="color:#14b8a6;"></i> Costos</a>
+        </div>
+
+        <div class="af-submenu-divider"></div>
+
+        {{-- ✅ NUEVO: enlace al hato de ganado --}}
+        <div class="af-submenu-section">
+            <div class="af-submenu-label">Ganadería</div>
+            <a href="{{ route('client.cattle.index') }}" class="af-submenu-item">
+                <i class="fas fa-cow" style="color:#f59e0b;"></i> Mi Hato Ganadero
+            </a>
+        </div>
+
+        <div class="af-submenu-divider"></div>
+
+        <a href="{{ route('client.finances.index') }}" class="af-submenu-item-highlight">
+            <i class="fas fa-history"></i> Ver Historial Completo
+        </a>
+    </div>
+</li>
 
             {{-- 👥 Comunidad --}}
             <li>

@@ -8,43 +8,64 @@ use Illuminate\Support\Facades\Http;
 class AuthController extends Controller
 {
     public function home()         { return view('auth.home'); }
-    public function showLogin()    { return view('auth.login'); }
-    public function showRegister() { return view('auth.register'); }
+    // public function showLogin()    { return view('auth.login'); }
+    // public function showRegister() { return view('auth.register'); }
+    public function showAuth()
+{
+    return view('auth.auth'); // o donde ubiques el archivo
+}
 
     // ── REGISTRO ──────────────────────────────────────────────
     public function register(Request $request)
-    {
-        $request->validate([
-            'name'             => 'required|string|min:3|max:100',
-            'email'            => 'required|email',
-            'password'         => 'required|string|min:8|confirmed',
-            'birth_date'       => 'required|date|before:today',
-            'phone'            => 'nullable|string|max:20',
-            'gender'           => 'nullable|in:male,female,other',
-            'experience_years' => 'nullable|integer|min:0|max:70',
-        ]);
+{
+    $request->validate([
+        'name'             => 'required|string|min:3|max:100',
+        'email'            => 'required|email',
+        'password'         => 'required|string|min:8|confirmed',
+        'birth_date'       => 'required|date|before:today',
+        'phone'            => 'nullable|string|max:20',
+        'gender'           => 'nullable|in:male,female,other',
+        'experience_years' => 'nullable|integer|min:0|max:70',
+    ]);
 
-        $response = Http::post('http://api.AgroFinanzas.test/api/register', [
-            'name'                  => $request->name,
-            'email'                 => $request->email,
-            'password'              => $request->password,
-            'password_confirmation' => $request->password_confirmation,
-            'birth_date'            => $request->birth_date,
-            'phone'                 => $request->phone,
-            'gender'                => $request->gender,
-            'experience_years'      => $request->experience_years,
-        ]);
+    $response = Http::post('http://api.AgroFinanzas.test/api/register', [
+        'name'                  => $request->name,
+        'email'                 => $request->email,
+        'password'              => $request->password,
+        'password_confirmation' => $request->password_confirmation,
+        'birth_date'            => $request->birth_date,
+        'phone'                 => $request->phone,
+        'gender'                => $request->gender,
+        'experience_years'      => $request->experience_years,
+    ]);
 
-        if (!$response->successful()) {
-            $apiErrors = $response->json('errors');
-            if ($apiErrors) return back()->withErrors($apiErrors)->withInput();
-            return back()->withErrors(['register_error' => $response->json('message') ?? 'No se pudo completar el registro.'])->withInput();
+    if (!$response->successful()) {
+        $apiErrors = $response->json('errors');
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => false,
+                'errors'  => $apiErrors,
+                'message' => $response->json('message') ?? 'No se pudo completar el registro.',
+            ], 422);
         }
-
-        $data = $response->json();
-        return redirect()->route('verify.show', ['user_id' => $data['user_id'], 'email' => $data['email']])
-                         ->with('success', '¡Registro exitoso! Te enviamos un código a tu correo.');
+        if ($apiErrors) return back()->withErrors($apiErrors)->withInput();
+        return back()->withErrors(['register_error' => $response->json('message') ?? 'No se pudo completar el registro.'])->withInput();
     }
+
+    $data = $response->json();
+
+    // Si es fetch (JSON) devolver JSON con user_id y email
+    if ($request->wantsJson()) {
+        return response()->json([
+            'success' => true,
+            'user_id' => $data['user_id'],
+            'email'   => $data['email'],
+        ]);
+    }
+
+    return redirect()->route('verify.show', ['user_id' => $data['user_id'], 'email' => $data['email']])
+                     ->with('success', '¡Registro exitoso! Te enviamos un código a tu correo.');
+}
 
     // ── VERIFICACIÓN ──────────────────────────────────────────
     public function showVerify(Request $request)
@@ -56,24 +77,39 @@ class AuthController extends Controller
     }
 
     public function verifyCode(Request $request)
-    {
-        $request->validate(['user_id' => 'required|integer', 'code' => 'required|string']);
+{
+    $request->validate(['user_id' => 'required|integer', 'code' => 'required|string']);
 
-        $response = Http::post('http://api.AgroFinanzas.test/api/verify-code', [
-            'user_id' => $request->user_id,
-            'code'    => $request->code,
-        ]);
+    $response = Http::post('http://api.AgroFinanzas.test/api/verify-code', [
+        'user_id' => $request->user_id,
+        'code'    => $request->code,
+    ]);
 
-        if (!$response->successful()) {
-            $data = $response->json();
-            if ($data['expired'] ?? false) {
-                return back()->withErrors(['verify_error' => 'El código expiró. Haz clic en "Reenviar código".'])->withInput();
-            }
-            return back()->withErrors(['verify_error' => $data['message'] ?? 'Código incorrecto.'])->withInput();
+    if (!$response->successful()) {
+        $data = $response->json();
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => false,
+                'message' => ($data['expired'] ?? false)
+                    ? 'El código expiró. Reenvía uno nuevo.'
+                    : ($data['message'] ?? 'Código incorrecto.'),
+            ], 422);
         }
-
-        return redirect()->route('login')->with('success', '✅ ¡Cuenta verificada! Ya puedes iniciar sesión.');
+        if ($data['expired'] ?? false) {
+            return back()->withErrors(['verify_error' => 'El código expiró.'])->withInput();
+        }
+        return back()->withErrors(['verify_error' => $data['message'] ?? 'Código incorrecto.'])->withInput();
     }
+
+    if ($request->wantsJson()) {
+        return response()->json([
+            'success'  => true,
+            'redirect' => route('login'),
+        ]);
+    }
+
+    return redirect()->route('login')->with('success', '✅ ¡Cuenta verificada! Ya puedes iniciar sesión.');
+}
 
     public function resendCode(Request $request)
     {
@@ -123,7 +159,7 @@ class AuthController extends Controller
         $request->session()->forget('user');
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 
     // ── EDITAR PERFIL ─────────────────────────────────────────

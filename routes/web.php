@@ -3,7 +3,8 @@
 use App\Http\Controllers\AgronomyController;
 use App\Http\Controllers\AnimalProductionController;
 use App\Http\Controllers\AvocadoCropController;
-use App\Http\Controllers\CattleController;
+use App\Http\Controllers\CattleController;       // ← Gestión del hato del usuario
+use App\Http\Controllers\CattleInfoController;   // ← Vista informativa pública
 use App\Http\Controllers\CoffeCropController;
 use App\Http\Controllers\CropController;
 use App\Http\Controllers\HenController;
@@ -15,6 +16,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClimaController;
 use App\Http\Controllers\FinanceClienteController;
 use App\Http\Controllers\AgricultureController;
+
+use App\Http\Controllers\AdminController;
 
 Route::prefix('agro')->group(function () {
     Route::get('products', [AgricultureController::class, 'products']);
@@ -35,18 +38,21 @@ Route::get('crops',        [CropController::class, 'index'])->name('crops');
 Route::get('crops/{crop}', [CropController::class, 'show'])->name('crop.show');
 Route::get('coffe_crops/{coffecrop}', [CoffeCropController::class, 'show'])->name('coffecrop.show');
 Route::get('coffe_crops',             [CoffeCropController::class, 'index'])->name('coffecrops');
-Route::get('cattles',          [CattleController::class, 'index'])->name('cattles');
-Route::get('cattles/{cattle}', [CattleController::class, 'show'])->name('cattle.show');
 Route::get('avocadocrops',               [AvocadoCropController::class, 'index'])->name('avocadocrops');
 Route::get('avocadocrops/{avocadocrop}', [AvocadoCropController::class, 'show'])->name('avocadocrop.show');
 Route::get('animalproductions',                    [AnimalProductionController::class, 'index'])->name('animalproductions');
 Route::get('animalproductions/{animalproduction}', [AnimalProductionController::class, 'show'])->name('animalproduction.show');
 
+// ✅ GANADO INFORMATIVO — Vista pública (el del navbar, no cambia nada)
+// El navbar apunta a url('cattles') y sigue funcionando igual
+Route::get('cattles',          [CattleInfoController::class, 'index'])->name('cattles');
+Route::get('cattles/{id}',     [CattleInfoController::class, 'show'])->name('cattle.show');
+
 // ── AUTH ──────────────────────────────────────────────────────
 Route::get('/',         [AuthController::class, 'home'])->name('home');
-Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
+// Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login',   [AuthController::class, 'login'])->name('login.submit');
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+// Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register',[AuthController::class, 'register'])->name('register.submit');
 Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
 
@@ -63,18 +69,27 @@ Route::post('/editar-perfil', [AuthController::class, 'updateProfile'])->name('p
 Route::post('/cuenta/enviar-codigo-eliminacion', [AuthController::class, 'sendDeleteCode'])->name('cuenta.send-delete-code');
 Route::delete('/cuenta/eliminar',                [AuthController::class, 'deleteAccount'])->name('cuenta.eliminar');
 
-// ✅ NOTIFICACIONES
-// ⚠️ IMPORTANTE: las rutas estáticas SIEMPRE antes que las dinámicas {id}
-// Si {id}/leer va primero, Laravel captura "leer-todas" como {id} y leer-todas nunca funciona
+// ── NOTIFICACIONES ────────────────────────────────────────────
 Route::get('/notificaciones',              [NotificationController::class, 'index'])->name('notificaciones.index');
 Route::get('/notificaciones/no-leidas',    [NotificationController::class, 'unreadCount'])->name('notificaciones.unread');
-// En web.php — cambia estas dos líneas:
-Route::post('/notificaciones/leer-todas', [NotificationController::class, 'markAllRead'])->name('notificaciones.read-all');
-Route::post('/notificaciones/{id}/leer',  [NotificationController::class, 'markRead'])->name('notificaciones.read');
+Route::post('/notificaciones/leer-todas',  [NotificationController::class, 'markAllRead'])->name('notificaciones.read-all');
+Route::post('/notificaciones/{id}/leer',   [NotificationController::class, 'markRead'])->name('notificaciones.read');
 
 Route::get('/inicio',    [ClimaController::class, 'index'])->name('inicio.index');
 Route::get('/api/clima', [ClimaController::class, 'apiClima']);
 Route::get('/Agronomia', [AgronomyController::class, 'index'])->name('Agronomy.index');
+
+// ✅ HATO — Gestión individual del usuario (carpeta hato/)
+Route::middleware(['custom.auth'])->prefix('client/hato')->name('client.cattle.')->group(function () {
+    Route::get('/hato',                 [CattleController::class, 'index'])->name('index');
+    Route::get('/nuevo',            [CattleController::class, 'create'])->name('create');
+    Route::post('/',                [CattleController::class, 'store'])->name('store');
+    Route::get('/{id}',             [CattleController::class, 'show'])->name('show');
+    Route::post('/{id}',            [CattleController::class, 'update'])->name('update');
+    Route::delete('/{id}',          [CattleController::class, 'destroy'])->name('destroy');
+    Route::get('/{id}/nacimiento',  [CattleController::class, 'showBirthForm'])->name('birth.form');
+    Route::post('/{id}/nacimiento', [CattleController::class, 'registerBirth'])->name('birth.store');
+});
 
 // ── FINANZAS ──────────────────────────────────────────────────
 Route::middleware(['custom.auth'])->prefix('client')->name('client.')->group(function () {
@@ -95,4 +110,33 @@ Route::middleware(['custom.auth'])->prefix('client')->name('client.')->group(fun
     Route::put('/finances/{id}',     [FinanceClienteController::class, 'update'])->name('finances.update');
     Route::delete('/finances/{id}',  [FinanceClienteController::class, 'destroy'])->name('finances.destroy');
     Route::post('/finances',         [FinanceClienteController::class, 'store'])->name('finances.store');
+});
+Route::get('/login',    [AuthController::class, 'showAuth'])->name('login');
+Route::get('/register', [AuthController::class, 'showAuth'])->name('register');
+
+
+// ── LOGIN (sin middleware) ────────────────────────────────────
+Route::get('/admin/login',  [AdminController::class, 'showLogin'])->name('admin.login');
+Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
+
+// ── RUTAS PROTEGIDAS ─────────────────────────────────────────
+Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(function () {
+
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    // Dashboard
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    // Usuarios
+    Route::get('/usuarios',                  [AdminController::class, 'users'])->name('users');
+    Route::get('/usuarios/{id}',             [AdminController::class, 'showUser'])->name('users.show');
+    Route::patch('/usuarios/{id}/toggle',    [AdminController::class, 'toggleUser'])->name('users.toggle');
+    Route::delete('/usuarios/{id}',          [AdminController::class, 'destroyUser'])->name('users.destroy');
+
+    // Finanzas
+    Route::get('/finanzas', [AdminController::class, 'finances'])->name('finances');
+
+    // Comentarios
+    Route::get('/comentarios',          [AdminController::class, 'comments'])->name('comments');
+    Route::delete('/comentarios/{id}',  [AdminController::class, 'destroyComment'])->name('comments.destroy');
 });

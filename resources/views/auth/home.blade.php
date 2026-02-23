@@ -1,124 +1,805 @@
 @extends('layouts.app')
 
+@push('styles')
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+<style>
+:root {
+    --green:      #8ac926;
+    --green-dim:  rgba(138,201,38,0.15);
+    --green-glow: rgba(138,201,38,0.35);
+    --dark:       #050905;
+    --dark-2:     #0a110a;
+    --dark-3:     #0f160f;
+    --text:       #e8ede8;
+    --muted:      rgba(232,237,232,0.45);
+}
+
+/* ── BASE ── */
+.home-wrap {
+    background: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.home-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    animation: heroZoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1.0); }
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top,    #050905 0%, transparent 40%),
+        linear-gradient(to bottom, rgba(5,9,5,0.5) 0%, transparent 30%),
+        linear-gradient(135deg,    rgba(5,9,5,0.6) 0%, rgba(138,201,38,0.04) 100%);
+}
+
+/* Grain texture */
+.hero-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px 60px;
+    max-width: 860px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    border: 1px solid rgba(138,201,38,0.3);
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-title em {
+    font-style: italic;
+    color: var(--green);
+}
+
+.hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    max-width: 540px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+    animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.btn-primary-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 36px;
+    background: var(--green);
+    color: #060c06;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 30px rgba(138,201,38,0.3);
+}
+.btn-primary-home:hover {
+    background: #a8e050;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(138,201,38,0.45);
+    color: #060c06;
+}
+
+.btn-secondary-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 36px;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.btn-secondary-home:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: rgba(138,201,38,0.06);
+}
+
+/* Stats flotantes */
+.hero-stats {
+    display: flex;
+    gap: 50px;
+    white-space: nowrap;
+    margin-top: 35px;
+    animation: fadeUp 0.8s 0.6s ease both;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-stat {
+    text-align: center;
+}
+
+.hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+}
+
+.hero-stat-label {
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-top: 4px;
+}
+
+.hero-stat-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255,255,255,0.1);
+    align-self: center;
+}
+
+/* Scroll indicator */
+.hero-scroll {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 1s 0.8s ease both;
+}
+.hero-scroll span {
+    font-size: 0.62rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    writing-mode: vertical-rl;
+}
+.hero-scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(138,201,38,0.6), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.2); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════
+   QUIÉNES SOMOS — layout asimétrico
+══════════════════════════════════════ */
+.home-about {
+    padding: 120px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-left {
+    position: relative;
+}
+
+.about-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.about-label::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--green);
+}
+
+.about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.about-title em {
+    font-style: italic;
+    color: var(--green);
+}
+
+/* Imagen decorativa lateral */
+.about-img-wrap {
+    position: relative;
+}
+
+.about-img-main {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: 16px;
+    filter: brightness(0.7) saturate(1.2);
+}
+
+.about-img-card {
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 180px;
+    background: var(--dark-2);
+    border: 1px solid rgba(138,201,38,0.2);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.about-img-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+}
+.about-img-card-text {
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+/* Texto derecha */
+.about-right p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(232,237,232,0.7);
+    margin-bottom: 20px;
+}
+
+.about-right p strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Features list */
+.about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 36px;
+}
+
+.about-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(138,201,38,0.04);
+    border: 1px solid rgba(138,201,38,0.1);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.about-feature:hover {
+    background: rgba(138,201,38,0.08);
+    border-color: rgba(138,201,38,0.25);
+    transform: translateY(-2px);
+}
+
+.about-feature-icon {
+    width: 36px; height: 36px;
+    background: var(--green-dim);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.about-feature-text {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(232,237,232,0.75);
+    line-height: 1.4;
+}
+
+/* Separador ornamental */
+.home-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    opacity: 0.3;
+}
+.home-divider-line { flex: 1; height: 1px; background: var(--green); }
+.home-divider-dot  { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+/* ══════════════════════════════════════
+   DESARROLLADORES
+══════════════════════════════════════ */
+.home-team {
+    padding: 100px 40px 120px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.section-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.section-title em {
+    font-style: italic;
+    color: var(--green);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.dev-card {
+    position: relative;
+    background: var(--dark-3);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 36px 24px 28px;
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.dev-card.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Glow de fondo en hover */
+.dev-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 50% 120%, rgba(138,201,38,0.12) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.dev-card:hover::before { opacity: 1; }
+
+.dev-card:hover {
+    border-color: rgba(138,201,38,0.25);
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(138,201,38,0.15);
+}
+
+/* Número de orden */
+.dev-card-num {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(138,201,38,0.06);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.dev-photo-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.dev-photo {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(138,201,38,0.4);
+    box-shadow: 0 0 0 6px rgba(138,201,38,0.06), 0 12px 30px rgba(0,0,0,0.4);
+    transition: all 0.4s ease;
+}
+.dev-card:hover .dev-photo {
+    border-color: var(--green);
+    box-shadow: 0 0 0 8px rgba(138,201,38,0.1), 0 0 30px rgba(138,201,38,0.25);
+}
+
+/* Badge rol */
+.dev-badge {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: #060c06;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.dev-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 16px 0 6px;
+}
+
+.dev-role {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+}
+
+.dev-age {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+/* Línea decorativa inferior */
+.dev-card-line {
+    width: 30px;
+    height: 2px;
+    background: var(--green);
+    margin: 16px auto 0;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+.dev-card:hover .dev-card-line { transform: scaleX(1); }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+    .home-about { grid-template-columns: 1fr; gap: 50px; }
+    .about-img-wrap { display: none; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .hero-stats { gap: 30px; }
+    .hero-stat-num { font-size: 1.5rem; }
+    .home-about { padding: 80px 20px; }
+    .home-team  { padding: 60px 20px; }
+    .team-grid  { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .about-features { grid-template-columns: 1fr; }
+    .hero-scroll { display: none; }
+}
+
+@media (max-width: 420px) {
+    .team-grid { grid-template-columns: 1fr; max-width: 280px; margin: 0 auto; }
+}
+</style>
+@endpush
 
 @section('content')
+<div class="home-wrap">
 
-<div class="container-fluid p-0">
+    {{-- ══ HERO ══ --}}
+    <section class="home-hero">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1932&auto=format&fit=crop"
+             alt="Campo colombiano" class="hero-img">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-tag">
+                <i class="fas fa-leaf"></i>
+                Plataforma Agropecuaria Digital
+            </div>
+            <h1 class="hero-title">
+                El campo colombiano<br>merece tecnología <em>inteligente</em>
+            </h1>
+            <p class="hero-sub">
+                Gestiona tus finanzas, cultivos y producción animal desde un solo lugar.
+                Simple, poderoso, hecho para el agricultor moderno.
+            </p>
+            <div class="hero-actions">
+                <a href="{{ route('register') }}" class="btn-primary-home">
+                    <i class="fas fa-seedling"></i> Comenzar gratis
+                </a>
+                <a href="#sobre-nosotros" class="btn-secondary-home">
+                    <i class="fas fa-play-circle"></i> Conocer más
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num">4+</div>
+                    <div class="hero-stat-label">Módulos</div>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">100%</div>
+                    <div class="hero-stat-label">Gratuito</div>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">Col</div>
+                    <div class="hero-stat-label">Hecho en Colombia</div>
+                </div>
+            </div>
+        </div>
 
 
-<!-- LOGO SOLO PARA LA VISTA HOME -->
-<div class="home-floating-logo">
-    <img src="/img/LOGOYESLOGAN.jpeg" alt="Logo AgroFinanzas">
+
+        <div class="hero-scroll">
+            <div class="hero-scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    {{-- ══ QUIÉNES SOMOS ══ --}}
+    <section class="home-about" id="sobre-nosotros">
+
+        <div class="about-left">
+            <p class="about-label">Sobre nosotros</p>
+            <h2 class="about-title">
+                Tecnología que<br>entiende el <em>campo</em>
+            </h2>
+
+            <div class="about-img-wrap">
+                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1170&auto=format&fit=crop"
+                     alt="Agricultura" class="about-img-main">
+                <div class="about-img-card">
+                    <div class="about-img-card-num">🌿</div>
+                    <div class="about-img-card-text">Hecho para el agricultor colombiano</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-right">
+            <p>
+                <strong>AgroFinanzas</strong> nació con una misión clara: llevar herramientas digitales de calidad
+                a quienes trabajan la tierra. Somos una plataforma comprometida con el fortalecimiento del sector
+                rural colombiano.
+            </p>
+            <p>
+                Creemos en el poder del conocimiento y la tecnología para transformar vidas. Por eso trabajamos
+                para que cada campesino tenga acceso a información clara, recomendaciones útiles y un entorno
+                digital amigable que le permita tomar mejores decisiones.
+            </p>
+            <p>
+                No somos solo una app. Somos un aliado del campo, una apuesta por la inclusión y un paso firme
+                hacia un desarrollo rural más justo, sostenible e inteligente.
+            </p>
+
+            <div class="about-features">
+                <div class="about-feature">
+                    <div class="about-feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="about-feature-text">Gestión financiera completa</div>
+                </div>
+                <div class="about-feature">
+                    <div class="about-feature-icon"><i class="fas fa-leaf"></i></div>
+                    <div class="about-feature-text">Guías de cultivos y agronomía</div>
+                </div>
+                <div class="about-feature">
+                    <div class="about-feature-icon"><i class="fas fa-egg"></i></div>
+                    <div class="about-feature-text">Producción animal</div>
+                </div>
+                <div class="about-feature">
+                    <div class="about-feature-icon"><i class="fas fa-users"></i></div>
+                    <div class="about-feature-text">Comunidad de agricultores</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Separador --}}
+    <div class="home-divider">
+        <div class="home-divider-line"></div>
+        <div class="home-divider-dot"></div>
+        <div class="home-divider-line"></div>
+    </div>
+
+    {{-- ══ EQUIPO ══ --}}
+    <section class="home-team">
+        <div class="section-header">
+            <p class="section-eyebrow">El equipo detrás del proyecto</p>
+            <h2 class="section-title">Nuestros <em>Desarrolladores</em></h2>
+        </div>
+
+        <div class="team-grid">
+
+            <div class="dev-card" data-delay="0">
+                <div class="dev-card-num">01</div>
+                <div class="dev-photo-wrap">
+                    <img src="/img/FOTODEDANIEL.jpeg" alt="Daniel Esteban" class="dev-photo">
+                    <span class="dev-badge">Frontend</span>
+                </div>
+                <p class="dev-name">Daniel Esteban</p>
+                <p class="dev-role">Frontend Developer</p>
+                <p class="dev-age">19 años</p>
+                <div class="dev-card-line"></div>
+            </div>
+
+            <div class="dev-card" data-delay="100">
+                <div class="dev-card-num">02</div>
+                <div class="dev-photo-wrap">
+                    <img src="/img/FOTODELUISSSJ4.jpeg" alt="Luis Esteban" class="dev-photo">
+                    <span class="dev-badge">Scrum</span>
+                </div>
+                <p class="dev-name">Luis Esteban</p>
+                <p class="dev-role">Scrum Master</p>
+                <p class="dev-age">21 años</p>
+                <div class="dev-card-line"></div>
+            </div>
+
+            <div class="dev-card" data-delay="200">
+                <div class="dev-card-num">03</div>
+                <div class="dev-photo-wrap">
+                    <img src="/img/BLACK.jpeg" alt="Julian David" class="dev-photo">
+                    <span class="dev-badge">UI/UX</span>
+                </div>
+                <p class="dev-name">Julian David</p>
+                <p class="dev-role">UI/UX Designer</p>
+                <p class="dev-age">23 años</p>
+                <div class="dev-card-line"></div>
+            </div>
+
+            <div class="dev-card" data-delay="300">
+                <div class="dev-card-num">04</div>
+                <div class="dev-photo-wrap">
+                    <img src="/img/FOTODEMAICOL.jpeg" alt="Maicol Antonio" class="dev-photo">
+                    <span class="dev-badge">Mobile</span>
+                </div>
+                <p class="dev-name">Maicol Antonio</p>
+                <p class="dev-role">Mobile Developer</p>
+                <p class="dev-age">19 años</p>
+                <div class="dev-card-line"></div>
+            </div>
+
+        </div>
+    </section>
+
 </div>
 
-@if(Route::currentRouteName() === 'home')
-    <div class="home-floating-logo">
-        <img src="/img/LOGOYESLOGAN.jpeg" alt="Logo AgroFinanzas">
-    </div>
-@endif
+<script>
+// ── Reveal on scroll para las cards ─────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.dev-card');
 
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay ?? 0;
+                setTimeout(() => {
+                    entry.target.classList.add('revealed');
+                }, parseInt(delay));
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
 
-  {{-- HERO --}}
+    cards.forEach(card => observer.observe(card));
 
-  <section class="hero-section position-relative">
-
-    <img src="https://images.unsplash.com/photo-1677123618781-a713408ebc59?q=80&w=1170&auto=format&fit=crop"
-
-         alt="Imagen granja"
-
-         class="w-100"
-
-         style="height:500px; object-fit:cover; filter:brightness(0.45);">
-
-
-
-    <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
-
-      <h1 class="display-5 fw-bold mb-3">Bienvenido a <span class="remarcado">AgroFinanzas</span></h1>
-
-      <p class="lead mb-4">Tu aliado digital para el crecimiento sostenible del campo colombiano</p>
-
-      <a href="{{ route('register') }}" class="btn-comenzar">Comenzar</a>
-
-    </div>
-
-  </section>
-
-
-
-  {{-- PRESENTACIÓN --}}
-
-  <section class="presentacion container my-5 p-5 text-light">
-
-    <h2 class="Titulo">¿Quiénes somos?</h2>
-
-    <p class="lead text-justify mb-3">
-
-        AgroFinanzas es una plataforma digital comprometida con el fortalecimiento del sector rural. Nacemos con la misión de apoyar a
-
-        los agricultores en el manejo eficiente de sus finanzas, el cuidado responsable de sus cultivos y el bienestar de sus animales,
-
-        brindándoles herramientas prácticas, accesibles y adaptadas a sus realidades.
-
-    </p>
-
-    <p class="text-light opacity-75 text-justify">
-
-        Creemos en el poder del conocimiento y la tecnología para transformar vidas. Por eso, trabajamos para que cada campesino tenga acceso a información clara,
-
-        recomendaciones útiles y un entorno digital amigable que le permita tomar mejores decisiones, mejorar su productividad y asegurar un futuro más próspero
-
-        para su familia y su comunidad.
-
-        <br><br>
-
-        FARMFINANC no es solo una app. Es un aliado del campo, una apuesta por la inclusión, y un paso firme hacia un desarrollo rural más justo, sostenible e inteligente.
-
-    </p>
-
-</section>
-
-</div>
-
-<div class="containerdevelops container my-5">
-    <h2 class="Titulo">Desarrolladores</h2>
-
-    <div class="developsclass">
-
-        <!-- CARD 1 -->
-        <div class="developer-card">
-            <img src="/img/FOTODEDANIEL.jpeg" alt="Foto desarrollador" class="dev-photo">
-            <p class="dev-name">Daniel Esteban</p>
-            <p class="dev-age">Edad: 19 años</p>
-            <p class="dev-role">Rol: Frontend Developer</p>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="developer-card">
-            <img src="/img/FOTODELUISSSJ4.jpeg" alt="Foto desarrollador" class="dev-photo">
-            <p class="dev-name">Luis Esteban </p>
-            <p class="dev-age">Edad: 21 años</p>
-            <p class="dev-role">Rol: Scrum Master</p>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="developer-card">
-            <img src="/img/BLACK.jpeg" alt="Foto desarrollador" class="dev-photo">
-            <p class="dev-name">Julian David</p>
-            <p class="dev-age">Edad: 23 años</p>
-            <p class="dev-role">Rol: UI/UX Designer</p>
-        </div>
-
-        <!-- CARD 4 -->
-        <div class="developer-card">
-            <img src="/img/FOTODEMAICOL.jpeg" alt="Foto desarrollador" class="dev-photo">
-            <p class="dev-name">Maicol Antonio</p>
-            <p class="dev-age">Edad: 19 años</p>
-            <p class="dev-role">Rol: Mobile Developer</p>
-        </div>
-
-    </div>
-</div>
-
+    // Smooth scroll para el link "Conocer más"
+    document.querySelector('a[href="#sobre-nosotros"]')?.addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('sobre-nosotros')?.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+</script>
 @endsection

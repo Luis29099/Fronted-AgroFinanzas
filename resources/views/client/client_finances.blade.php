@@ -668,7 +668,8 @@
 #calc-widget {
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    top: 540px;
+    right: 30px;
     width: 60px;
     height: 60px;
     background: var(--bg-card);

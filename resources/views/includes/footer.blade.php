@@ -22,6 +22,9 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS12cuQlU2h6d0V-rLkxpSJSdBJ89ZO4uGTPA&s" title="YouTube" alt="YouTube">
       </div>
       <p class="terminos">© 2025 | <a href="{{ url('/terminos-condiciones') }}">Términos de uso</a></p>
+
+{{-- Acceso admin oculto --}}
+<a href="{{ route('admin.login') }}" style="opacity:0.08; font-size:0.5rem; color:#333; text-decoration:none;">·</a>
     </div>
 
     <!-- 📧 Correos Electrónicos -->
