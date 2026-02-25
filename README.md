@@ -59,3 +59,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## App móvil Android (Jetpack Compose)
+
+Se agregó un proyecto base Android en `android-app/` con arquitectura **MVVM** y consumo de endpoints Laravel vía Retrofit.
+
+Consulta la guía completa en `android-app/README.md`.
