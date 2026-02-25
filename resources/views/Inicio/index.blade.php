@@ -104,7 +104,7 @@
     <div class="ganadero-layout">
         <div class="ganadero-intro">
             <span class="section-tag">Base de Conocimiento</span>
-            <h2 class="section-title">🐮 Amigo Ganadero</h2>
+            <h2 class="section-title"> Amigo Ganadero</h2>
             <p class="section-sub">Busca cualquier tema del sector agropecuario y accede a datos actualizados: precios, mercados, subsidios, plagas y más.</p>
             <div class="gstats">
                 <div class="gstat"><span class="gstat-n">23</span><span class="gstat-l">Categorías</span></div>

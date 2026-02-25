@@ -107,76 +107,140 @@ footer.footer {
   color: #8ac926;
 }
 
+/* =====================================================================
+   RESPONSIVE — Laptop (≤ 1024px)
+   ===================================================================== */
+@media (max-width: 1024px) {
+  .footer-container {
+    gap: 40px;
+    max-width: 900px;
+  }
+
+  .footer-section {
+    flex: 1 1 260px;
+    min-width: 240px;
+  }
+}
+
+/* =====================================================================
+   RESPONSIVE — Tablet (≤ 768px)
+   ===================================================================== */
 @media (max-width: 768px) {
+  footer.footer {
+    padding: 40px 16px;
+  }
+
   .footer-container {
     flex-direction: column;
     align-items: center;
+    gap: 36px;
     text-align: center;
   }
 
   .footer-section {
     min-width: 100%;
+    width: 100%;
+  }
+
+  .footer-section h3 {
+    font-size: 16px;
+  }
+
+  .social-icons {
+    gap: 16px;
+  }
+
+  .social-icons img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* =====================================================================
+   RESPONSIVE — Mobile (≤ 480px)
+   ===================================================================== */
+@media (max-width: 480px) {
+  footer.footer {
+    padding: 32px 12px;
+  }
+
+  .footer-container {
+    gap: 28px;
+  }
+
+  .footer-section h3 {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-section li {
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .social-icons {
+    gap: 12px;
+  }
+
+  .social-icons img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .terminos {
+    font-size: 12px;
   }
 }
 
 /* =====================================================================
    SCROLL-UP BUTTON
-   Esquina inferior IZQUIERDA — el chatbot Botpress va a la derecha
-   así no se superponen nunca.
    ===================================================================== */
 .scroll-top-btn {
-    position: fixed;
-    bottom: 28px;
-    left: 28px;            /* ← izquierda, el chatbot va a la derecha */
-    z-index: 9999;
-
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-
-    /* Verde AgroFinanzas con borde para diferenciarlo del chatbot blanco */
-    background: linear-gradient(135deg, #8ac926, #a8e050);
-    color: #0a0f04;
-    border: 2px solid rgba(255,255,255,0.15);
-
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    box-shadow: 0 4px 20px rgba(138, 201, 38, 0.5),
-                0 0 0 3px rgba(138, 201, 38, 0.15);
-
-    transition: background  0.25s ease,
-                transform   0.25s ease,
-                box-shadow  0.25s ease;
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8ac926, #a8e050);
+  color: #0a0f04;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(138, 201, 38, 0.5),
+              0 0 0 3px rgba(138, 201, 38, 0.15);
+  transition: background 0.25s ease,
+              transform  0.25s ease,
+              box-shadow 0.25s ease;
 }
 
 .scroll-top-btn.visible {
-    display: flex;
+  display: flex;
 }
 
 .scroll-top-btn:hover {
-    background: linear-gradient(135deg, #a8e050, #c5f075);
-    transform: scale(1.12) translateY(-3px);
-    box-shadow: 0 6px 28px rgba(138, 201, 38, 0.7),
-                0 0 0 4px rgba(138, 201, 38, 0.2);
+  background: linear-gradient(135deg, #a8e050, #c5f075);
+  transform: scale(1.12) translateY(-3px);
+  box-shadow: 0 6px 28px rgba(138, 201, 38, 0.7),
+              0 0 0 4px rgba(138, 201, 38, 0.2);
 }
 
 .scroll-top-btn:active {
-    transform: scale(0.96) translateY(0);
-    box-shadow: 0 2px 12px rgba(138, 201, 38, 0.4);
+  transform: scale(0.96) translateY(0);
+  box-shadow: 0 2px 12px rgba(138, 201, 38, 0.4);
 }
 
 @media (max-width: 480px) {
-    .scroll-top-btn {
-        bottom: 16px;
-        left: 16px;
-        width: 42px;
-        height: 42px;
-        font-size: 0.9rem;
-    }
+  .scroll-top-btn {
+    bottom: 16px;
+    left: 16px;
+    width: 42px;
+    height: 42px;
+    font-size: 0.9rem;
+  }
 }
