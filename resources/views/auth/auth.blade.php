@@ -71,9 +71,9 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 980px;
+    max-width: 1060px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.35fr;
     border-radius: 24px;
     overflow: visible;
     box-shadow:
@@ -225,7 +225,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 50px 44px;
+    padding: 50px 52px;
     overflow: hidden;
     border-radius: 0 24px 24px 0;
 }
@@ -425,7 +425,24 @@
 .field-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
+}
+
+/* Formulario de registro compacto */
+#registerForm .field-group {
+    margin-bottom: 10px;
+}
+#registerForm .field-group input,
+#registerForm .field-select {
+    padding: 9px 12px;
+    font-size: 0.82rem;
+}
+#registerForm .field-group label {
+    font-size: 0.66rem;
+}
+#registerForm .strength-bar-wrapper {
+    margin-top: 4px;
+    margin-bottom: 10px;
 }
 
 /* ── RECORDAR ── */
@@ -854,61 +871,77 @@
 
                             <form action="{{ route('register.submit') }}" method="POST" id="registerForm">
                                 @csrf
-                                <div class="field-group">
-                                    <label><i class="fas fa-user"></i> Nombre completo</label>
-                                    <input type="text" name="name" placeholder="Juan Pérez"
-                                        value="{{ old('name') }}"
-                                        class="{{ $errors->has('name') ? 'input-error' : '' }}" required>
-                                    @error('name')<span class="field-error">{{ $message }}</span>@enderror
-                                </div>
-                                <div class="field-group">
-                                    <label><i class="fas fa-envelope"></i> Correo electrónico</label>
-                                    <input type="email" name="email" placeholder="correo@ejemplo.com"
-                                        value="{{ old('email') }}"
-                                        class="{{ $errors->has('email') ? 'input-error' : '' }}" required>
-                                    @error('email')<span class="field-error">{{ $message }}</span>@enderror
-                                </div>
-                                <div class="field-group">
-                                    <label><i class="fas fa-phone"></i> Teléfono <span class="optional">(opcional)</span></label>
-                                    <input type="tel" name="phone" placeholder="300 123 4567"
-                                        value="{{ old('phone') }}">
-                                </div>
-                                <div class="field-group">
-                                    <label><i class="fas fa-lock"></i> Contraseña</label>
-                                    <div class="password-container">
-                                        <input type="password" name="password" id="regPass"
-                                            placeholder="Mínimo 8 caracteres"
-                                            class="{{ $errors->has('password') ? 'input-error' : '' }}"
-                                            required oninput="checkStrength(this.value)">
-                                        <span class="toggle-password" onclick="togglePass('regPass', this)">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
+
+                                {{-- Fila 1: Nombre + Correo --}}
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label><i class="fas fa-user"></i> Nombre</label>
+                                        <input type="text" name="name" placeholder="Juan Pérez"
+                                            value="{{ old('name') }}"
+                                            class="{{ $errors->has('name') ? 'input-error' : '' }}" required>
+                                        @error('name')<span class="field-error">{{ $message }}</span>@enderror
                                     </div>
-                                    <div class="strength-bar-wrapper" id="strengthWrapper" style="display:none">
-                                        <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
-                                        <span class="strength-label" id="strengthLabel"></span>
+                                    <div class="field-group">
+                                        <label><i class="fas fa-envelope"></i> Correo</label>
+                                        <input type="email" name="email" placeholder="correo@ejemplo.com"
+                                            value="{{ old('email') }}"
+                                            class="{{ $errors->has('email') ? 'input-error' : '' }}" required>
+                                        @error('email')<span class="field-error">{{ $message }}</span>@enderror
                                     </div>
-                                    @error('password')<span class="field-error">{{ $message }}</span>@enderror
                                 </div>
-                                <div class="field-group">
-                                    <label><i class="fas fa-lock"></i> Confirmar contraseña</label>
-                                    <div class="password-container">
-                                        <input type="password" name="password_confirmation" id="regPassConfirm"
-                                            placeholder="Repite tu contraseña" required>
-                                        <span class="toggle-password" onclick="togglePass('regPassConfirm', this)">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
+
+                                {{-- Fila 2: Teléfono + Fecha de nacimiento --}}
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label><i class="fas fa-phone"></i> Teléfono <span class="optional">(opc.)</span></label>
+                                        <input type="tel" name="phone" placeholder="300 123 4567"
+                                            value="{{ old('phone') }}">
                                     </div>
-                                    <span class="field-error" id="matchError" style="display:none">Las contraseñas no coinciden.</span>
+                                    <div class="field-group">
+                                        <label><i class="fas fa-calendar"></i> Nacimiento</label>
+                                        <input type="date" name="birth_date"
+                                            value="{{ old('birth_date') }}"
+                                            max="{{ date('Y-m-d', strtotime('-1 day')) }}"
+                                            class="{{ $errors->has('birth_date') ? 'input-error' : '' }}" required>
+                                        @error('birth_date')<span class="field-error">{{ $message }}</span>@enderror
+                                    </div>
                                 </div>
-                                <div class="field-group">
-                                    <label><i class="fas fa-calendar"></i> Fecha de nacimiento</label>
-                                    <input type="date" name="birth_date"
-                                        value="{{ old('birth_date') }}"
-                                        max="{{ date('Y-m-d', strtotime('-1 day')) }}"
-                                        class="{{ $errors->has('birth_date') ? 'input-error' : '' }}" required>
-                                    @error('birth_date')<span class="field-error">{{ $message }}</span>@enderror
+
+                                {{-- Fila 3: Contraseña + Confirmar --}}
+                                <div class="field-row">
+                                    <div class="field-group">
+                                        <label><i class="fas fa-lock"></i> Contraseña</label>
+                                        <div class="password-container">
+                                            <input type="password" name="password" id="regPass"
+                                                placeholder="Mínimo 8 caracteres"
+                                                class="{{ $errors->has('password') ? 'input-error' : '' }}"
+                                                required oninput="checkStrength(this.value)">
+                                            <span class="toggle-password" onclick="togglePass('regPass', this)">
+                                                <i class="fas fa-eye"></i>
+                                            </span>
+                                        </div>
+                                        @error('password')<span class="field-error">{{ $message }}</span>@enderror
+                                    </div>
+                                    <div class="field-group">
+                                        <label><i class="fas fa-lock"></i> Confirmar</label>
+                                        <div class="password-container">
+                                            <input type="password" name="password_confirmation" id="regPassConfirm"
+                                                placeholder="Repite tu contraseña" required>
+                                            <span class="toggle-password" onclick="togglePass('regPassConfirm', this)">
+                                                <i class="fas fa-eye"></i>
+                                            </span>
+                                        </div>
+                                        <span class="field-error" id="matchError" style="display:none">No coinciden.</span>
+                                    </div>
                                 </div>
+
+                                {{-- Barra fuerza contraseña (span full) --}}
+                                <div class="strength-bar-wrapper" id="strengthWrapper" style="display:none">
+                                    <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+                                    <span class="strength-label" id="strengthLabel"></span>
+                                </div>
+
+                                {{-- Fila 4: Género + Años en campo --}}
                                 <div class="field-row">
                                     <div class="field-group">
                                         <label><i class="fas fa-venus-mars"></i> Género <span class="optional">(opc.)</span></label>
