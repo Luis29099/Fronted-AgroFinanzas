@@ -9,13 +9,19 @@
 }
 
 .home-floating-logo img {
-    width: 150px;
-    height: 150px;
+    width: clamp(90px, 15vw, 150px);
+    height: clamp(90px, 15vw, 150px);
     border-radius: 50%;
     box-shadow: 0 0 18px #8ac926;;
     border: 2px solid #00ff9d;
     background: #000;
 }
+@media (max-width: 768px) {
+  .home-floating-logo {
+    top: 70px;
+  }
+}
+
 .presentacion {
   background: #000; /* Fondo negro puro */
   border-radius: 20px;
@@ -41,10 +47,16 @@
   line-height: 1.7;
   text-align: justify;
 }
+@media (max-width: 768px) {
+  .presentacion p {
+    text-align: left;
+  }
+}
+
 .btn-comenzar{
   font-family: 'Poppins', sans-serif;
-    padding: 8px 16px;
-    font-size: 14px;
+    padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 22px);
+  font-size: clamp(14px, 2.5vw, 16px);
     font-weight: 500;
     color: #000000;
     background: linear-gradient(135deg, #8ac926, #99d98c); /* 80ffdb, 5390d9*/
@@ -71,7 +83,7 @@ color:#8ac926 ;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
   color: #fff;
-  padding: 50px;
+  padding: clamp(20px, 5vw, 50px);
   margin-top: 40px;
   transition: transform 0.3s ease, background 0.3s ease;
 }
@@ -91,7 +103,7 @@ color:#8ac926 ;
 /* GRID de tarjetas */
 .developsclass {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
 }
 
@@ -112,10 +124,10 @@ color:#8ac926 ;
 
 /* Imagen del desarrollador */
 .dev-photo {
-  width: 150px;
-  height: 150px;
+  width: clamp(100px, 18vw, 150px);
+  height: clamp(100px, 18vw, 150px);
   border-radius: 50%;
-  object-fit: fill;
+  object-fit: cover;
   margin-bottom: 15px;
   border: 3px solid #8ac926;
   box-shadow: 0 0 10px rgba(138, 201, 38, 0.4);

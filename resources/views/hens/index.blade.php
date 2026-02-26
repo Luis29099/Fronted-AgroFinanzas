@@ -647,4 +647,5 @@
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         });
     </script>
+    {{-- /amo las waifus --}}
 @endsection
