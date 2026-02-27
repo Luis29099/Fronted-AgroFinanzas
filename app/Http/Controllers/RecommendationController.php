@@ -9,16 +9,16 @@ class RecommendationController extends Controller
 {
     public function index()
     {
-        $response = Http::get('http://api.AgroFinanzas.test/api/recommendations');
-        
+        $token = session('api_token');
+
+        $response = Http::withToken($token)
+            ->get('http://api.AgroFinanzas.test/api/recommendations');
+
         $recommendations = collect($response->json() ?? [])->map(function ($rec) {
-            
-            // Convertir fecha del comentario principal
             $rec['created_at'] = \Carbon\Carbon::parse($rec['created_at'])
                 ->setTimezone('America/Bogota')
                 ->toDateTimeString();
 
-            // Convertir fecha de cada respuesta
             if (!empty($rec['replies'])) {
                 $rec['replies'] = array_map(function ($reply) {
                     $reply['created_at'] = \Carbon\Carbon::parse($reply['created_at'])
@@ -36,7 +36,8 @@ class RecommendationController extends Controller
 
     public function store(Request $request)
     {
-        $user = session('user');
+        $user  = session('user');
+        $token = session('api_token');
 
         $request->validate([
             'text'       => 'required|string',
@@ -48,7 +49,7 @@ class RecommendationController extends Controller
             'media_file.max'   => 'El archivo no puede superar 20MB.',
         ]);
 
-        $http = Http::asMultipart();
+        $http = Http::withToken($token)->asMultipart();
 
         if ($request->hasFile('media_file')) {
             $file = $request->file('media_file');

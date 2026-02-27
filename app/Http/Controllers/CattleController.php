@@ -15,14 +15,20 @@ class CattleController extends Controller
         $this->apiBase = env('URL_SERVER_API') . '/cattles';
     }
 
+    private function token(): string
+    {
+        return session('api_token') ?? '';
+    }
+
     // ── Lista del hato del usuario ────────────────────────────
     public function index()
     {
         $user   = session('user');
         $userId = $user['id'] ?? null;
 
-        $response = Http::get($this->apiBase, ['user_id' => $userId]);
-        $data     = $response->json();
+        $response = Http::withToken($this->token())
+            ->get($this->apiBase, ['user_id' => $userId]);
+        $data = $response->json();
 
         $cattle  = $data['cattle']  ?? [];
         $summary = $data['summary'] ?? [];
@@ -33,8 +39,9 @@ class CattleController extends Controller
     // ── Detalle de un animal ──────────────────────────────────
     public function show($id)
     {
-        $response = Http::get("{$this->apiBase}/{$id}");
-        $cattle   = $response->json('cattle') ?? [];
+        $response = Http::withToken($this->token())
+            ->get("{$this->apiBase}/{$id}");
+        $cattle = $response->json('cattle') ?? [];
 
         return view('hato.show', compact('cattle'));
     }
@@ -44,9 +51,9 @@ class CattleController extends Controller
     {
         $user = session('user');
 
-        $mothers = Http::get($this->apiBase, [
-            'user_id' => $user['id'],
-        ])->json('cattle') ?? [];
+        $mothers = Http::withToken($this->token())
+            ->get($this->apiBase, ['user_id' => $user['id']])
+            ->json('cattle') ?? [];
 
         $mothers = array_filter($mothers, fn($c) => $c['gender'] === 'female' && $c['status'] === 'active');
 
@@ -71,7 +78,7 @@ class CattleController extends Controller
             'photo'         => 'nullable|image|mimes:jpg,jpeg,png|max:3072',
         ]);
 
-        $http = Http::asMultipart();
+        $http = Http::withToken($this->token())->asMultipart();
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
@@ -104,8 +111,9 @@ class CattleController extends Controller
     // ── Formulario registrar nacimiento ───────────────────────
     public function showBirthForm($motherId)
     {
-        $response = Http::get("{$this->apiBase}/{$motherId}");
-        $mother   = $response->json('cattle') ?? [];
+        $response = Http::withToken($this->token())
+            ->get("{$this->apiBase}/{$motherId}");
+        $mother = $response->json('cattle') ?? [];
 
         return view('hato.birth', compact('mother'));
     }
@@ -122,7 +130,7 @@ class CattleController extends Controller
             'photo'      => 'nullable|image|mimes:jpg,jpeg,png|max:3072',
         ]);
 
-        $http = Http::asMultipart();
+        $http = Http::withToken($this->token())->asMultipart();
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
@@ -153,7 +161,7 @@ class CattleController extends Controller
     // ── Actualizar animal ─────────────────────────────────────
     public function update(Request $request, $id)
     {
-        $http = Http::asMultipart();
+        $http = Http::withToken($this->token())->asMultipart();
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
@@ -179,7 +187,8 @@ class CattleController extends Controller
     // ── Eliminar animal ───────────────────────────────────────
     public function destroy($id)
     {
-        $response = Http::delete("{$this->apiBase}/{$id}");
+        $response = Http::withToken($this->token())
+            ->delete("{$this->apiBase}/{$id}");
 
         if ($response->successful()) {
             return redirect()->route('client.cattle.index')->with('success', 'Animal eliminado.');

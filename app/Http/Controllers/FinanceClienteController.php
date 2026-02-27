@@ -10,52 +10,37 @@ class FinanceClienteController extends Controller
 {
     private $apiUrl = "http://api.AgroFinanzas.test/api/finances";
 
+    private function token()
+    {
+        return session('api_token');
+    }
+
     // ===============================
     // VISTAS CREATE
     // ===============================
 
-    public function createIncome()
-    {
-        return view('client.income.create');
-    }
+    public function createIncome()      { return view('client.income.create'); }
+    public function createExpense()     { return view('client.expense.create'); }
+    public function createInvestment()  { return view('client.investment.create'); }
+    public function createDebt()        { return view('client.debt.create'); }
+    public function createInventory()   { return view('client.inventory.create'); }
+    public function createCosts()       { return view('client.costs.create'); }
 
-    public function createExpense()
-    {
-        return view('client.expense.create');
-    }
-
-    public function createInvestment()
-    {
-        return view('client.investment.create');
-    }
-
-    public function createDebt()
-    {
-        return view('client.debt.create');
-    }
-
-    public function createInventory()
-    {
-        return view('client.inventory.create');
-    }
-
-    public function createCosts()
-    {
-        return view('client.costs.create');
-    }
+    // ===============================
+    // INDEX
+    // ===============================
 
     public function index(Request $request)
     {
-        $user = session('user');
+        $user  = session('user');
+        $token = $this->token();
 
         if (!$user || !isset($user['id'])) {
             return redirect()->route('login')->withErrors(['auth_error' => 'Sesión expirada']);
         }
 
-        $userId = $user['id'];
-
-        $response = Http::get($this->apiUrl, [
-            'user_id' => $userId
+        $response = Http::withToken($token)->get($this->apiUrl, [
+            'user_id' => $user['id']
         ]);
 
         if (!$response->successful()) {
@@ -119,6 +104,10 @@ class FinanceClienteController extends Controller
         ]);
     }
 
+    // ===============================
+    // STORE METHODS
+    // ===============================
+
     public function storeIncome(Request $request)
     {
         $user = session('user');
@@ -134,7 +123,7 @@ class FinanceClienteController extends Controller
         $data['type']    = 'income';
         $data['user_id'] = $user['id'];
 
-        $response = Http::post($this->apiUrl, $data);
+        $response = Http::withToken($this->token())->post($this->apiUrl, $data);
 
         if ($response->successful()) {
             return redirect()->route('client.finances.index', ['filter' => 'income'])
@@ -159,7 +148,7 @@ class FinanceClienteController extends Controller
         $data['type']    = 'expense';
         $data['user_id'] = $user['id'];
 
-        $response = Http::post($this->apiUrl, $data);
+        $response = Http::withToken($this->token())->post($this->apiUrl, $data);
 
         if ($response->successful()) {
             return redirect()->route('client.finances.index', ['filter' => 'expense'])
@@ -186,7 +175,7 @@ class FinanceClienteController extends Controller
         $data['type']    = 'investment';
         $data['user_id'] = $user['id'];
 
-        $response = Http::post($this->apiUrl, $data);
+        $response = Http::withToken($this->token())->post($this->apiUrl, $data);
 
         if ($response->successful()) {
             return redirect()->route('client.finances.index', ['filter' => 'investment'])
@@ -215,7 +204,7 @@ class FinanceClienteController extends Controller
         $data['type']    = 'debt';
         $data['user_id'] = $user['id'];
 
-        $response = Http::post($this->apiUrl, $data);
+        $response = Http::withToken($this->token())->post($this->apiUrl, $data);
 
         if ($response->successful()) {
             return redirect()->route('client.finances.index', ['filter' => 'debt'])
@@ -244,7 +233,7 @@ class FinanceClienteController extends Controller
         $data['type']    = 'inventory';
         $data['user_id'] = $user['id'];
 
-        $response = Http::post($this->apiUrl, $data);
+        $response = Http::withToken($this->token())->post($this->apiUrl, $data);
 
         if ($response->successful()) {
             return redirect()->route('client.finances.index', ['filter' => 'inventory'])
@@ -273,7 +262,7 @@ class FinanceClienteController extends Controller
         $data['type']    = 'costs';
         $data['user_id'] = $user['id'];
 
-        $response = Http::post($this->apiUrl, $data);
+        $response = Http::withToken($this->token())->post($this->apiUrl, $data);
 
         if ($response->successful()) {
             return redirect()->route('client.finances.index', ['filter' => 'costs'])
@@ -282,6 +271,10 @@ class FinanceClienteController extends Controller
 
         return $this->handleApiError($response);
     }
+
+    // ===============================
+    // UPDATE / DELETE
+    // ===============================
 
     public function update(Request $request, $id)
     {
@@ -295,7 +288,8 @@ class FinanceClienteController extends Controller
             'category'    => 'nullable|string|max:100',
         ]);
 
-        $response = Http::put("{$this->apiUrl}/{$id}?user_id={$user['id']}", $data);
+        $response = Http::withToken($this->token())
+            ->put("{$this->apiUrl}/{$id}?user_id={$user['id']}", $data);
 
         if ($response->successful()) {
             return redirect()->back()->with('success', 'Registro actualizado correctamente.');
@@ -309,7 +303,8 @@ class FinanceClienteController extends Controller
         $user = session('user');
         if (!$user || !isset($user['id'])) return redirect()->route('login');
 
-        $response = Http::delete("{$this->apiUrl}/{$id}?user_id={$user['id']}");
+        $response = Http::withToken($this->token())
+            ->delete("{$this->apiUrl}/{$id}?user_id={$user['id']}");
 
         if ($response->successful()) {
             return redirect()->back()->with('success', 'Registro eliminado correctamente.');
@@ -323,7 +318,8 @@ class FinanceClienteController extends Controller
         $user = session('user');
         if (!$user || !isset($user['id'])) return redirect()->route('login');
 
-        $response = Http::patch("{$this->apiUrl}/{$id}/pay-installment?user_id={$user['id']}");
+        $response = Http::withToken($this->token())
+            ->patch("{$this->apiUrl}/{$id}/pay-installment?user_id={$user['id']}");
 
         if ($response->successful()) {
             return redirect()->back()->with('success', 'Cuota pagada correctamente.');
@@ -346,7 +342,7 @@ class FinanceClienteController extends Controller
 
         $data['user_id'] = $user['id'];
 
-        $response = Http::post($this->apiUrl, $data);
+        $response = Http::withToken($this->token())->post($this->apiUrl, $data);
 
         if ($response->successful()) {
             return redirect()->route('client.finances.index')
@@ -355,6 +351,10 @@ class FinanceClienteController extends Controller
 
         return $this->handleApiError($response);
     }
+
+    // ===============================
+    // HELPER
+    // ===============================
 
     private function handleApiError($response)
     {

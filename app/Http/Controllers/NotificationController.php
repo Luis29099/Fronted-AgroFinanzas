@@ -9,13 +9,19 @@ class NotificationController extends Controller
 {
     protected string $apiBase = 'http://api.AgroFinanzas.test/api';
 
+    private function token(): string
+    {
+        return session('api_token') ?? '';
+    }
+
     // ── Obtener notificaciones del usuario ────────────────────
     public function index()
     {
         $user = session('user');
         if (!$user) return response()->json(['error' => 'No autenticado'], 401);
 
-        $response = Http::get("{$this->apiBase}/notifications/{$user['id']}");
+        $response = Http::withToken($this->token())
+            ->get("{$this->apiBase}/notifications/{$user['id']}");
 
         return response()->json($response->json());
     }
@@ -26,7 +32,8 @@ class NotificationController extends Controller
         $user = session('user');
         if (!$user) return response()->json(['unread_count' => 0]);
 
-        $response = Http::get("{$this->apiBase}/notifications/{$user['id']}/unread-count");
+        $response = Http::withToken($this->token())
+            ->get("{$this->apiBase}/notifications/{$user['id']}/unread-count");
 
         return response()->json($response->json());
     }
@@ -34,7 +41,8 @@ class NotificationController extends Controller
     // ── Marcar una como leída ─────────────────────────────────
     public function markRead($id)
     {
-        $response = Http::patch("{$this->apiBase}/notifications/{$id}/read");
+        $response = Http::withToken($this->token())
+            ->patch("{$this->apiBase}/notifications/{$id}/read");
 
         return response()->json($response->json());
     }
@@ -45,7 +53,8 @@ class NotificationController extends Controller
         $user = session('user');
         if (!$user) return response()->json(['error' => 'No autenticado'], 401);
 
-        $response = Http::patch("{$this->apiBase}/notifications/{$user['id']}/read-all");
+        $response = Http::withToken($this->token())
+            ->patch("{$this->apiBase}/notifications/{$user['id']}/read-all");
 
         return response()->json($response->json());
     }
